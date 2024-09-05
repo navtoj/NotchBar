@@ -9,34 +9,6 @@ import Cocoa
 import SystemInfoKit
 import Combine
 
-class AppState: ObservableObject {
-	static let shared = AppState()
-	private init() {}
-
-	@Published private(set) var isBarCovered: Bool = false
-	func showBar() {
-		isBarCovered = false
-	}
-	func hideBar() {
-		isBarCovered = true
-	}
-}
-
-class AppData: ObservableObject {
-	static let shared = AppData()
-	private init() {}
-
-	@Published private(set) var activeApp = NSWorkspace.shared.frontmostApplication
-	func updateActiveApp(_ app: NSRunningApplication) {
-		activeApp = app
-	}
-	
-	@Published private(set) var systemInfo = SystemInfoBundle()
-	func updateSystemInfo(_ info: SystemInfoBundle) {
-		systemInfo = info
-	}
-}
-
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	// Create System Info Observer
