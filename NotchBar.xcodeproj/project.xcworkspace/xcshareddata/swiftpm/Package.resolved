@@ -1,6 +1,15 @@
 {
-  "originHash" : "d1803c009ea14e2e3450db0f00f310c972cedea7a0155ad8a06159a751570392",
+  "originHash" : "b9a08929aa05be3783ab712bf2b09e162b61acd8b70033139ac7a4f962045eb7",
   "pins" : [
+    {
+      "identity" : "sfsafesymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "state" : {
+        "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a",
+        "version" : "5.3.0"
+      }
+    },
     {
       "identity" : "systeminfokit",
       "kind" : "remoteSourceControl",

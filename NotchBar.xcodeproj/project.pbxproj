@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302152C89C07B0046AA22 /* SystemInfo.swift */; };
+		224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302172C89C0BB0046AA22 /* SystemInfoKit.swift */; };
+		2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2243021A2C89C2940046AA22 /* SFSafeSymbols */; };
 		22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B39C2C8944C200A79687 /* AppDelegate.swift */; };
 		22E2B3A12C8944C300A79687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E2B3A02C8944C300A79687 /* Assets.xcassets */; };
 		22E2B3AC2C89453A00A79687 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AB2C89453A00A79687 /* main.swift */; };
@@ -17,9 +20,12 @@
 		22E2B3B92C896D9A00A79687 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B82C896D9A00A79687 /* ContentView.swift */; };
 		22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22E2B3BB2C897B4900A79687 /* SystemInfoKit */; };
 		22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3BD2C897E1C00A79687 /* NotchBar.swift */; };
+		22E2B3C22C89BE4F00A79687 /* ActiveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3C12C89BE4F00A79687 /* ActiveApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		224302152C89C07B0046AA22 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
+		224302172C89C0BB0046AA22 /* SystemInfoKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoKit.swift; sourceTree = "<group>"; };
 		22E2B3992C8944C200A79687 /* NotchBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotchBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E2B39C2C8944C200A79687 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22E2B3A02C8944C300A79687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +37,7 @@
 		22E2B3B42C89615B00A79687 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		22E2B3B82C896D9A00A79687 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22E2B3BD2C897E1C00A79687 /* NotchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchBar.swift; sourceTree = "<group>"; };
+		22E2B3C12C89BE4F00A79687 /* ActiveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */,
 				22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +72,7 @@
 		22E2B39B2C8944C200A79687 /* NotchBar */ = {
 			isa = PBXGroup;
 			children = (
+				22E2B3C02C89BE3F00A79687 /* Widgets */,
 				22E2B3AF2C8951CE00A79687 /* Extensions */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
 				22E2B3B42C89615B00A79687 /* Helpers.swift */,
@@ -81,6 +90,7 @@
 			children = (
 				22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */,
 				22E2B3B22C895B7E00A79687 /* NotchFrame.swift */,
+				224302172C89C0BB0046AA22 /* SystemInfoKit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -92,6 +102,15 @@
 				22E2B3BD2C897E1C00A79687 /* NotchBar.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		22E2B3C02C89BE3F00A79687 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				22E2B3C12C89BE4F00A79687 /* ActiveApp.swift */,
+				224302152C89C07B0046AA22 /* SystemInfo.swift */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +131,7 @@
 			name = NotchBar;
 			packageProductDependencies = (
 				22E2B3BB2C897B4900A79687 /* SystemInfoKit */,
+				2243021A2C89C2940046AA22 /* SFSafeSymbols */,
 			);
 			productName = NotchBar;
 			productReference = 22E2B3992C8944C200A79687 /* NotchBar.app */;
@@ -143,6 +163,7 @@
 			mainGroup = 22E2B3902C8944C200A79687;
 			packageReferences = (
 				22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */,
+				224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 			);
 			productRefGroup = 22E2B39A2C8944C200A79687 /* Products */;
 			projectDirPath = "";
@@ -169,13 +190,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E2B3C22C89BE4F00A79687 /* ActiveApp.swift in Sources */,
 				22E2B3B52C89615B00A79687 /* Helpers.swift in Sources */,
 				22E2B3B92C896D9A00A79687 /* ContentView.swift in Sources */,
+				224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */,
 				22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */,
 				22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */,
 				22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */,
 				22E2B3AC2C89453A00A79687 /* main.swift in Sources */,
 				22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */,
+				224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */,
 				22E2B3AE2C89460300A79687 /* NotchWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +403,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
 		22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kyome22/SystemInfoKit";
@@ -390,6 +422,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2243021A2C89C2940046AA22 /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
 		22E2B3BB2C897B4900A79687 /* SystemInfoKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */;

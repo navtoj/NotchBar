@@ -6,6 +6,8 @@
 //
 
 import Cocoa
+import SystemInfoKit
+import Combine
 
 class AppState: ObservableObject {
 	static let shared = AppState()
@@ -20,7 +22,27 @@ class AppState: ObservableObject {
 	}
 }
 
+class AppData: ObservableObject {
+	static let shared = AppData()
+	private init() {}
+
+	@Published private(set) var activeApp = NSWorkspace.shared.frontmostApplication
+	func updateActiveApp(_ app: NSRunningApplication) {
+		activeApp = app
+	}
+	
+	@Published private(set) var systemInfo = SystemInfoBundle()
+	func updateSystemInfo(_ info: SystemInfoBundle) {
+		systemInfo = info
+	}
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
+	
+	// Create System Info Observer
+	
+	let observer = SystemInfoObserver.shared(monitorInterval: 1.0)
+	var cancellables = Set<AnyCancellable>()
 	
 	// Create Window
 	
@@ -48,13 +70,60 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// Show Window
 		
 		window.orderFrontRegardless()
+		
+		// Track Active App
+		
+		NSWorkspace.shared.notificationCenter.addObserver(
+			self,
+			selector: #selector(UpdateActiveApp),
+			name: NSWorkspace.didActivateApplicationNotification,
+			object: nil
+		)
+		
+		// Track System Info
+		
+		observer.systemInfoPublisher
+			.sink { systemInfo in
+				self.UpdateSystemInfo(systemInfo)
+			}
+			.store(in: &cancellables)
+		
+		observer.startMonitoring()
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 		print("applicationWillTerminate")
+		
+		// Stop System Info Observer
+	
+		observer.stopMonitoring()
 	}
 	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
 		return false
+	}
+	
+	@objc private func UpdateActiveApp(_ notification: Notification) {
+		
+		// Get NSRunningApplication
+		
+		guard let userInfo = notification.userInfo else {
+			return QuitWithLog("Failed to get userInfo.")
+		}
+		
+		guard let app = userInfo[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
+			return QuitWithLog("Failed to get NSRunningApplication.")
+		}
+		
+		print("UpdateActiveApp", app.bundleIdentifier ?? "Unknown")
+		
+		AppData.shared.updateActiveApp(app)
+	}
+	
+	private func UpdateSystemInfo(_ systemInfo: SystemInfoBundle) {
+		
+//		print("UpdateSystemInfo", systemInfo.description)
+		
+		AppData.shared.updateSystemInfo(systemInfo)
 	}
 }

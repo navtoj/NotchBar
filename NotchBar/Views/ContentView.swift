@@ -15,6 +15,7 @@ struct ContentView: View {
 		VStack {
 			NotchBar()
 				.opacity(appState.isBarCovered ? 0 : 1)
+				.allowsHitTesting(appState.isBarCovered ? false : true)
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}
@@ -22,4 +23,5 @@ struct ContentView: View {
 
 #Preview {
 	ContentView()
+		.frame(minWidth: NSScreen.builtIn?.frame.width)
 }

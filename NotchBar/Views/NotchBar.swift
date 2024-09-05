@@ -6,25 +6,22 @@
 //
 
 import SwiftUI
+import SystemInfoKit
 
 struct NotchBar: View {
+	
+	@StateObject private var appData = AppData.shared
 	
 	let notch = NSScreen.builtIn?.notchFrame
 	
 	var body: some View {
 		HStack(spacing: notch?.width) {
 			HStack {
-				Image(systemName: "sparkle")
-				Spacer()
-				Image(systemName: "sparkle")
-				// SystemInfo(info: delegate.appData.systemInfo)
+				SystemInfo(info: appData.systemInfo)
 			}
 			.frame(maxWidth: .infinity, alignment: .leading)
 			HStack {
-				Image(systemName: "sparkle")
-				Spacer()
-				Image(systemName: "sparkle")
-				// ActiveApp(app: delegate.appData.activeApp)
+				ActiveApp(app: appData.activeApp)
 			}
 			.frame(maxWidth: .infinity, alignment: .trailing)
 		}
@@ -39,4 +36,5 @@ struct NotchBar: View {
 
 #Preview {
 	NotchBar()
+		.frame(minWidth: NSScreen.builtIn?.frame.width)
 }
