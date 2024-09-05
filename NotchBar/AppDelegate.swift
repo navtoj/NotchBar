@@ -31,8 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		// Ensure Notch Area
 		
-		guard NSScreen.builtIn?.notchFrame != nil else {
-			return QuitWithLog("NotchBar only supports devices with a notch.")
+		if NSScreen.builtIn?.notchFrame == nil {
+			QuitWithLog("NotchBar only supports devices with a notch.")
 		}
 	}
 	
@@ -77,24 +77,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	@objc private func UpdateActiveApp(_ notification: Notification) {
 		
-		// Get NSRunningApplication
-		
 		guard let userInfo = notification.userInfo else {
-			return QuitWithLog("Failed to get userInfo.")
+			return print("Failed to get active app notification.")
 		}
 		
 		guard let app = userInfo[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
-			return QuitWithLog("Failed to get NSRunningApplication.")
+			return print("Failed to get NSRunningApplication.")
 		}
-		
-//		print("UpdateActiveApp", app.bundleIdentifier ?? "Unknown")
 		
 		AppData.shared.updateActiveApp(app)
 	}
 	
 	private func UpdateSystemInfo(_ systemInfo: SystemInfoBundle) {
-		
-//		print("UpdateSystemInfo", systemInfo.description)
 		
 		AppData.shared.updateSystemInfo(systemInfo)
 	}
