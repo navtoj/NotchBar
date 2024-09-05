@@ -1,0 +1,15 @@
+{
+  "originHash" : "d1803c009ea14e2e3450db0f00f310c972cedea7a0155ad8a06159a751570392",
+  "pins" : [
+    {
+      "identity" : "systeminfokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kyome22/SystemInfoKit",
+      "state" : {
+        "revision" : "a70db062a94959404fb35b72eb9a08568dcf1dc0",
+        "version" : "3.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}

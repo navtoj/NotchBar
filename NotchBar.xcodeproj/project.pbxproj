@@ -10,11 +10,13 @@
 		22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B39C2C8944C200A79687 /* AppDelegate.swift */; };
 		22E2B3A12C8944C300A79687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E2B3A02C8944C300A79687 /* Assets.xcassets */; };
 		22E2B3AC2C89453A00A79687 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AB2C89453A00A79687 /* main.swift */; };
-		22E2B3AE2C89460300A79687 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AD2C89460300A79687 /* Window.swift */; };
+		22E2B3AE2C89460300A79687 /* NotchWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AD2C89460300A79687 /* NotchWindow.swift */; };
 		22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */; };
 		22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B22C895B7E00A79687 /* NotchFrame.swift */; };
 		22E2B3B52C89615B00A79687 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B42C89615B00A79687 /* Helpers.swift */; };
 		22E2B3B92C896D9A00A79687 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B82C896D9A00A79687 /* ContentView.swift */; };
+		22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22E2B3BB2C897B4900A79687 /* SystemInfoKit */; };
+		22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3BD2C897E1C00A79687 /* NotchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,11 +25,12 @@
 		22E2B3A02C8944C300A79687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22E2B3A52C8944C300A79687 /* NotchBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotchBar.entitlements; sourceTree = "<group>"; };
 		22E2B3AB2C89453A00A79687 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		22E2B3AD2C89460300A79687 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		22E2B3AD2C89460300A79687 /* NotchWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindow.swift; sourceTree = "<group>"; };
 		22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInScreen.swift; sourceTree = "<group>"; };
 		22E2B3B22C895B7E00A79687 /* NotchFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchFrame.swift; sourceTree = "<group>"; };
 		22E2B3B42C89615B00A79687 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		22E2B3B82C896D9A00A79687 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		22E2B3BD2C897E1C00A79687 /* NotchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,8 +67,8 @@
 				22E2B3AF2C8951CE00A79687 /* Extensions */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
 				22E2B3B42C89615B00A79687 /* Helpers.swift */,
-				22E2B3AD2C89460300A79687 /* Window.swift */,
-				22E2B3B82C896D9A00A79687 /* ContentView.swift */,
+				22E2B3AD2C89460300A79687 /* NotchWindow.swift */,
+				22E2B3BF2C898AB200A79687 /* Views */,
 				22E2B3AB2C89453A00A79687 /* main.swift */,
 				22E2B3A02C8944C300A79687 /* Assets.xcassets */,
 				22E2B3A52C8944C300A79687 /* NotchBar.entitlements */,
@@ -79,6 +83,15 @@
 				22E2B3B22C895B7E00A79687 /* NotchFrame.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		22E2B3BF2C898AB200A79687 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22E2B3B82C896D9A00A79687 /* ContentView.swift */,
+				22E2B3BD2C897E1C00A79687 /* NotchBar.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +110,9 @@
 			dependencies = (
 			);
 			name = NotchBar;
+			packageProductDependencies = (
+				22E2B3BB2C897B4900A79687 /* SystemInfoKit */,
+			);
 			productName = NotchBar;
 			productReference = 22E2B3992C8944C200A79687 /* NotchBar.app */;
 			productType = "com.apple.product-type.application";
@@ -125,6 +141,9 @@
 				Base,
 			);
 			mainGroup = 22E2B3902C8944C200A79687;
+			packageReferences = (
+				22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */,
+			);
 			productRefGroup = 22E2B39A2C8944C200A79687 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -152,11 +171,12 @@
 			files = (
 				22E2B3B52C89615B00A79687 /* Helpers.swift in Sources */,
 				22E2B3B92C896D9A00A79687 /* ContentView.swift in Sources */,
+				22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */,
 				22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */,
 				22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */,
 				22E2B3AC2C89453A00A79687 /* main.swift in Sources */,
 				22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */,
-				22E2B3AE2C89460300A79687 /* Window.swift in Sources */,
+				22E2B3AE2C89460300A79687 /* NotchWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +377,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kyome22/SystemInfoKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22E2B3BB2C897B4900A79687 /* SystemInfoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */;
+			productName = SystemInfoKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22E2B3912C8944C200A79687 /* Project object */;
 }

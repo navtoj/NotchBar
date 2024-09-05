@@ -11,7 +11,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	// Create Window
 	
-	private lazy var window = Window()
+	private lazy var window = NotchWindow()
+	
+	// App Delegate Functions
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
 		print("applicationWillFinishLaunching")
@@ -37,8 +39,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 		print("applicationWillTerminate")
-		
-		// Insert code here to tear down your application
 	}
 	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

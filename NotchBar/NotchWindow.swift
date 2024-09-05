@@ -1,5 +1,5 @@
 //
-//  Window.swift
+//  NotchWindow.swift
 //  NotchBar
 //
 //  Created by Navtoj Chahal on 2024-09-04.
@@ -8,7 +8,7 @@
 import Cocoa
 import SwiftUI
 
-class Window: NSWindow {
+class NotchWindow: NSWindow {
 	
 	init() {
 		// Create Window
@@ -116,6 +116,14 @@ class Window: NSWindow {
 		if skipCheck || x != origin.x || y != origin.y {
 			print("Reset Window Position")
 			window.setFrameOrigin(origin)
+		}
+		
+		// Ensure Notch Bar Visibility
+		
+		if display.frame.height == (display.visibleFrame.height + display.safeAreaInsets.top) {
+			print("Notch bar visible.")
+		} else {
+			print("Notch bar not visible.")
 		}
 	}
 }
