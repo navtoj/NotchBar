@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftUI
 
 class Window: NSWindow {
 	
@@ -23,9 +24,7 @@ class Window: NSWindow {
 		
 		// Configure View
 		
-		let viewController = ViewController()
-		contentView = viewController.view
-		contentViewController = viewController
+		contentView = NSHostingView(rootView: ContentView())
 		
 		// Configure Window
 		
@@ -44,7 +43,7 @@ class Window: NSWindow {
 		hasShadow = false
 		if hasShadow { print("hasShadow", hasShadow) }
 		
-//		ignoresMouseEvents = true
+		ignoresMouseEvents = true
 		if !ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
 		
 		isMovable = false
