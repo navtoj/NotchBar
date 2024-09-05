@@ -15,7 +15,7 @@ class Window: NSWindow {
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
 			styleMask: [
-//				.titled
+//				.nonactivatingPanel
 			],
 			backing: .buffered,
 			defer: false
@@ -30,7 +30,6 @@ class Window: NSWindow {
 		// Configure Window
 		
 		level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1)
-		styleMask = .borderless
 		collectionBehavior = [
 			.canJoinAllSpaces,
 			.stationary,
@@ -45,7 +44,7 @@ class Window: NSWindow {
 		hasShadow = false
 		if hasShadow { print("hasShadow", hasShadow) }
 		
-		ignoresMouseEvents = true
+//		ignoresMouseEvents = true
 		if !ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
 		
 		isMovable = false

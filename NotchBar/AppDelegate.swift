@@ -14,6 +14,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	private lazy var window = Window()
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
+		print("applicationWillFinishLaunching")
+		
+		// Prevent Focus
+		
+		NSApp.setActivationPolicy(.prohibited)
 		
 		// Ensure Notch Area
 		
@@ -23,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
+		print("applicationDidFinishLaunching")
 		
 		// Show Window
 		
@@ -30,6 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
+		print("applicationWillTerminate")
+		
 		// Insert code here to tear down your application
 	}
 	
