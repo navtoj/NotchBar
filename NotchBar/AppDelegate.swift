@@ -9,9 +9,9 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	// Create Notch Panel
+	// Create Window
 	
-	private lazy var notchPanel = NotchPanel()
+	private lazy var window = Window()
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
 		
@@ -24,9 +24,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		
-		// Show Notch Panel
+		// Show Window
 		
-		notchPanel.orderFrontRegardless()
+		window.orderFrontRegardless()
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {

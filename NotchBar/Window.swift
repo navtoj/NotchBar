@@ -1,5 +1,5 @@
 //
-//  NotchPanel.swift
+//  Window.swift
 //  NotchBar
 //
 //  Created by Navtoj Chahal on 2024-09-04.
@@ -7,9 +7,10 @@
 
 import Cocoa
 
-class NotchPanel: NSWindow {
-
+class Window: NSWindow {
+	
 	init() {
+		// Create Window
 		
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
@@ -52,8 +53,6 @@ class NotchPanel: NSWindow {
 		
 		// isMovableByWindowBackground = true
 		if isMovableByWindowBackground { print("isMovableByWindowBackground", isMovableByWindowBackground) }
-		
-//		EnsureWindowSizePosition(self)
 		
 		// Track Window Position & Size
 		
