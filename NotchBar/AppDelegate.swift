@@ -7,6 +7,19 @@
 
 import Cocoa
 
+class AppState: ObservableObject {
+	static let shared = AppState()
+	private init() {}
+
+	@Published private(set) var isBarCovered: Bool = false
+	func showBar() {
+		isBarCovered = false
+	}
+	func hideBar() {
+		isBarCovered = true
+	}
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	// Create Window

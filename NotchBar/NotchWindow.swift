@@ -11,8 +11,6 @@ import SwiftUI
 class NotchWindow: NSWindow {
 	
 	init() {
-		// Create Window
-		
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
 			styleMask: [
@@ -122,8 +120,10 @@ class NotchWindow: NSWindow {
 		
 		if display.frame.height == (display.visibleFrame.height + display.safeAreaInsets.top) {
 			print("Notch bar visible.")
+			AppState.shared.showBar()
 		} else {
 			print("Notch bar not visible.")
+			AppState.shared.hideBar()
 		}
 	}
 }
