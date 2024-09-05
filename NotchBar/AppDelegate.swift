@@ -9,10 +9,22 @@ import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	let notchPanel = NotchPanel()
+	// Create Notch Panel
+	
+	private lazy var notchPanel = NotchPanel()
+	
+	func applicationWillFinishLaunching(_ notification: Notification) {
+		
+		// Ensure Notch Area
+		
+		guard NSScreen.builtIn?.notchFrame != nil else {
+			return QuitWithLog("NotchBar only supports devices with a notch.")
+		}
+	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		// Insert code here to initialize your application
+		
+		// Show Notch Panel
 		
 		notchPanel.orderFrontRegardless()
 	}

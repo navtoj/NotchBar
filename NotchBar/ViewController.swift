@@ -10,19 +10,34 @@ import Cocoa
 class ViewController: NSViewController {
 	
 	override func loadView() {
+		
+		// Create Base View
+		
 		view = NSView()
 		
-		view.wantsLayer = true
-		view.layer?.backgroundColor = NSColor.red.cgColor
+//		view.wantsLayer = true
+//		view.layer?.backgroundColor = .black
+//		view.layer?.borderWidth = 10
+//		view.layer?.borderColor = .white
 		
-		let label = NSTextField(labelWithString: "Hello World!")
-		label.translatesAutoresizingMaskIntoConstraints = false
-		view.addSubview(label)
+		// Create Notch Area
 		
-		NSLayoutConstraint.activate([
-			label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-		])
+		let notchArea = NSView(
+			frame: NSRect(
+				origin: CGPoint(x: 0, y: 950),
+				size: CGSize(
+					width: (NSScreen.builtIn?.frame.width)!,
+					height: (NSScreen.builtIn?.notchFrame!.height)!
+				)
+			)
+		)
+		
+		notchArea.wantsLayer = true
+		notchArea.layer?.backgroundColor = .black
+		
+		// Add Notch Area
+		
+		view.addSubview(notchArea)
 	}
 	
 	override func viewDidLoad() {

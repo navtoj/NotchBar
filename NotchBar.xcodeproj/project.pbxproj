@@ -14,6 +14,7 @@
 		22E2B3AE2C89460300A79687 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AD2C89460300A79687 /* NotchPanel.swift */; };
 		22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */; };
 		22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B22C895B7E00A79687 /* NotchFrame.swift */; };
+		22E2B3B52C89615B00A79687 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3B42C89615B00A79687 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		22E2B3AD2C89460300A79687 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInScreen.swift; sourceTree = "<group>"; };
 		22E2B3B22C895B7E00A79687 /* NotchFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchFrame.swift; sourceTree = "<group>"; };
+		22E2B3B42C89615B00A79687 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				22E2B3AF2C8951CE00A79687 /* Extensions */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
+				22E2B3B42C89615B00A79687 /* Helpers.swift */,
 				22E2B3AD2C89460300A79687 /* NotchPanel.swift */,
 				22E2B39E2C8944C200A79687 /* ViewController.swift */,
 				22E2B3AB2C89453A00A79687 /* main.swift */,
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E2B39F2C8944C200A79687 /* ViewController.swift in Sources */,
+				22E2B3B52C89615B00A79687 /* Helpers.swift in Sources */,
 				22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */,
 				22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */,
 				22E2B3AC2C89453A00A79687 /* main.swift in Sources */,
