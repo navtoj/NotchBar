@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	// App Delegate Functions
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
-		print("applicationWillFinishLaunching")
+//		print("applicationWillFinishLaunching")
 		
 		// Prevent Focus
 		
@@ -37,7 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		print("applicationDidFinishLaunching")
+//		print("applicationDidFinishLaunching")
 		
 		// Show Window
 		
@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			return QuitWithLog("Failed to get NSRunningApplication.")
 		}
 		
-		print("UpdateActiveApp", app.bundleIdentifier ?? "Unknown")
+//		print("UpdateActiveApp", app.bundleIdentifier ?? "Unknown")
 		
 		AppData.shared.updateActiveApp(app)
 	}
