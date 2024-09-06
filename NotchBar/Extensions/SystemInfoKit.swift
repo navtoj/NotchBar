@@ -15,17 +15,18 @@ private enum DetailDataUnit : String {
 public struct DetailData: CustomStringConvertible {
 	public internal(set) var value: Double
 	public internal(set) var unit: String
+	public internal(set) var decimalPlaces: Int = 2
 	
 	public var description: String {
-		return String(format: "%.2f %@", value, unit)
+		return String(format: "%.\(decimalPlaces)f %@", value, unit)
 	}
 }
 
 
-private func getNumInfo(details: [String], key: String, unit: String, unitOverride: String = "") -> DetailData {
+private func getNumInfo(details: [String], key: String, unit: String, unitOverride: String = "", decimals: Int = 2) -> DetailData {
 	let returnUnit = unitOverride.isEmpty ? unit : unitOverride
 	
-	let errorValue = DetailData(value: -1.0, unit: returnUnit)
+	let errorValue = DetailData(value: -1.0, unit: returnUnit, decimalPlaces: decimals)
 	
 	guard let detail = details.first(where: { value in
 		value.starts(with: key)
@@ -38,7 +39,7 @@ private func getNumInfo(details: [String], key: String, unit: String, unitOverri
 	
 	guard let numValue = Double(value) else { return errorValue }
 	
-	return DetailData(value: numValue, unit: returnUnit)
+	return DetailData(value: numValue, unit: returnUnit, decimalPlaces: decimals)
 }
 
 private func getTextInfo(details: [String], key: String) -> String {
@@ -159,7 +160,7 @@ extension BatteryInfo {
 		getNumInfo(details: details, key: "Max Capacity:", unit: DetailDataUnit.percentage.rawValue)
 	}
 	var cycles: DetailData {
-		getNumInfo(details: details, key: "Cycle Count:", unit: "cycles")
+		getNumInfo(details: details, key: "Cycle Count:", unit: "cycles", decimals: 0)
 	}
 	var temperature: DetailData {
 		getNumInfo(details: details, key: "Temperature:", unit: "℃", unitOverride: "ºC")

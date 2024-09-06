@@ -91,9 +91,9 @@ struct SystemInfo: View {
 					// Text("Max Capacity:")
 					// Text(battery.capacity.description)
 					// Text("Cycle Count:")
-					// Text(battery.cycles.description)
+					Text(battery.cycles.description)
 					// Text("Temperature:")
-					Text(battery.temperature.description)
+					// Text(battery.temperature.description)
 				}
 				.frame(maxWidth: .infinity, alignment: .leading)
 			}
@@ -103,12 +103,13 @@ struct SystemInfo: View {
 					// Text("Network:")
 					// Text(network.name)
 					Text(network.ip)
-					// Text(network.upload.description)
-					// Text(network.download.description)
+					// Text(network.upload.value.description)
+					// Text(network.download.value.description)
 				}
 				.frame(maxWidth: .infinity, alignment: .leading)
 			}
 		}
+		.padding(.leading, 4)
 		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 }

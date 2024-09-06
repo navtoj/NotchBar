@@ -61,7 +61,7 @@ class AppData: ObservableObject {
 	}
 	
 	@objc private func handleDidActivateApplicationNotification(_ notification: Notification) {
-		print("didActivateApplicationNotification")
+//		print("didActivateApplicationNotification")
 		
 		guard let userInfo = notification.userInfo else {
 			return print("Failed to get active app notification.")
