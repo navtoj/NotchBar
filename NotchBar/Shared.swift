@@ -18,19 +18,6 @@ func QuitWithLog(_ message: String, sender: Any? = nil) {
 	NSApplication.shared.terminate(sender)
 }
 
-class AppState: ObservableObject {
-	static let shared = AppState()
-	private init() {}
-	
-	@Published private(set) var isBarCovered: Bool = false
-	func showBar() {
-		isBarCovered = false
-	}
-	func hideBar() {
-		isBarCovered = true
-	}
-}
-
 class AppData: ObservableObject {
 	static let shared = AppData()
 	

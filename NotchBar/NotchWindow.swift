@@ -14,7 +14,7 @@ class NotchWindow: NSWindow {
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
 			styleMask: [
-//				.nonactivatingPanel
+				//				.nonactivatingPanel
 			],
 			backing: .buffered,
 			defer: false
@@ -120,10 +120,10 @@ class NotchWindow: NSWindow {
 		
 		if display.frame.height == (display.visibleFrame.height + display.safeAreaInsets.top) {
 			print("Notch bar visible.")
-			AppState.shared.showBar()
+			window.alphaValue = 1
 		} else {
 			print("Notch bar not visible.")
-			AppState.shared.hideBar()
+			window.alphaValue = 0
 		}
 	}
 }
