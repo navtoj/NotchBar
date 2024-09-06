@@ -13,29 +13,29 @@ struct InvertedBottomCorners: Shape {
 	func path(in rect: CGRect) -> Path {
 		var p = Path()
 		
-		// Top Left
-		p.move(to: CGPoint(x: rect.minX, y: rect.minY))
-		
-		// Top Right
-		p.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+		// Botton Left
+		p.addArc(
+			center: CGPoint(x: rect.minX + radius, y: rect.maxY),
+			radius: radius,
+			startAngle: .left,
+			endAngle: .top,
+			clockwise: false
+		)
 		
 		// Bottom Right
 		p.addArc(
 			center: CGPoint(x: rect.maxX - radius, y: rect.maxY),
 			radius: radius,
-			startAngle: Angle(degrees: 0),
-			endAngle: Angle(degrees: 270),
-			clockwise: true
+			startAngle: .top,
+			endAngle: .right,
+			clockwise: false
 		)
 		
-		// Bottom Left
-		p.addArc(
-			center: CGPoint(x: rect.minX + radius, y: rect.maxY),
-			radius: radius,
-			startAngle: Angle(degrees: 270),
-			endAngle: Angle(degrees: 180),
-			clockwise: true
-		)
+		// Top Right
+		p.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+		
+		// Top Left
+		p.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
 		
 		return p
 	}
