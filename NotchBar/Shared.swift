@@ -7,6 +7,7 @@
 
 import AppKit
 import SystemInfoKit
+import Combine
 
 func QuitWithLog(_ message: String, sender: Any? = nil) {
 	
@@ -32,15 +33,57 @@ class AppState: ObservableObject {
 
 class AppData: ObservableObject {
 	static let shared = AppData()
-	private init() {}
 	
 	@Published private(set) var activeApp = NSWorkspace.shared.frontmostApplication
-	func updateActiveApp(_ app: NSRunningApplication) {
-		activeApp = app
+	@Published private(set) var systemInfo = SystemInfoBundle()
+	
+	// Create System Info Observer
+	
+	private let observer = SystemInfoObserver.shared(monitorInterval: 1.0)
+	private var cancellables = Set<AnyCancellable>()
+	
+	private init() {
+		// Track Active App
+		
+		NSWorkspace.shared.notificationCenter.addObserver(
+			self,
+			selector: #selector(handleDidActivateApplicationNotification),
+			name: NSWorkspace.didActivateApplicationNotification,
+			object: nil
+		)
+		
+		// Track System Info
+		
+		observer.systemInfoPublisher
+			.sink { systemInfo in
+				self.systemInfo = systemInfo
+			}
+			.store(in: &cancellables)
+		
+		observer.startMonitoring()
 	}
 	
-	@Published private(set) var systemInfo = SystemInfoBundle()
-	func updateSystemInfo(_ info: SystemInfoBundle) {
-		systemInfo = info
+	deinit {
+		// Remove Active App Observer
+		
+		NSWorkspace.shared.notificationCenter.removeObserver(self)
+		
+		// Stop System Info Observer
+		
+		observer.stopMonitoring()
+	}
+	
+	@objc private func handleDidActivateApplicationNotification(_ notification: Notification) {
+		print("didActivateApplicationNotification")
+		
+		guard let userInfo = notification.userInfo else {
+			return print("Failed to get active app notification.")
+		}
+		
+		guard let app = userInfo[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
+			return print("Failed to get NSRunningApplication.")
+		}
+		
+		self.activeApp = app
 	}
 }

@@ -11,14 +11,16 @@ import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	// Create System Info Observer
-	
-	let observer = SystemInfoObserver.shared(monitorInterval: 1.0)
-	var cancellables = Set<AnyCancellable>()
+	private var cancellables = Set<AnyCancellable>()
 	
 	// Create Window
 	
 	private lazy var window = NotchWindow()
+	
+	// Create Status Menu
+	
+	private lazy var statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
+	private lazy var statusBarMenuInfoItem = NSMenuItem()
 	
 	// App Delegate Functions
 	
@@ -34,6 +36,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		if NSScreen.builtIn?.notchFrame == nil {
 			QuitWithLog("NotchBar only supports devices with a notch.")
 		}
+		
+		// Configure Status Bar Item
+		
+		if let button = statusBarItem.button {
+//			button.title = "NotchBar"
+			button.image = NSImage(systemSymbol: .sparkle)
+		}
+		
+		// Configure Status Bar Menu Info Item
+		
+		statusBarMenuInfoItem.title = "Covered by Menu Bar"
+		statusBarMenuInfoItem.isEnabled = false
+		statusBarMenuInfoItem.isHidden = !AppState.shared.isBarCovered
+		
+		// Configure Status Bar Menu
+		
+		statusBarItem.menu = NSMenu()
+		if let statusBarMenu = statusBarItem.menu {
+			statusBarMenu.addItem(statusBarMenuInfoItem)
+			statusBarMenu.addItem(
+				withTitle: "Quit NotchBar",
+				action: #selector(NSApplication.terminate(_:)),
+				keyEquivalent: "q"
+			)
+		}
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -43,53 +70,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		window.orderFrontRegardless()
 		
-		// Track Active App
+		// Track AppState
 		
-		NSWorkspace.shared.notificationCenter.addObserver(
-			self,
-			selector: #selector(UpdateActiveApp),
-			name: NSWorkspace.didActivateApplicationNotification,
-			object: nil
-		)
-		
-		// Track System Info
-		
-		observer.systemInfoPublisher
-			.sink { systemInfo in
-				self.UpdateSystemInfo(systemInfo)
+		AppState.shared.$isBarCovered
+			.sink { isBarCovered in
+				self.statusBarMenuInfoItem.isHidden = !isBarCovered
 			}
 			.store(in: &cancellables)
-		
-		observer.startMonitoring()
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 		print("applicationWillTerminate")
 		
-		// Stop System Info Observer
-	
-		observer.stopMonitoring()
+		// Cancel App State Subscriptions
+		
+		cancellables.forEach { cancellable in
+			cancellable.cancel()
+		}
+		cancellables.removeAll()
 	}
 	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
 		return false
-	}
-	
-	@objc private func UpdateActiveApp(_ notification: Notification) {
-		
-		guard let userInfo = notification.userInfo else {
-			return print("Failed to get active app notification.")
-		}
-		
-		guard let app = userInfo[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
-			return print("Failed to get NSRunningApplication.")
-		}
-		
-		AppData.shared.updateActiveApp(app)
-	}
-	
-	private func UpdateSystemInfo(_ systemInfo: SystemInfoBundle) {
-		
-		AppData.shared.updateSystemInfo(systemInfo)
 	}
 }
