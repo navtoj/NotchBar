@@ -8,6 +8,7 @@
 import Cocoa
 import SystemInfoKit
 import Combine
+import LaunchAtLogin
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
@@ -15,9 +16,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	private lazy var window = NotchWindow()
 	
-	// Create Status Menu
+	// Create Status Item
 	
-	private lazy var statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
+	private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+	
+	// Create Status Menu Items
+	
+	private lazy var launchAtLogin = NSMenuItem(
+		title: "Launch at Login",
+		action: #selector(toggleLaunchAtLogin),
+		keyEquivalent: "l"
+	)
 	
 	// App Delegate Functions
 	
@@ -36,16 +45,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		// Configure Status Bar Item
 		
-		if let button = statusBarItem.button {
-			//			button.title = "NotchBar"
+		if let button = statusItem.button {
 			button.image = NSImage(systemSymbol: .sparkle)
 		}
 		
-		// Configure Status Bar Menu
+		// Create Status Bar Menu
 		
-		statusBarItem.menu = NSMenu()
-		if let statusBarMenu = statusBarItem.menu {
-			statusBarMenu.addItem(
+		statusItem.menu = NSMenu()
+		if let menu = statusItem.menu {
+			
+			// Add Launch at Login Item
+			
+			updateLaunchAtLoginIcon()
+			menu.addItem(launchAtLogin)
+			
+			// Add Separator
+			
+			menu.addItem(.separator())
+			
+			// Add Quit Item
+			
+			menu.addItem(
 				withTitle: "Quit NotchBar",
 				action: #selector(NSApplication.terminate(_:)),
 				keyEquivalent: "q"
@@ -67,5 +87,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
 		return false
+	}
+	
+	// Status Menu Functions
+	
+	@objc private func toggleLaunchAtLogin() {
+		LaunchAtLogin.isEnabled.toggle()
+		updateLaunchAtLoginIcon()
+	}
+	
+	private func updateLaunchAtLoginIcon() {
+		launchAtLogin.image = LaunchAtLogin.isEnabled ? NSImage(systemSymbol: .checkmarkCircleFill) : nil
 	}
 }

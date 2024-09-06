@@ -13,6 +13,7 @@
 		2243021D2C89C45D0046AA22 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2243021C2C89C45D0046AA22 /* Shared.swift */; };
 		22890BB42C8ACDA600F05025 /* InvertedBottomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22890BB32C8ACDA600F05025 /* InvertedBottomCorners.swift */; };
 		22890BB82C8AEC4A00F05025 /* CardinalAngles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22890BB72C8AEC4A00F05025 /* CardinalAngles.swift */; };
+		22890BBB2C8B08DB00F05025 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 22890BBA2C8B08DB00F05025 /* LaunchAtLogin */; };
 		22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B39C2C8944C200A79687 /* AppDelegate.swift */; };
 		22E2B3A12C8944C300A79687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E2B3A02C8944C300A79687 /* Assets.xcassets */; };
 		22E2B3AC2C89453A00A79687 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AB2C89453A00A79687 /* main.swift */; };
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22890BBB2C8B08DB00F05025 /* LaunchAtLogin in Frameworks */,
 				2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */,
 				22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */,
 			);
@@ -138,6 +140,7 @@
 			packageProductDependencies = (
 				22E2B3BB2C897B4900A79687 /* SystemInfoKit */,
 				2243021A2C89C2940046AA22 /* SFSafeSymbols */,
+				22890BBA2C8B08DB00F05025 /* LaunchAtLogin */,
 			);
 			productName = NotchBar;
 			productReference = 22E2B3992C8944C200A79687 /* NotchBar.app */;
@@ -170,6 +173,7 @@
 			packageReferences = (
 				22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */,
 				224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				22890BB92C8B08DB00F05025 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 22E2B39A2C8944C200A79687 /* Products */;
 			projectDirPath = "";
@@ -421,6 +425,14 @@
 				minimumVersion = 5.3.0;
 			};
 		};
+		22890BB92C8B08DB00F05025 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kyome22/SystemInfoKit";
@@ -436,6 +448,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
+		};
+		22890BBA2C8B08DB00F05025 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22890BB92C8B08DB00F05025 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
 		};
 		22E2B3BB2C897B4900A79687 /* SystemInfoKit */ = {
 			isa = XCSwiftPackageProductDependency;

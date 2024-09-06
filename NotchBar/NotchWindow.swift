@@ -13,9 +13,7 @@ class NotchWindow: NSWindow {
 	init() {
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
-			styleMask: [
-				//				.nonactivatingPanel
-			],
+			styleMask: .borderless,
 			backing: .buffered,
 			defer: false
 		)
