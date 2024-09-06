@@ -1,5 +1,5 @@
 //
-//  ViewInvertedBottomCorners.swift
+//  InvertedBottomCorners.swift
 //  NotchBar
 //
 //  Created by Navtoj Chahal on 2024-09-05.
@@ -13,29 +13,29 @@ struct InvertedBottomCorners: Shape {
 	func path(in rect: CGRect) -> Path {
 		var p = Path()
 		
-		// Botton Left
-		p.addArc(
-			center: CGPoint(x: rect.minX + radius, y: rect.maxY),
-			radius: radius,
-			startAngle: .left,
-			endAngle: .top,
-			clockwise: false
-		)
+		// Top Left
+		p.move(to: CGPoint(x: rect.minX, y: rect.minY))
+		
+		// Top Right
+		p.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
 		
 		// Bottom Right
 		p.addArc(
 			center: CGPoint(x: rect.maxX - radius, y: rect.maxY),
 			radius: radius,
-			startAngle: .top,
-			endAngle: .right,
-			clockwise: false
+			startAngle: .right,
+			endAngle: .top,
+			clockwise: true
 		)
 		
-		// Top Right
-		p.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
-		
-		// Top Left
-		p.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+		// Botton Left
+		p.addArc(
+			center: CGPoint(x: rect.minX + radius, y: rect.maxY),
+			radius: radius,
+			startAngle: .top,
+			endAngle: .left,
+			clockwise: true
+		)
 		
 		return p
 	}
