@@ -12,6 +12,7 @@ struct ContentView: View {
 	var body: some View {
 		VStack {
 			NotchBar()
+				.invertedBottomCorners(background: .black, radius: 16)
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}

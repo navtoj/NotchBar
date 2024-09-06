@@ -11,6 +11,7 @@
 		224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302172C89C0BB0046AA22 /* SystemInfoKit.swift */; };
 		2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2243021A2C89C2940046AA22 /* SFSafeSymbols */; };
 		2243021D2C89C45D0046AA22 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2243021C2C89C45D0046AA22 /* Shared.swift */; };
+		22890BB42C8ACDA600F05025 /* ViewInvertedBottomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22890BB32C8ACDA600F05025 /* ViewInvertedBottomCorners.swift */; };
 		22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B39C2C8944C200A79687 /* AppDelegate.swift */; };
 		22E2B3A12C8944C300A79687 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E2B3A02C8944C300A79687 /* Assets.xcassets */; };
 		22E2B3AC2C89453A00A79687 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2B3AB2C89453A00A79687 /* main.swift */; };
@@ -27,6 +28,7 @@
 		224302152C89C07B0046AA22 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		224302172C89C0BB0046AA22 /* SystemInfoKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoKit.swift; sourceTree = "<group>"; };
 		2243021C2C89C45D0046AA22 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		22890BB32C8ACDA600F05025 /* ViewInvertedBottomCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInvertedBottomCorners.swift; sourceTree = "<group>"; };
 		22E2B3992C8944C200A79687 /* NotchBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotchBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E2B39C2C8944C200A79687 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22E2B3A02C8944C300A79687 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				22E2B3B02C8951E400A79687 /* BuiltInScreen.swift */,
 				22E2B3B22C895B7E00A79687 /* NotchFrame.swift */,
 				224302172C89C0BB0046AA22 /* SystemInfoKit.swift */,
+				22890BB32C8ACDA600F05025 /* ViewInvertedBottomCorners.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */,
 				224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */,
 				22E2B3AE2C89460300A79687 /* NotchWindow.swift in Sources */,
+				22890BB42C8ACDA600F05025 /* ViewInvertedBottomCorners.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
