@@ -13,6 +13,12 @@ struct ContentView: View {
 		VStack {
 			NotchBar()
 				.invertedBottomCorners(background: .black, radius: 10)
+				.onHover(perform: { hovering in
+					print("hovering", hovering)
+				})
+				.onTapGesture(count: 1, perform: {
+					print("tapped")
+				})
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}

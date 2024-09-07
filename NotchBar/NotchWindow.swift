@@ -24,7 +24,7 @@ class NotchWindow: NSWindow {
 		
 		// Configure Window
 		
-		level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1)
+//		level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1)
 		collectionBehavior = [
 			.canJoinAllSpaces,
 			.stationary,
@@ -39,13 +39,13 @@ class NotchWindow: NSWindow {
 		hasShadow = false
 		if hasShadow { print("hasShadow", hasShadow) }
 		
-		ignoresMouseEvents = true
+//		ignoresMouseEvents = true
 		if !ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
 		
 		isMovable = false
 		if isMovable { print("isMovable", isMovable) }
 		
-		// isMovableByWindowBackground = true
+//		isMovableByWindowBackground = true
 		if isMovableByWindowBackground { print("isMovableByWindowBackground", isMovableByWindowBackground) }
 		
 		// Track Window Position & Size
