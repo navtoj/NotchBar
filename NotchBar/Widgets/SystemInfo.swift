@@ -42,6 +42,10 @@ struct SystemInfo: View {
 					Image(systemName: cpu.icon)
 					// Text("CPU:")
 					Text(cpu.usage.description)
+						.contentTransition(.numericText(value: cpu.usage.value))
+						.transaction { t in
+							t.animation = .bouncy
+						}
 					// Text("System:")
 					// Text(cpu.system.description)
 					// Text("User:")
@@ -56,6 +60,10 @@ struct SystemInfo: View {
 					Image(systemName: memory.icon)
 					// Text("Memory:")
 					Text(memory.usage.description)
+						.contentTransition(.numericText(value: memory.usage.value))
+						.transaction { t in
+							t.animation = .bouncy
+						}
 					// Text("Pressure:")
 					// Text(memory.pressure.description)
 					// Text("App:")
@@ -72,6 +80,10 @@ struct SystemInfo: View {
 					Image(systemName: storage.icon)
 					// Text("Storage:")
 					Text(storage.usage.description)
+						.contentTransition(.numericText(value: storage.usage.value))
+						.transaction { t in
+							t.animation = .bouncy
+						}
 					// Text("Used:")
 					// Text(storage.used.description)
 					// Text("Free:")
@@ -92,6 +104,10 @@ struct SystemInfo: View {
 					// Text(battery.capacity.description)
 					// Text("Cycle Count:")
 					Text(battery.cycles.description)
+						.contentTransition(.numericText(value: battery.cycles.value))
+						.transaction { t in
+							t.animation = .bouncy
+						}
 					// Text("Temperature:")
 					// Text(battery.temperature.description)
 				}

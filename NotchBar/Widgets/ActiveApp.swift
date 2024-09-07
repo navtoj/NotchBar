@@ -26,7 +26,13 @@ struct ActiveApp: View {
 				.padding(.horizontal, 10)
 				.padding(.vertical, 4)
 				.background(.tertiary)
-				.clipShape(Capsule())
+				.clipShape(.capsule(style: .continuous))
+				.onHover(perform: { hovering in
+					print("hovering", hovering)
+				})
+				.onTapGesture(count: 1, perform: {
+					print("tapped")
+				})
 			}
 		}
 }
