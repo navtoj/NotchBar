@@ -9,6 +9,7 @@ import SwiftUI
 import SystemInfoKit
 
 struct NotchBar: View {
+	@Environment(\.colorScheme) var theme
 	
 	@StateObject private var appData = AppData.shared
 	
@@ -29,8 +30,8 @@ struct NotchBar: View {
 		.padding(.vertical, 2)
 		.frame(height: notch?.height ?? 31.5)
 		.preferredColorScheme(.dark)
-		.background(.black)
-		.foregroundStyle(.primary)
+		.background(theme == .dark ? .black : Color(.textBackgroundColor))
+		.foregroundStyle(.foreground)
 	}
 }
 

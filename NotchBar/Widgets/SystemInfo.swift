@@ -119,6 +119,6 @@ struct SystemInfo: View {
 	}
 }
 
-//#Preview {
-//	SystemInfo(info: .init())
-//}
+#Preview {
+	SystemInfo(info: .init())
+}

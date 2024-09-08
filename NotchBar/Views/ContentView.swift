@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+	@Environment(\.colorScheme) var theme
 	
 	var body: some View {
 		VStack {
 			NotchBar()
-				.invertedBottomCorners(background: .black, radius: 10)
+				.invertedBottomCorners(background: theme == .dark ? .black : Color(.textBackgroundColor), radius: 10)
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}
