@@ -12,9 +12,6 @@ extension View {
 		self
 			.monospacedDigit()
 			.contentTransition(.numericText(value: value))
-			.animation(
-				.spring(response: 0.3, dampingFraction: 0.8),
-				value: value
-			)
+			.animation(.default, value: value)
 	}
 }

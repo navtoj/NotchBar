@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
+import Pow
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var theme
@@ -14,6 +16,11 @@ struct ContentView: View {
 		VStack {
 			NotchBar()
 				.invertedBottomCorners(background: theme == .dark ? .black : Color(.textBackgroundColor), radius: 10)
+#if DEBUG
+				.preferredColorScheme(.light)
+#else
+				.preferredColorScheme(.dark)
+#endif
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}

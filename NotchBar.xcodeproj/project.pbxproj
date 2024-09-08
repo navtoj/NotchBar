@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220EB28C2C8D21D2000B1111 /* AnimatedNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB28B2C8D21D2000B1111 /* AnimatedNumbers.swift */; };
+		220EB2922C8D5D14000B1111 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = 220EB2912C8D5D14000B1111 /* Pow */; };
 		224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302152C89C07B0046AA22 /* SystemInfo.swift */; };
 		224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302172C89C0BB0046AA22 /* SystemInfoKit.swift */; };
 		2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2243021A2C89C2940046AA22 /* SFSafeSymbols */; };
@@ -53,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22890BBB2C8B08DB00F05025 /* LaunchAtLogin in Frameworks */,
+				220EB2922C8D5D14000B1111 /* Pow in Frameworks */,
 				2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */,
 				22E2B3BC2C897B4900A79687 /* SystemInfoKit in Frameworks */,
 			);
@@ -144,6 +146,7 @@
 				22E2B3BB2C897B4900A79687 /* SystemInfoKit */,
 				2243021A2C89C2940046AA22 /* SFSafeSymbols */,
 				22890BBA2C8B08DB00F05025 /* LaunchAtLogin */,
+				220EB2912C8D5D14000B1111 /* Pow */,
 			);
 			productName = NotchBar;
 			productReference = 22E2B3992C8944C200A79687 /* NotchBar.app */;
@@ -177,6 +180,7 @@
 				22E2B3BA2C897B4900A79687 /* XCRemoteSwiftPackageReference "SystemInfoKit" */,
 				224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				22890BB92C8B08DB00F05025 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+				220EB2902C8D5D14000B1111 /* XCRemoteSwiftPackageReference "Pow" */,
 			);
 			productRefGroup = 22E2B39A2C8944C200A79687 /* Products */;
 			projectDirPath = "";
@@ -421,6 +425,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		220EB2902C8D5D14000B1111 /* XCRemoteSwiftPackageReference "Pow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmergeTools/Pow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -448,6 +460,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		220EB2912C8D5D14000B1111 /* Pow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 220EB2902C8D5D14000B1111 /* XCRemoteSwiftPackageReference "Pow" */;
+			productName = Pow;
+		};
 		2243021A2C89C2940046AA22 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 224302192C89C2940046AA22 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;

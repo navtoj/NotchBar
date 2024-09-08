@@ -29,7 +29,6 @@ struct NotchBar: View {
 		.padding(.horizontal, 4)
 		.padding(.vertical, 2)
 		.frame(height: notch?.height ?? 31.5)
-		.preferredColorScheme(.dark)
 		.background(theme == .dark ? .black : Color(.textBackgroundColor))
 		.foregroundStyle(.foreground)
 	}
