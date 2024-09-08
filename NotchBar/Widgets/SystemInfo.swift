@@ -42,10 +42,7 @@ struct SystemInfo: View {
 					Image(systemName: cpu.icon)
 					// Text("CPU:")
 					Text(cpu.usage.description)
-						.contentTransition(.numericText(value: cpu.usage.value))
-						.transaction { t in
-							t.animation = .bouncy
-						}
+						.animatedNumbers(value: cpu.usage.value)
 					// Text("System:")
 					// Text(cpu.system.description)
 					// Text("User:")
@@ -60,10 +57,7 @@ struct SystemInfo: View {
 					Image(systemName: memory.icon)
 					// Text("Memory:")
 					Text(memory.usage.description)
-						.contentTransition(.numericText(value: memory.usage.value))
-						.transaction { t in
-							t.animation = .bouncy
-						}
+						.animatedNumbers(value: memory.usage.value)
 					// Text("Pressure:")
 					// Text(memory.pressure.description)
 					// Text("App:")
@@ -80,10 +74,7 @@ struct SystemInfo: View {
 					Image(systemName: storage.icon)
 					// Text("Storage:")
 					Text(storage.usage.description)
-						.contentTransition(.numericText(value: storage.usage.value))
-						.transaction { t in
-							t.animation = .bouncy
-						}
+						.animatedNumbers(value: storage.usage.value)
 					// Text("Used:")
 					// Text(storage.used.description)
 					// Text("Free:")
@@ -104,10 +95,7 @@ struct SystemInfo: View {
 					// Text(battery.capacity.description)
 					// Text("Cycle Count:")
 					Text(battery.cycles.description)
-						.contentTransition(.numericText(value: battery.cycles.value))
-						.transaction { t in
-							t.animation = .bouncy
-						}
+						.animatedNumbers(value: battery.cycles.value)
 					// Text("Temperature:")
 					// Text(battery.temperature.description)
 				}
@@ -119,6 +107,7 @@ struct SystemInfo: View {
 					// Text("Network:")
 					// Text(network.name)
 					Text(network.ip)
+						.monospacedDigit()
 					// Text(network.upload.value.description)
 					// Text(network.download.value.description)
 				}
@@ -130,6 +119,6 @@ struct SystemInfo: View {
 	}
 }
 
-#Preview {
-	SystemInfo(info: .init())
-}
+//#Preview {
+//	SystemInfo(info: .init())
+//}
