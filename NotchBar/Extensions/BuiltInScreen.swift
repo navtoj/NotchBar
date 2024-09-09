@@ -10,7 +10,7 @@ import AppKit
 extension NSScreen {
 	
 	/// Returns a screen object representing the built-in screen.
-	class var builtIn: NSScreen? {
+	final class var builtIn: NSScreen? {
 		
 		// loop through available screens
 		

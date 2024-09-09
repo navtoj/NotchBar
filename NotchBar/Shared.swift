@@ -18,7 +18,7 @@ func QuitWithLog(_ message: String, sender: Any? = nil) {
 	NSApplication.shared.terminate(sender)
 }
 
-class AppData: ObservableObject {
+final class AppData: ObservableObject {
 	static let shared = AppData()
 	
 	@Published private(set) var activeApp = NSWorkspace.shared.frontmostApplication

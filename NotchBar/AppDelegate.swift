@@ -10,11 +10,11 @@ import SystemInfoKit
 import Combine
 import LaunchAtLogin
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	// Create Window
 	
-	private lazy var window = NotchWindow()
+	private lazy var window = NotchWindow.shared
 	
 	// Create Status Item
 	
@@ -43,13 +43,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			QuitWithLog("NotchBar only supports devices with a notch.")
 		}
 		
-		// Configure Status Bar Item
+		// Configure Status Item
 		
 		if let button = statusItem.button {
 			button.image = NSImage(systemSymbol: .sparkle)
 		}
 		
-		// Create Status Bar Menu
+		// Create Status Item Menu
 		
 		statusItem.menu = NSMenu()
 		if let menu = statusItem.menu {

@@ -8,9 +8,10 @@
 import Cocoa
 import SwiftUI
 
-class NotchWindow: NSWindow {
+final class NotchWindow: NSWindow {
+	static let shared = NotchWindow()
 	
-	init() {
+	private init() {
 		super.init(
 			contentRect: NSScreen.builtIn!.frame,
 			styleMask: .borderless,
@@ -40,7 +41,7 @@ class NotchWindow: NSWindow {
 		if hasShadow { print("hasShadow", hasShadow) }
 		
 //		ignoresMouseEvents = true
-		if !ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
+		if ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
 		
 		isMovable = false
 		if isMovable { print("isMovable", isMovable) }
