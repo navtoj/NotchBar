@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220EB28C2C8D21D2000B1111 /* AnimatedNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB28B2C8D21D2000B1111 /* AnimatedNumbers.swift */; };
 		220EB2922C8D5D14000B1111 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = 220EB2912C8D5D14000B1111 /* Pow */; };
+		221F5EC12C8FDA54007A16DB /* MediaRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F5EC02C8FDA54007A16DB /* MediaRemote.swift */; };
 		224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302152C89C07B0046AA22 /* SystemInfo.swift */; };
 		224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302172C89C0BB0046AA22 /* SystemInfoKit.swift */; };
 		2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2243021A2C89C2940046AA22 /* SFSafeSymbols */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		220EB28B2C8D21D2000B1111 /* AnimatedNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumbers.swift; sourceTree = "<group>"; };
+		221F5EC02C8FDA54007A16DB /* MediaRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemote.swift; sourceTree = "<group>"; };
 		224302152C89C07B0046AA22 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		224302172C89C0BB0046AA22 /* SystemInfoKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoKit.swift; sourceTree = "<group>"; };
 		2243021C2C89C45D0046AA22 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				22E2B3AF2C8951CE00A79687 /* Extensions */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
 				2243021C2C89C45D0046AA22 /* Shared.swift */,
+				221F5EC02C8FDA54007A16DB /* MediaRemote.swift */,
 				22E2B3AD2C89460300A79687 /* NotchWindow.swift */,
 				22E2B3BF2C898AB200A79687 /* Views */,
 				22E2B3AB2C89453A00A79687 /* main.swift */,
@@ -212,6 +215,7 @@
 				224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */,
 				22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */,
 				22890BB82C8AEC4A00F05025 /* CardinalAngles.swift in Sources */,
+				221F5EC12C8FDA54007A16DB /* MediaRemote.swift in Sources */,
 				22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */,
 				2243021D2C89C45D0046AA22 /* Shared.swift in Sources */,
 				22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */,
