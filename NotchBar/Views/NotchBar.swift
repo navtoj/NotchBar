@@ -6,23 +6,26 @@
 //
 
 import SwiftUI
-import SystemInfoKit
 
 struct NotchBar: View {
 	@Environment(\.colorScheme) var theme
 	
-	@StateObject private var appData = AppData.shared
+	@StateObject private var systemInfoData = SystemInfoData.shared
+	@StateObject private var activeAppData = ActiveAppData.shared
+	@StateObject private var mediaRemoteData = MediaRemoteData.shared
 	
 	let notch = NSScreen.builtIn?.notchFrame
 	
 	var body: some View {
 		HStack(spacing: notch?.width) {
 			HStack {
-				SystemInfo(info: appData.systemInfo)
+				SystemInfo(info: systemInfoData.systemInfo)
 			}
 			.frame(maxWidth: .infinity, alignment: .leading)
 			HStack {
-				ActiveApp(app: appData.activeApp)
+				MediaRemote(info: mediaRemoteData.mediaRemoteInfo)
+				Spacer()
+				ActiveApp(app: activeAppData.activeApp)
 			}
 			.frame(maxWidth: .infinity, alignment: .trailing)
 		}

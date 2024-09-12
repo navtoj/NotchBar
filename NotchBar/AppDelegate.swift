@@ -6,10 +6,7 @@
 //
 
 import Cocoa
-import SystemInfoKit
-import Combine
 import LaunchAtLogin
-import MediaPlayer
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	
@@ -33,7 +30,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
 		print("applicationWillFinishLaunching")
-		print(MediaRemote.shared)
 		
 		// Prevent Focus
 		

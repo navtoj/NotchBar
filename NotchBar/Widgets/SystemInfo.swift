@@ -127,5 +127,5 @@ struct SystemInfo: View {
 }
 
 #Preview {
-	SystemInfo(info: AppData.shared.systemInfo)
+	SystemInfo(info: SystemInfoData.shared.systemInfo)
 }

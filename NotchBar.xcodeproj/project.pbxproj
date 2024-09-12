@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		220EB28C2C8D21D2000B1111 /* AnimatedNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB28B2C8D21D2000B1111 /* AnimatedNumbers.swift */; };
 		220EB2922C8D5D14000B1111 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = 220EB2912C8D5D14000B1111 /* Pow */; };
-		221F5EC12C8FDA54007A16DB /* MediaRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F5EC02C8FDA54007A16DB /* MediaRemote.swift */; };
+		221F5EC12C8FDA54007A16DB /* MediaRemoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F5EC02C8FDA54007A16DB /* MediaRemoteData.swift */; };
 		224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302152C89C07B0046AA22 /* SystemInfo.swift */; };
 		224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224302172C89C0BB0046AA22 /* SystemInfoKit.swift */; };
 		2243021B2C89C2940046AA22 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2243021A2C89C2940046AA22 /* SFSafeSymbols */; };
-		2243021D2C89C45D0046AA22 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2243021C2C89C45D0046AA22 /* Shared.swift */; };
+		2261128B2C92E21900E814A1 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2261128A2C92E21900E814A1 /* Helpers.swift */; };
+		2261128D2C92E2B000E814A1 /* SystemInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2261128C2C92E2B000E814A1 /* SystemInfoData.swift */; };
+		2261128F2C92E3CB00E814A1 /* ActiveAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2261128E2C92E3CB00E814A1 /* ActiveAppData.swift */; };
+		226112912C92E8BA00E814A1 /* MediaRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226112902C92E8BA00E814A1 /* MediaRemote.swift */; };
 		22890BB42C8ACDA600F05025 /* InvertedBottomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22890BB32C8ACDA600F05025 /* InvertedBottomCorners.swift */; };
 		22890BB82C8AEC4A00F05025 /* CardinalAngles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22890BB72C8AEC4A00F05025 /* CardinalAngles.swift */; };
 		22890BBB2C8B08DB00F05025 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 22890BBA2C8B08DB00F05025 /* LaunchAtLogin */; };
@@ -31,10 +34,13 @@
 
 /* Begin PBXFileReference section */
 		220EB28B2C8D21D2000B1111 /* AnimatedNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNumbers.swift; sourceTree = "<group>"; };
-		221F5EC02C8FDA54007A16DB /* MediaRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemote.swift; sourceTree = "<group>"; };
+		221F5EC02C8FDA54007A16DB /* MediaRemoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemoteData.swift; sourceTree = "<group>"; };
 		224302152C89C07B0046AA22 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		224302172C89C0BB0046AA22 /* SystemInfoKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoKit.swift; sourceTree = "<group>"; };
-		2243021C2C89C45D0046AA22 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		2261128A2C92E21900E814A1 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		2261128C2C92E2B000E814A1 /* SystemInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfoData.swift; sourceTree = "<group>"; };
+		2261128E2C92E3CB00E814A1 /* ActiveAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAppData.swift; sourceTree = "<group>"; };
+		226112902C92E8BA00E814A1 /* MediaRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemote.swift; sourceTree = "<group>"; };
 		22890BB32C8ACDA600F05025 /* InvertedBottomCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedBottomCorners.swift; sourceTree = "<group>"; };
 		22890BB72C8AEC4A00F05025 /* CardinalAngles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardinalAngles.swift; sourceTree = "<group>"; };
 		22E2B3992C8944C200A79687 /* NotchBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotchBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +71,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		226112892C92E19000E814A1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2261128E2C92E3CB00E814A1 /* ActiveAppData.swift */,
+				221F5EC02C8FDA54007A16DB /* MediaRemoteData.swift */,
+				2261128C2C92E2B000E814A1 /* SystemInfoData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		22E2B3902C8944C200A79687 = {
 			isa = PBXGroup;
 			children = (
@@ -87,8 +103,8 @@
 				22E2B3C02C89BE3F00A79687 /* Widgets */,
 				22E2B3AF2C8951CE00A79687 /* Extensions */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
-				2243021C2C89C45D0046AA22 /* Shared.swift */,
-				221F5EC02C8FDA54007A16DB /* MediaRemote.swift */,
+				2261128A2C92E21900E814A1 /* Helpers.swift */,
+				226112892C92E19000E814A1 /* Data */,
 				22E2B3AD2C89460300A79687 /* NotchWindow.swift */,
 				22E2B3BF2C898AB200A79687 /* Views */,
 				22E2B3AB2C89453A00A79687 /* main.swift */,
@@ -125,6 +141,7 @@
 			children = (
 				22E2B3C12C89BE4F00A79687 /* ActiveApp.swift */,
 				224302152C89C07B0046AA22 /* SystemInfo.swift */,
+				226112902C92E8BA00E814A1 /* MediaRemote.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -211,17 +228,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E2B3C22C89BE4F00A79687 /* ActiveApp.swift in Sources */,
+				2261128D2C92E2B000E814A1 /* SystemInfoData.swift in Sources */,
 				22E2B3B92C896D9A00A79687 /* ContentView.swift in Sources */,
 				224302182C89C0BB0046AA22 /* SystemInfoKit.swift in Sources */,
 				22E2B3BE2C897E1C00A79687 /* NotchBar.swift in Sources */,
 				22890BB82C8AEC4A00F05025 /* CardinalAngles.swift in Sources */,
-				221F5EC12C8FDA54007A16DB /* MediaRemote.swift in Sources */,
+				221F5EC12C8FDA54007A16DB /* MediaRemoteData.swift in Sources */,
 				22E2B39D2C8944C200A79687 /* AppDelegate.swift in Sources */,
-				2243021D2C89C45D0046AA22 /* Shared.swift in Sources */,
+				2261128F2C92E3CB00E814A1 /* ActiveAppData.swift in Sources */,
 				22E2B3B32C895B7E00A79687 /* NotchFrame.swift in Sources */,
 				22E2B3AC2C89453A00A79687 /* main.swift in Sources */,
 				220EB28C2C8D21D2000B1111 /* AnimatedNumbers.swift in Sources */,
+				2261128B2C92E21900E814A1 /* Helpers.swift in Sources */,
 				22E2B3B12C8951E400A79687 /* BuiltInScreen.swift in Sources */,
+				226112912C92E8BA00E814A1 /* MediaRemote.swift in Sources */,
 				224302162C89C07B0046AA22 /* SystemInfo.swift in Sources */,
 				22E2B3AE2C89460300A79687 /* NotchWindow.swift in Sources */,
 				22890BB42C8ACDA600F05025 /* InvertedBottomCorners.swift in Sources */,
