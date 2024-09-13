@@ -100,16 +100,16 @@
 		22E2B39B2C8944C200A79687 /* NotchBar */ = {
 			isa = PBXGroup;
 			children = (
-				22E2B3C02C89BE3F00A79687 /* Widgets */,
-				22E2B3AF2C8951CE00A79687 /* Extensions */,
+				22E2B3A52C8944C300A79687 /* NotchBar.entitlements */,
 				22E2B39C2C8944C200A79687 /* AppDelegate.swift */,
 				2261128A2C92E21900E814A1 /* Helpers.swift */,
-				226112892C92E19000E814A1 /* Data */,
-				22E2B3AD2C89460300A79687 /* NotchWindow.swift */,
-				22E2B3BF2C898AB200A79687 /* Views */,
 				22E2B3AB2C89453A00A79687 /* main.swift */,
+				22E2B3AD2C89460300A79687 /* NotchWindow.swift */,
 				22E2B3A02C8944C300A79687 /* Assets.xcassets */,
-				22E2B3A52C8944C300A79687 /* NotchBar.entitlements */,
+				226112892C92E19000E814A1 /* Data */,
+				22E2B3AF2C8951CE00A79687 /* Extensions */,
+				22E2B3BF2C898AB200A79687 /* Views */,
+				22E2B3C02C89BE3F00A79687 /* Widgets */,
 			);
 			path = NotchBar;
 			sourceTree = "<group>";

@@ -12,12 +12,41 @@ struct MediaRemote: View {
 	
 	var body: some View {
 		if let info = info {
-			if info.isPlaying {
-				if let title = info.title {
-					Label(title, systemSymbol: .musicNote)
-						.padding(.horizontal, 10)
+			HStack {
+				if info.isPlaying {
+					if let nowPlaying = info.nowPlaying {
+						if let artwork = nowPlaying.artwork {
+							Image(nsImage: artwork)
+								.resizable()
+								.scaledToFit()
+						} else {
+							if let icon = info.application?.icon {
+								Image(nsImage: icon)
+									.resizable()
+									.scaledToFit()
+							} else {
+								Image(systemSymbol: .musicNote)
+									.resizable()
+									.scaledToFit()
+							}
+						}
+						Text(nowPlaying.artist)
+						Divider()
+						Text(nowPlaying.title)
+							.lineLimit(1)
+							.truncationMode(.tail)
+					}
 				}
 			}
+#if DEBUG
+			.border(.red)
+#endif
+			.padding(.leading, 4)
+//			.padding(.vertical, 4)
+#if DEBUG
+			.border(.blue)
+#endif
+			.frame(maxWidth: .infinity, alignment: .leading)
 		}
 	}
 }

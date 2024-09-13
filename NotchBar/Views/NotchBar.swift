@@ -24,7 +24,6 @@ struct NotchBar: View {
 			.frame(maxWidth: .infinity, alignment: .leading)
 			HStack {
 				MediaRemote(info: mediaRemoteData.mediaRemoteInfo)
-				Spacer()
 				ActiveApp(app: activeAppData.activeApp)
 			}
 			.frame(maxWidth: .infinity, alignment: .trailing)
