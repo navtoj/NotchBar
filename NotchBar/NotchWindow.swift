@@ -9,11 +9,7 @@ import Cocoa
 import SwiftUI
 
 final class NotchWindow: NSWindow {
-#if DEBUG
-	private let debug = true
-#else
 	private let debug = false
-#endif
 	static let shared = NotchWindow()
 	
 	private var observers: [NSObjectProtocol] = []
