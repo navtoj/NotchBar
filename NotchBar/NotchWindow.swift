@@ -9,7 +9,14 @@ import Cocoa
 import SwiftUI
 
 final class NotchWindow: NSWindow {
+#if DEBUG
+	private let debug = true
+#else
+	private let debug = false
+#endif
 	static let shared = NotchWindow()
+	
+	private var observers: [NSObjectProtocol] = []
 	
 	private init() {
 		super.init(
@@ -18,6 +25,7 @@ final class NotchWindow: NSWindow {
 			backing: .buffered,
 			defer: false
 		)
+		EnsureWindowSizePosition(self)
 		
 		// Configure View
 		
@@ -35,47 +43,58 @@ final class NotchWindow: NSWindow {
 		backgroundColor = .clear
 		
 		isOpaque = false
-		if isOpaque { print("isOpaque", isOpaque) }
+		if debug && isOpaque { print("isOpaque", isOpaque) }
 		
 		hasShadow = false
-		if hasShadow { print("hasShadow", hasShadow) }
+		if debug && hasShadow { print("hasShadow", hasShadow) }
 		
 //		ignoresMouseEvents = true
-		if ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
+		if debug && ignoresMouseEvents { print("ignoresMouseEvents", ignoresMouseEvents) }
 		
 		isMovable = false
-		if isMovable { print("isMovable", isMovable) }
+		if debug && isMovable { print("isMovable", isMovable) }
 		
 //		isMovableByWindowBackground = true
-		if isMovableByWindowBackground { print("isMovableByWindowBackground", isMovableByWindowBackground) }
+		if debug && isMovableByWindowBackground { print("isMovableByWindowBackground", isMovableByWindowBackground) }
 		
 		// Track Window Position & Size
 		
-		NotificationCenter.default.addObserver(
+		observers.append(NotificationCenter.default.addObserver(
 			forName: NSWindow.didMoveNotification,
-			object: self,
+			object: nil,
 			queue: nil
-		) { _ in
-			print("didMoveNotification")
+		) { notification in
+			if self.debug { print("didMoveNotification", notification.name.rawValue) }
 			self.EnsureWindowSizePosition(self)
-		}
+		})
 		
-		NotificationCenter.default.addObserver(
+		observers.append(NotificationCenter.default.addObserver(
 			forName: NSWindow.didResizeNotification,
-			object: self,
+			object: nil,
 			queue: nil
-		) { _ in
-			print("didResizeNotification")
+		) { notification in
+			if self.debug { print("didResizeNotification", notification.name.rawValue) }
 			self.EnsureWindowSizePosition(self)
-		}
+		})
+		
+		observers.append(NotificationCenter.default.addObserver(
+			forName: NSApplication.didChangeScreenParametersNotification,
+			object: nil,
+			queue: nil
+		) { notification in
+			if self.debug { print("didChangeScreenParametersNotification", notification.name.rawValue) }
+		})
 	}
 	
 	deinit {
-		NotificationCenter.default.removeObserver(self)
+		for observer in observers {
+			NotificationCenter.default.removeObserver(observer)
+		}
+		observers.removeAll()
 	}
 	
 	private func EnsureWindowSizePosition(_ window: NSWindow, _ skipCheck: Bool = false) {
-		print("EnsureWindowSizePosition")
+		if debug { print("EnsureWindowSizePosition") }
 		
 		// Ensure Internal Display
 		
@@ -85,7 +104,7 @@ final class NotchWindow: NSWindow {
 		
 		// Ensure Notch Area
 		
-		guard display.notchFrame != nil else {
+		guard let notch = display.notchFrame else {
 			return QuitWithLog("NotchBar only supports devices with a notch.")
 		}
 		
@@ -104,25 +123,21 @@ final class NotchWindow: NSWindow {
 		// Check Window Size Change // https://arc.net/l/quote/remcdzmn
 		
 		if skipCheck || width != size.width || height != size.height {
-			print("Reset Window Size")
+			if debug { print("Reset Window Size") }
 			window.setContentSize(size)
 		}
 		
 		// Check Window Position Change
 		
-		if skipCheck || x != origin.x || y != origin.y {
-			print("Reset Window Position")
+		if (skipCheck || x != origin.x || y != origin.y) {
+			if debug { print("Reset Window Position") }
 			window.setFrameOrigin(origin)
 		}
 		
-		// Ensure Notch Bar Visibility
+		// Check Menu Bar Visibility
 		
-		if display.frame.height == (display.visibleFrame.height + display.safeAreaInsets.top) {
-			print("Notch bar visible.")
-			window.alphaValue = 1
-		} else {
-			print("Notch bar not visible.")
-			window.alphaValue = 0
-		}
+		let isMenuBarVisible = display.frame.height != (display.visibleFrame.height + notch.height)
+		if debug { print("isMenuBarVisible", isMenuBarVisible) }
+		window.alphaValue = isMenuBarVisible ? 0 : 1
 	}
 }

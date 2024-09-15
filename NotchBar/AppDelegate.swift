@@ -9,6 +9,11 @@ import Cocoa
 import LaunchAtLogin
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
+#if DEBUG
+	private let debug = true
+#else
+	private let debug = false
+#endif
 	
 	// Create Window
 	
@@ -29,7 +34,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// App Delegate Functions
 	
 	func applicationWillFinishLaunching(_ notification: Notification) {
-		print("applicationWillFinishLaunching")
+		if debug { print("applicationWillFinishLaunching") }
 		
 		// Prevent Focus
 		
@@ -72,7 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		print("applicationDidFinishLaunching")
+		if debug { print("applicationDidFinishLaunching") }
 		
 		// Show Window
 		
@@ -80,7 +85,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
-		print("applicationWillTerminate")
+		if debug { print("applicationWillTerminate") }
 	}
 	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

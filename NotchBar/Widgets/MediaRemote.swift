@@ -20,14 +20,10 @@ struct MediaRemote: View {
 								.resizable()
 								.scaledToFit()
 						} else {
-							if let icon = info.application?.icon {
-								Image(nsImage: icon)
-									.resizable()
-									.scaledToFit()
-							} else {
+							HStack(spacing: 0) {
 								Image(systemSymbol: .musicNote)
-									.resizable()
-									.scaledToFit()
+									.frame(width: 23)
+								Divider()
 							}
 						}
 						Text(nowPlaying.artist)
@@ -42,7 +38,7 @@ struct MediaRemote: View {
 			.border(.red)
 #endif
 			.padding(.leading, 4)
-//			.padding(.vertical, 4)
+			.padding(.vertical, 4)
 #if DEBUG
 			.border(.blue)
 #endif
