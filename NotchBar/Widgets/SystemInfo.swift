@@ -33,7 +33,7 @@ Network: USB 10/100/1G/2.5G LAN
 */
 
 struct SystemInfo: View {
-	@StateObject private var systemInfoData = SystemInfoData.shared
+	private var systemInfoData = SystemInfoData.shared
 	
 	var body: some View {
 		let info: SystemInfoBundle = systemInfoData.systemInfo

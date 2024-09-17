@@ -101,7 +101,7 @@ class Track: Equatable {
 }
 
 
-final class MediaRemoteData: ObservableObject {
+@Observable final class MediaRemoteData {
 #if DEBUG
 	private let debug = true
 #else
@@ -110,9 +110,9 @@ final class MediaRemoteData: ObservableObject {
 	static let shared = MediaRemoteData()
 	
 //	@Published private(set) var mediaRemoteInfo = MediaRemoteInfo(isPlaying: false)
-	@Published private(set) var application: NSRunningApplication?
-	@Published private(set) var isPlaying: Bool = false
-	@Published private(set) var track: Track?
+	private(set) var application: NSRunningApplication?
+	private(set) var isPlaying: Bool = false
+	private(set) var track: Track?
 	
 	private init() {
 		if debug { print("MediaRemoteData") }

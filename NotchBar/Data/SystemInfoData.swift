@@ -7,11 +7,12 @@
 
 import SystemInfoKit
 import Combine
+import Observation
 
-final class SystemInfoData: ObservableObject {
+@Observable final class SystemInfoData {
 	static let shared = SystemInfoData()
 	
-	@Published private(set) var systemInfo = SystemInfoBundle()
+	private(set) var systemInfo = SystemInfoBundle()
 	
 	// Create System Info Observer
 	

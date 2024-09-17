@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MediaRemote: View {
-	@StateObject private var mediaRemoteData = MediaRemoteData.shared
+	private var mediaRemoteData = MediaRemoteData.shared
 	
 	var body: some View {
 		let data: MediaRemoteData = mediaRemoteData

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActiveApp: View {
-	@StateObject private var activeAppData = ActiveAppData.shared
+	private var activeAppData = ActiveAppData.shared
 	
 	var body: some View {
 		if let app = activeAppData.activeApp {

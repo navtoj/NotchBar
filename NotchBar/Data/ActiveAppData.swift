@@ -7,10 +7,10 @@
 
 import AppKit
 
-final class ActiveAppData: ObservableObject {
+@Observable final class ActiveAppData {
 	static let shared = ActiveAppData()
 	
-	@Published private(set) var activeApp = NSWorkspace.shared.frontmostApplication
+	private(set) var activeApp = NSWorkspace.shared.frontmostApplication
 	
 	private init() {
 		
