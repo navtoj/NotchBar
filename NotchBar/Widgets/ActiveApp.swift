@@ -14,10 +14,15 @@ struct ActiveApp: View {
 		if let app = activeAppData.activeApp {
 			HStack {
 				Text(app.localizedName ?? "Unknown")
+					.id(app)
+					.transition(.opacity.animation(.easeOut))
+//					.transition(.asymmetric(insertion: .offset(y: -25), removal: .opacity))
 				if let icon = app.icon {
 					Image(nsImage: icon)
 						.resizable()
 						.scaledToFit()
+						.id(app)
+						.transition(.opacity.animation(.easeOut))
 				} else {
 					Image(systemSymbol: .macwindow)
 				}
@@ -32,13 +37,7 @@ struct ActiveApp: View {
 //#endif
 			.background(.fill)
 			.clipShape(.capsule(style: .continuous))
-			.onHover(perform: { hovering in
-				print("hovering", hovering)
-			})
-			.onTapGesture(count: 1, perform: {
-				print("tapped")
-			})
-			.animation(.movingParts.easeInOutExponential, value: app)
+			.animation(.movingParts.overshoot, value: app)
 		}
 	}
 }
