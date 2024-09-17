@@ -43,73 +43,88 @@ private let MRMediaRemoteGetNowPlayingInfo = unsafeBitCast(MRMediaRemoteGetNowPl
 
 // Data Types
 
-class Track: Equatable {
+@Observable class Track: Equatable {
 	private(set) var artist: String
 	private(set) var title: String
 	private(set) var album: String
 	private(set) var duration: TimeInterval
 	private(set) var elapsedTime: TimeInterval
 	private(set) var artworkId: String?
-	private(set) var artwork: NSImage?
+	private(set) var artworkData: Data?
 	
-	init(artist: String, title: String, album: String, duration: TimeInterval, elapsedTime: TimeInterval, artworkId: String?, artwork: NSImage?) {
+	init(
+		artist: String,
+		title: String,
+		album: String,
+		duration: TimeInterval,
+		elapsedTime: TimeInterval,
+		artworkId: String? = nil,
+		artworkData: Data? = nil
+	) {
 		self.artist = artist
 		self.title = title
 		self.album = album
 		self.duration = duration
 		self.elapsedTime = elapsedTime
 		self.artworkId = artworkId
-		self.artwork = artwork
+		self.artworkData = artworkData
 	}
 	
-	func update(using track: Track) {
-		elapsedTime = track.elapsedTime
-		if artworkId == nil && track.artworkId != nil { artworkId = track.artworkId }
-		if artwork   == nil && track.artwork   != nil { artwork   = track.artwork }
-	}
-	func replace(with track: Track) {
-		artist = track.artist
-		title = track.title
-		album = track.album
-		duration = track.duration
-		elapsedTime = track.elapsedTime
-		artworkId = track.artworkId
-		artwork = track.artwork
-	}
-	
-	static func == (lhs: Track, rhs: Track) -> Bool {
+	func update(using track: Track) -> [String] {
+		var updated: [String] = []
 		
-		// Compare All Properties Except Elapsed Time, Artwork, and Artwork ID
+		if elapsedTime != track.elapsedTime {
+			elapsedTime = track.elapsedTime
+			updated.append("elapsedTime")
+		}
+		if artworkId == nil,
+		   let id = track.artworkId {
+			artworkId = id
+			updated.append("artworkId")
+		}
+		if artworkData == nil,
+		   let data = track.artworkData {
+			artworkData = data
+			updated.append("artworkData")
+		}
+		
+		return updated
+	}
+	
+	static func ==(lhs: Track, rhs: Track) -> Bool {
+		
+		// Compare Required Properties
 		
 		let isSameTrack = (
 			lhs.artist == rhs.artist
 			&& lhs.title == rhs.title
 			&& lhs.album == rhs.album
-			&& lhs.duration == rhs.duration
+//			&& lhs.duration == rhs.duration
 		)
 		
-		// If Same Track, Compare Artwork ID If Available
+		// Return False If Tracks Are Different
 		
-		if isSameTrack && lhs.artworkId != nil && rhs.artworkId != nil {
-			return lhs.artworkId == rhs.artworkId
-		}
+		guard isSameTrack else { return false }
 		
-		// Otherwise, Return Result
+		// Compare Artwork Data If Available
 		
-		return isSameTrack
+		guard
+			let lhsArtworkData = lhs.artworkData,
+			let rhsArtworkData = rhs.artworkData
+		else { return true }
+		
+		return lhsArtworkData == rhsArtworkData
 	}
 }
 
-
 @Observable final class MediaRemoteData {
 #if DEBUG
-	private let debug = true
+	private let debug = false
 #else
 	private let debug = false
 #endif
 	static let shared = MediaRemoteData()
 	
-//	@Published private(set) var mediaRemoteInfo = MediaRemoteInfo(isPlaying: false)
 	private(set) var application: NSRunningApplication?
 	private(set) var isPlaying: Bool = false
 	private(set) var track: Track?
@@ -165,7 +180,7 @@ class Track: Equatable {
 	}
 	
 	@objc private func handleApplicationDidChangeNotification(_ notification: Notification) {
-		if debug { print("\n// " + "handleApplicationDidChangeNotification") }
+//		if debug { print("\n// " + "handleApplicationDidChangeNotification") }
 		
 		// Get Notification Information
 		
@@ -176,18 +191,18 @@ class Track: Equatable {
 	}
 	
 	@objc private func handleApplicationIsPlayingDidChangeNotification(_ notification: Notification) {
-		if debug { print("\n// " + "handleApplicationIsPlayingDidChangeNotification") }
+//		if debug { print("\n// " + "handleApplicationIsPlayingDidChangeNotification") }
 		
 		// Get Notification Information
 		
 		if let info = notification.userInfo as? [String: Any] {
 			let isPlaying = getIsPlaying(from: info)
-			if debug { print(isPlaying) }
+			if debug { print(isPlaying, self.isPlaying ? "Playing" : "Paused") }
 		}
 	}
 	
 	@objc private func handlePlaybackQueueChangedNotification(_ notification: Notification) {
-		if debug { print("\n// " + "handlePlaybackQueueChangedNotification") }
+//		if debug { print("\n// " + "handlePlaybackQueueChangedNotification") }
 		
 		// Get Notification Information
 		
@@ -218,7 +233,7 @@ class Track: Equatable {
 	}
 	
 	@objc private func handleInfoDidChangeNotification(_ notification: Notification) {
-		if debug { print("\n// " + "handleInfoDidChangeNotification") }
+//		if debug { print("\n// " + "handleInfoDidChangeNotification") }
 		
 		// Get Notification Information
 		
@@ -249,7 +264,6 @@ class Track: Equatable {
 			
 			if self.debug { print("fetchApplication :", app?.bundleIdentifier ?? (pid == 0 ? "nil" : pid)) }
 			
-//			self.mediaRemoteInfo.setApplication(to: app)
 			self.application = app
 		})
 	}
@@ -258,9 +272,8 @@ class Track: Equatable {
 		if debug { print("\n" + "fetchIsPlaying") }
 		
 		MRMediaRemoteGetNowPlayingApplicationIsPlaying(DispatchQueue.main, { (isPlaying) in
-			if self.debug { print("fetchIsPlaying :", isPlaying) }
+			if self.debug { print("fetchIsPlaying :", isPlaying ? "Playing" : "Paused") }
 			
-//			self.mediaRemoteInfo.setIsPlaying(to: isPlaying)
 			self.isPlaying = isPlaying
 		})
 	}
@@ -279,13 +292,13 @@ class Track: Equatable {
 				if self.debug { print("fetchNowPlayingInfo :", title) }
 				
 				var artworkId: String? = nil
-				var artwork: NSImage? = nil
+				var artworkData: Data? = nil
 				if
-					let artworkIdentifier = information["kMRMediaRemoteNowPlayingInfoArtworkIdentifier"] as? String,
-					let artworkData = information["kMRMediaRemoteNowPlayingInfoArtworkData"] as? Data
+					let identifier = information["kMRMediaRemoteNowPlayingInfoArtworkIdentifier"] as? String,
+					let data = information["kMRMediaRemoteNowPlayingInfoArtworkData"] as? Data
 				{
-					artworkId = artworkIdentifier
-					artwork = NSImage(data: artworkData)
+					artworkId = identifier
+					artworkData = data
 				}
 				
 				self.updateNowPlayingInfo(
@@ -295,10 +308,9 @@ class Track: Equatable {
 					duration: duration,
 					elapsedTime: elapsedTime,
 					artworkId: artworkId,
-					artwork: artwork
+					artworkData: artworkData
 				)
 			} else {
-//				self.mediaRemoteInfo.clearTrack()
 				self.track = nil
 				if self.debug { print("fetchNowPlayingInfo :", self.track ?? "nil") }
 			}
@@ -314,7 +326,6 @@ class Track: Equatable {
 				if appsFound.count == 1 {
 					let appFound = appsFound.first
 					if let app = appFound {
-//						mediaRemoteInfo.setApplication(to: app)
 						application = app
 						
 						// if app was found
@@ -333,7 +344,6 @@ class Track: Equatable {
 		if debug { print("\n" + "getIsPlaying") }
 		
 		if let isPlaying = info["kMRMediaRemoteNowPlayingApplicationIsPlayingUserInfoKey"] as? boolean_t {
-//			mediaRemoteInfo.setIsPlaying(to: isPlaying == 1)
 			self.isPlaying = isPlaying == 1
 			
 			// if isPlaying was found
@@ -367,7 +377,7 @@ class Track: Equatable {
 							duration: duration,
 							elapsedTime: elapsedTime,
 							artworkId: artworkId,
-							artwork: nil
+							artworkData: nil
 						)
 						
 						// if nowPlaying was found
@@ -381,29 +391,24 @@ class Track: Equatable {
 		return false
 	}
 	
-	private func updateNowPlayingInfo(artist: String, title: String, album: String, duration: TimeInterval, elapsedTime: TimeInterval, artworkId: String?, artwork: NSImage?) {
-		if debug {
-			print("updateNowPlayingInfo")
-			print("> artworkId :", artworkId != nil ? artworkId! : "nil")
-		}
+	private func updateNowPlayingInfo(artist: String, title: String, album: String, duration: TimeInterval, elapsedTime: TimeInterval, artworkId: String?, artworkData: Data?) {
+		if debug { print("updateNowPlayingInfo") }
 		
-		// Store Track Artwork
+		// Store Track Artwork Data
 		
-		var artwork: NSImage? = artwork
+		var artworkData: Data? = artworkData
 		
-		// If No Artwork, Find Existing Artwork
+		// If No Artwork Data, Find Existing Artwork Data
 		
-		if artwork == nil {
-			if let artworkId = artworkId,
-			   let track = track,
-			   let currentArtworkId = track.artworkId {
-				if currentArtworkId == artworkId {
-					if let currentArtwork = track.artwork {
-						if debug { print("Using existing artwork.") }
-						artwork = currentArtwork
-					}
-				}
-			}
+		if artworkData == nil,
+		   let artworkId = artworkId,
+		   let track = track,
+		   let currentArtworkId = track.artworkId,
+		   artworkId == currentArtworkId,
+		   let currentArtworkData = track.artworkData
+		{
+			if debug { print("Using existing artwork data.") }
+			artworkData = currentArtworkData
 		}
 		
 		// Create Track
@@ -415,30 +420,27 @@ class Track: Equatable {
 			duration: duration,
 			elapsedTime: elapsedTime,
 			artworkId: artworkId,
-			artwork: artwork
+			artworkData: artworkData
 		)
 		
 		// Update Track
 		
-		if let current = self.track {
-			if current == track {
-				if debug { print("Updating track...") }
-				current.update(using: track)
-			} else {
-				if debug { print("Replacing track...") }
-				current.replace(with: track)
-			}
+		if let current = self.track, current == track {
+			let updated = current.update(using: track)
+			if debug && !updated.isEmpty { print("Updated Track :", updated) }
 		} else {
-			if debug { print("Setting track...") }
-//			mediaRemoteInfo.setTrack(to: track)
 			self.track = track
+			if debug { print("Replaced Track.") }
 		}
 		
-		// Force Update If Artwork Not Found
+		// Force Update If Artwork Data Not Found
 		
-		if track.artwork == nil {
-			if debug { print("No artwork found. Fetching...") }
-			fetchNowPlayingInfo()
+		guard let track = self.track,
+			  let artworkData = track.artworkData,
+			  !artworkData.isEmpty
+		else {
+			if debug { print("No artwork data found. Fetching...") }
+			return fetchNowPlayingInfo()
 		}
 	}
 }

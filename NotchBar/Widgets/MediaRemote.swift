@@ -16,8 +16,9 @@ struct MediaRemote: View {
 		HStack {
 			if data.isPlaying {
 				if let track = data.track {
-					if let artwork = track.artwork {
-						Image(nsImage: artwork)
+				   if let artworkData = track.artworkData,
+					  let image = NSImage(data: artworkData) {
+						Image(nsImage: image)
 							.resizable()
 							.scaledToFit()
 					} else {
