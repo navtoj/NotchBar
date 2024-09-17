@@ -22,14 +22,14 @@ struct ActiveApp: View {
 					Image(systemSymbol: .macwindow)
 				}
 			}
-#if DEBUG
-			.border(.red)
-#endif
+//#if DEBUG
+//			.border(.red)
+//#endif
 			.padding(.horizontal, 10)
 			.padding(.vertical, 4)
-#if DEBUG
-			.border(.blue)
-#endif
+//#if DEBUG
+//			.border(.blue)
+//#endif
 			.background(.fill)
 			.clipShape(.capsule(style: .continuous))
 			.onHover(perform: { hovering in

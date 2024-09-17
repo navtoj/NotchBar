@@ -10,7 +10,7 @@ import LaunchAtLogin
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 #if DEBUG
-	private let debug = true
+	private let debug = false
 #else
 	private let debug = false
 #endif

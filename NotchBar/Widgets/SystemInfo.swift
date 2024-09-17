@@ -116,14 +116,14 @@ struct SystemInfo: View {
 				.frame(maxWidth: .infinity, alignment: .leading)
 			}
 		}
-#if DEBUG
-		.border(.red)
-#endif
+//#if DEBUG
+//		.border(.red)
+//#endif
 		.padding(.leading, 4)
 		.padding(.vertical, 4)
-#if DEBUG
-		.border(.blue)
-#endif
+//#if DEBUG
+//		.border(.blue)
+//#endif
 		.frame(maxWidth: .infinity, alignment: .leading)
 	}
 }

@@ -99,7 +99,7 @@ private let MRMediaRemoteGetNowPlayingInfo = unsafeBitCast(MRMediaRemoteGetNowPl
 			lhs.artist == rhs.artist
 			&& lhs.title == rhs.title
 			&& lhs.album == rhs.album
-//			&& lhs.duration == rhs.duration
+//			&& lhs.duration == rhs.duration // This is sometimes different for same song.
 		)
 		
 		// Return False If Tracks Are Different

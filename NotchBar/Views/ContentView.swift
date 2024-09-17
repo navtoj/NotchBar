@@ -17,7 +17,7 @@ struct ContentView: View {
 			NotchBar()
 				.invertedBottomCorners(background: theme == .dark ? .black : Color(.textBackgroundColor), radius: 10)
 #if DEBUG
-				.preferredColorScheme(.light)
+//				.preferredColorScheme(.light)
 #else
 				.preferredColorScheme(.dark)
 #endif
