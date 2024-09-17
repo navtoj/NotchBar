@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ActiveApp: View {
-	let app: NSRunningApplication?
+	@StateObject private var activeAppData = ActiveAppData.shared
 	
 	var body: some View {
-		if let app = app {
+		if let app = activeAppData.activeApp {
 			HStack {
 				Text(app.localizedName ?? "Unknown")
 				if let icon = app.icon {
@@ -44,5 +44,5 @@ struct ActiveApp: View {
 }
 
 #Preview {
-	ActiveApp(app: .current)
+	ActiveApp()
 }

@@ -33,9 +33,11 @@ Network: USB 10/100/1G/2.5G LAN
 */
 
 struct SystemInfo: View {
-	let info: SystemInfoBundle
+	@StateObject private var systemInfoData = SystemInfoData.shared
 	
 	var body: some View {
+		let info: SystemInfoBundle = systemInfoData.systemInfo
+		
 		HStack {
 			if let cpu = info.cpuInfo {
 				HStack {
@@ -127,5 +129,5 @@ struct SystemInfo: View {
 }
 
 #Preview {
-	SystemInfo(info: SystemInfoData.shared.systemInfo)
+	SystemInfo()
 }

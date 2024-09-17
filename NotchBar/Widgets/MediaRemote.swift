@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct MediaRemote: View {
-	@StateObject var data: MediaRemoteData
+	@StateObject private var mediaRemoteData = MediaRemoteData.shared
 	
 	var body: some View {
+		let data: MediaRemoteData = mediaRemoteData
+		
 		HStack {
 			if data.isPlaying {
 				if let track = data.track {
@@ -46,5 +48,5 @@ struct MediaRemote: View {
 }
 
 #Preview {
-	MediaRemote(data: .shared)
+	MediaRemote()
 }
