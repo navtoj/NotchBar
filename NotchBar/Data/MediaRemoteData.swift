@@ -41,6 +41,95 @@ private let MRMediaRemoteGetNowPlayingInfoPointer = CFBundleGetFunctionPointerFo
 private typealias MRMediaRemoteGetNowPlayingInfoFunction = @convention(c) (DispatchQueue, @escaping ([String: Any]) -> Void) -> Void
 private let MRMediaRemoteGetNowPlayingInfo = unsafeBitCast(MRMediaRemoteGetNowPlayingInfoPointer, to: MRMediaRemoteGetNowPlayingInfoFunction.self)
 
+// Create Function: Send Command
+
+private let MRMediaRemoteSendCommandPointer = CFBundleGetFunctionPointerForName(bundle, "MRMediaRemoteSendCommand" as CFString)
+private typealias MRMediaRemoteSendCommandFunction = @convention(c) (Int, [String: Any]?) -> Bool
+private let MRMediaRemoteSendCommand = unsafeBitCast(MRMediaRemoteSendCommandPointer, to: MRMediaRemoteSendCommandFunction.self)
+
+enum MRMediaRemoteCommand: Int {
+	/*
+	 * Use nil for userInfo.
+	 */
+	case Play
+	case Pause
+	case TogglePlayPause
+	case Stop
+	case NextTrack
+	case PreviousTrack
+	case AdvanceShuffleMode
+	case AdvanceRepeatMode
+	case BeginFastForward
+	case EndFastForward
+	case BeginRewind
+	case EndRewind
+	case Rewind15Seconds
+	case FastForward15Seconds
+	case Rewind30Seconds
+	case FastForward30Seconds
+	case ToggleRecord
+	case SkipForward
+	case SkipBackward
+	case ChangePlaybackRate
+
+	/*
+	 * Use a NSDictionary for userInfo, which contains three keys:
+	 * kMRMediaRemoteOptionTrackID
+	 * kMRMediaRemoteOptionStationID
+	 * kMRMediaRemoteOptionStationHash
+	 */
+	case RateTrack
+	case LikeTrack
+	case DislikeTrack
+	case BookmarkTrack
+
+	/*
+	 * Use nil for userInfo.
+	 */
+	case SeekToPlaybackPosition
+	case ChangeRepeatMode
+	case ChangeShuffleMode
+	case EnableLanguageOption
+	case DisableLanguageOption
+	
+	var userInfo: MediaRemoteUserInfo? {
+		let userInfo = MediaRemoteUserInfo(trackId: "", stationId: "", stationHash: "")
+		
+		switch self {
+		case .RateTrack:
+			return userInfo
+		case .LikeTrack:
+			return userInfo
+		case .DislikeTrack:
+			return userInfo
+		case .BookmarkTrack:
+			return userInfo
+		default:
+			return nil
+		}
+	}
+}
+struct MediaRemoteUserInfo {
+	let trackId: Any
+	let stationId: Any
+	let stationHash: Any
+
+	init?(trackId: Any, stationId: Any, stationHash: Any) {
+		self.trackId = trackId
+		self.stationId = stationId
+		self.stationHash = stationHash
+	}
+	
+	var dictionary: [String: Any] {
+		[
+			"kMRMediaRemoteOptionTrackID": trackId,
+			"kMRMediaRemoteOptionStationID": stationId,
+			"kMRMediaRemoteOptionStationHash": stationHash
+		]
+	}
+}
+
+
 // Data Types
 
 @Observable class Track: Equatable {
@@ -442,5 +531,9 @@ private let MRMediaRemoteGetNowPlayingInfo = unsafeBitCast(MRMediaRemoteGetNowPl
 			if debug { print("No artwork data found. Fetching...") }
 			return fetchNowPlayingInfo()
 		}
+	}
+	
+	final func SendCommand(_ command: MRMediaRemoteCommand) -> Bool {
+		return MRMediaRemoteSendCommand(command.rawValue, command.userInfo?.dictionary ?? nil)
 	}
 }
