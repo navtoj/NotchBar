@@ -10,7 +10,7 @@ import SwiftUI
 struct MediaRemote: View {
 	private var mediaRemoteData = MediaRemoteData.shared
 	
-	@State private var showAlbum = false
+	@State private var isHovered = false
 	
 	var body: some View {
 		let data: MediaRemoteData = mediaRemoteData
@@ -18,55 +18,60 @@ struct MediaRemote: View {
 		if data.isPlaying,
 		   let track = data.track {
 			HStack {
-				Group {
+				
+				// Group (Hover Area)
+				
+				HStack {
 					if let artworkData = track.artworkData,
 					   let image = NSImage(data: artworkData) {
+						
+						// Artwork
+						
 						Image(nsImage: image)
 							.resizable()
 							.scaledToFit()
 							.frame(width: 24)
 					} else {
+						
+						// Fallback Symbol
+						
 						HStack(spacing: 0) {
 							Image(systemSymbol: .musicNote)
 								.frame(width: 23)
 							Divider()
 						}
 					}
+					
+					// Artist
+					
 					Text(track.artist)
 					Divider()
 				}
+				.contentShape(.rect)
 				.onHover { isHovering in
-					showAlbum = isHovering
+					isHovered = isHovering
 				}
 				
 				// Title & Album (on Hover)
 				
-				if showAlbum {
-					Text(track.album)
-						.lineLimit(1)
-						.truncationMode(.tail)
-						.transition(.blurReplace.animation(.easeInOut))
-				} else {
-					Text(track.title)
-						.lineLimit(1)
-						.truncationMode(.tail)
-						.transition(.blurReplace.animation(.easeInOut))
-				}
-//				Text(showAlbum ? track.album : track.title)
-//					.lineLimit(1)
-//					.truncationMode(.tail)
-//					.conditionalEffect(.pushDown, condition: showAlbum)
+				Text(isHovered ? track.album : track.title)
+					.lineLimit(1)
+					.truncationMode(.tail)
+					.conditionalEffect(.pushDown, condition: isHovered)
 			}
-#if DEBUG
-			.border(.red)
-#endif
+			.transition(.movingParts.filmExposure.animation(.smooth))
+//#if DEBUG
+//			.border(.red)
+//#endif
 			.padding(.leading, 4)
 			.padding(.vertical, 2)
-#if DEBUG
-			.border(.blue)
-#endif
+//#if DEBUG
+//			.border(.blue)
+//#endif
 			.frame(maxWidth: .infinity, alignment: .leading)
-			.transition(.movingParts.filmExposure.animation(.smooth))
+//#if DEBUG
+//			.border(.green)
+//#endif
 		}
 	}
 }
