@@ -15,32 +15,37 @@ struct MediaRemote: View {
 	var body: some View {
 		let data: MediaRemoteData = mediaRemoteData
 		
-		if data.isPlaying,
-		   let track = data.track {
+		if let track = data.track {
 			HStack {
 				
 				// Group (Hover Area)
 				
 				HStack {
-					if let artworkData = track.artworkData,
-					   let image = NSImage(data: artworkData) {
-						
-						// Artwork
-						
-						Image(nsImage: image)
-							.resizable()
-							.scaledToFit()
-							.frame(width: 24)
-					} else {
-						
-						// Fallback Symbol
-						
-						HStack(spacing: 0) {
-							Image(systemSymbol: .musicNote)
-								.frame(width: 23)
-							Divider()
+					ZStack {
+						if let artworkData = track.artworkData,
+						   let image = NSImage(data: artworkData) {
+							
+							// Artwork
+							
+							Image(nsImage: image)
+								.resizable()
+								.scaledToFit()
+								.frame(width: 24)
+						} else {
+							
+							// Fallback Symbol
+							
+							HStack(spacing: 0) {
+								Image(systemSymbol: .musicNote)
+									.frame(width: 23)
+								Divider()
+							}
+						}
+						if isHovered || !data.isPlaying {
+							Image(systemSymbol: data.isPlaying ? .pauseFill : .playFill)
 						}
 					}
+					
 					
 					// Artist
 					
@@ -51,6 +56,9 @@ struct MediaRemote: View {
 				.onHover { isHovering in
 					isHovered = isHovering
 				}
+				.onTapGesture(count: 1) {
+					_ = mediaRemoteData.SendCommand(.TogglePlayPause)
+				}
 				
 				// Title & Album (on Hover)
 				
@@ -59,6 +67,7 @@ struct MediaRemote: View {
 					.truncationMode(.tail)
 					.conditionalEffect(.pushDown, condition: isHovered)
 			}
+//			.foregroundStyle(data.isPlaying ? .primary : .secondary)
 			.transition(.movingParts.filmExposure.animation(.smooth))
 //#if DEBUG
 //			.border(.red)
