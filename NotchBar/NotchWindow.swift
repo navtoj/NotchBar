@@ -29,7 +29,7 @@ final class NotchWindow: NSWindow {
 		
 		// Configure Window
 		
-//		level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1)
+		level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow)) + 1)
 		collectionBehavior = [
 			.canJoinAllSpaces,
 			.stationary,
