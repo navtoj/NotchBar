@@ -56,6 +56,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		statusItem.menu = NSMenu()
 		if let menu = statusItem.menu {
+#if DEBUG
+			// Add Debug Item
+			
+			menu.addItem(
+				withTitle: "Debug Mode",
+				action: nil,
+				keyEquivalent: ""
+			)
+			menu.items.first?.isEnabled = false
+			
+			// Add Separator
+			
+			menu.addItem(.separator())
+#endif
 			
 			// Add Launch at Login Item
 			

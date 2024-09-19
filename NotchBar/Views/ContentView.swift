@@ -16,11 +16,7 @@ struct ContentView: View {
 		VStack {
 			NotchBar()
 				.invertedBottomCorners(background: theme == .dark ? .black : Color(.textBackgroundColor), radius: 10)
-#if DEBUG
-				.preferredColorScheme(.light)
-#else
 				.preferredColorScheme(.dark)
-#endif
 		}
 		.frame(maxHeight: .infinity, alignment: .top)
 	}

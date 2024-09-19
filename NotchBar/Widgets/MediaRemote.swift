@@ -38,10 +38,24 @@ struct MediaRemote: View {
 				.onHover { isHovering in
 					showAlbum = isHovering
 				}
-				Text(showAlbum ? track.album : track.title)
-					.lineLimit(1)
-					.truncationMode(.tail)
-					.conditionalEffect(.pushDown, condition: showAlbum)
+				
+				// Title & Album (on Hover)
+				
+				if showAlbum {
+					Text(track.album)
+						.lineLimit(1)
+						.truncationMode(.tail)
+						.transition(.blurReplace.animation(.easeInOut))
+				} else {
+					Text(track.title)
+						.lineLimit(1)
+						.truncationMode(.tail)
+						.transition(.blurReplace.animation(.easeInOut))
+				}
+//				Text(showAlbum ? track.album : track.title)
+//					.lineLimit(1)
+//					.truncationMode(.tail)
+//					.conditionalEffect(.pushDown, condition: showAlbum)
 			}
 #if DEBUG
 			.border(.red)
