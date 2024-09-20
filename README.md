@@ -6,7 +6,7 @@
   <h1>NotchBar</h1>
 </div>
 
-NotchBar is a macOS app designed to utilize the empty space around the notch when connected to external displays.
+NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 ### Before
 <img src="Assets/macOS Notch.png" />
@@ -21,16 +21,6 @@ After launching NotchBar, it will automatically cover the notch area of your Mac
 A _sparkle_ icon will also be shown in the menu bar for important actions.
 
 <img src="Assets/Menu Bar.png" />
-
-## Installation
-
-> Requirements: macOS 14.5 or later
-
-1. Download the [latest release](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.dmg) from the [Releases](https://github.com/navtoj/NotchBar/releases) page.
-2. Drag the NotchBar app to your Applications folder.
-3. Launch NotchBar from your Applications folder or Spotlight.
-
-![Install.dmg](Assets/Install.dmg.png)
 
 ## Widgets
 
@@ -68,6 +58,16 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 
 |✨|more coming soon...|
 |-|:-|
+
+## Installation
+
+> Requirements: macOS 14.5 or later
+
+1. Download the [latest release](https://github.com/navtoj/NotchBar/releases/latest) ([.app](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.app.zip) or [.dmg](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.dmg)) from the [Releases](https://github.com/navtoj/NotchBar/releases) page.
+2. Drag the NotchBar app to your Applications folder.
+3. Launch NotchBar from your Applications folder or Spotlight.
+
+![Install.dmg](Assets/Install.dmg.png)
 
 ## Contributing
 
