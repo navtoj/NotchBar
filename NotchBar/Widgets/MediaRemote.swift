@@ -41,11 +41,15 @@ struct MediaRemote: View {
 								Divider()
 							}
 						}
-						if isHovered || !data.isPlaying {
+						
+						if isHovered {
+							
+							// Play/Pause Button
+							
 							Image(systemSymbol: data.isPlaying ? .pauseFill : .playFill)
+								.contentTransition(.symbolEffect)
 						}
 					}
-					
 					
 					// Artist
 					
@@ -62,12 +66,14 @@ struct MediaRemote: View {
 				
 				// Title & Album (on Hover)
 				
-				Text(isHovered ? track.album : track.title)
+				let text = isHovered ? (track.album.isEmpty ? track.title : track.album) : track.title
+				
+				Text(text)
 					.lineLimit(1)
 					.truncationMode(.tail)
 					.conditionalEffect(.pushDown, condition: isHovered)
+					.foregroundStyle(data.isPlaying ? .primary : .secondary)
 			}
-//			.foregroundStyle(data.isPlaying ? .primary : .secondary)
 			.transition(.movingParts.filmExposure.animation(.smooth))
 //#if DEBUG
 //			.border(.red)
