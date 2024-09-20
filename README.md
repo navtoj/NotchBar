@@ -29,7 +29,7 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 
 > Requirements: macOS 14.5 or later
 
-1. Download the latest release from the [Releases](https://github.com/navtoj/NotchBar/releases) page.
+1. Download the [latest release](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.dmg) from the [Releases](https://github.com/navtoj/NotchBar/releases) page.
 2. Drag the NotchBar app to your Applications folder.
 3. Launch NotchBar from your Applications folder or Spotlight.
 
