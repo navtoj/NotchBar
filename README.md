@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="Assets/AppIcon.dark.png">
-    <img alt="The NotchBar app icon." src="NotchBar/Assets.xcassets/AppIcon.appiconset/256.png" width=256 height=256>
+    <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/dark.png">
+    <img alt="The NotchBar app icon." src="_assets/icon/light.png" width=256>
   </picture>
   <h1>NotchBar</h1>
 </div>
@@ -9,10 +9,10 @@
 NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 ### Before
-<img src="Assets/macOS Notch.png" />
+<img src="_assets/intro/before.png" />
 
 ### After
-<img src="Assets/NotchBar.png" />
+<img src="_assets/intro/after.png" />
 
 ## Installation
 
@@ -22,16 +22,16 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 2. Drag the NotchBar app to your Applications folder.
 3. Launch NotchBar from your Applications folder or Spotlight.
 
-<!-- ![Install.dmg](Assets/Install.dmg.png) -->
+<!-- ![Install.dmg](_assets/install/dmg.png) -->
 
 > [!TIP]
 > ### Can't open `NotchBar.app`?
 > 
-> <img width="372" alt="Install Popup" src="Assets/Install Popup.png">
+> <img width="372" alt="Install Popup" src="_assets/install/popup.png">
 > 
 > **Right click** the `NotchBar` app and **left click** `Open`.[^1]
 > 
-> <img width="400" alt="Install Solution" src="Assets/Install Solution.png">
+> <img width="400" alt="Install Solution" src="_assets/install/solution.png">
 
 ## Usage
 
@@ -39,23 +39,23 @@ After launching NotchBar, it will automatically cover the notch area of your Mac
 
 A _sparkle_ icon will also be shown in the menu bar for important actions.
 
-<img src="Assets/Menu Bar.png" />
+<img src="_assets/usage/menuBarItem.png" />
 
 > [!TIP]
 > ### Can't see the `NotchBar`?
 > Make sure it's not being covered by the macOS menu bar.
 > 
 > **Option 1 —** Set **`Displays have separate Spaces`** option to **`Off`**
-> <img alt="Spaces Setting" src="Assets/Spaces Setting.png">
+> <img alt="Spaces Setting" src="_assets/usage/settingsSpaces.png">
 > <br>**Option 2 —** Set **`Automatically hide and show the menu bar`** option to **`Always`**
-> <img alt="Menu Bar Setting" src="Assets/Menu Bar Setting.png">
+> <img alt="Menu Bar Setting" src="_assets/usage/settingsMenuBar.png">
 
 ## Widgets
 
 <table>
   <tr></tr>
   <tr><th colspan="5" align="left">📊 System Monitor</th></tr>
-  <tr><td colspan="5"><img src="Assets/System Monitor.png" /></td></tr>
+  <tr><td colspan="5"><img src="_assets/widgets/systemMonitor.png" /></td></tr>
   <tr>
     <td>CPU</td>
     <td>Memory</td>
@@ -67,7 +67,7 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 <table>
   <tr></tr>
   <tr><th colspan="3" align="left">🎵 Media Playback</th></tr>
-  <tr><td colspan="3"><img src="Assets/Media Playback.png" /></td></tr>
+  <tr><td colspan="3"><img src="_assets/widgets/mediaPlayback.png" /></td></tr>
   <tr>
     <td>Artwork</td>
     <td>Artist</td>
@@ -77,7 +77,7 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 <table>
   <tr></tr>
   <tr><th colspan="2" align="left">📱 Active App</th></tr>
-  <tr><td colspan="2"><img src="Assets/Active App.png" /></td></tr>
+  <tr><td colspan="2"><img src="_assets/widgets/activeApp.png" /></td></tr>
   <tr>
     <td>Name</td>
     <td>Icon</td>
