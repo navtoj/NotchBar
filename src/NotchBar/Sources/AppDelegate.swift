@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SFSafeSymbols
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -24,42 +25,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 		// prevent focus
 
-//		NSApp.setActivationPolicy(.prohibited)
-		// FIXME: hides app during launch
+		NSApp.setActivationPolicy(.prohibited)
 
 		// configure status item
 
 		if let button = statusItem.button {
-			button.image = NSImage(systemSymbolName: "sparkle", accessibilityDescription: nil)
-		}
-		// TODO: add SFSafeSymbols package
 
-		// create status item menu
+			// set item icon
 
-		statusItem.menu = NSMenu()
-		if let menu = statusItem.menu {
+			button.image = NSImage(systemSymbol: .sparkle)
 
-#if DEBUG
-			// add debug item
+			// set item action
 
-			let quitItem = NSMenuItem(title: "Debug Mode", action: nil, keyEquivalent: "")
-			quitItem.isEnabled = false
-			menu.addItem(quitItem)
-
-			// add separator
-
-			menu.addItem(.separator())
-#endif
-
-			// TODO: add LaunchAtLogin package
-
-			// add quit item
-
-			menu.addItem(
-				withTitle: "Quit NotchBar",
-				action: #selector(NSApplication.shared.terminate(_:)),
-				keyEquivalent: "q"
-			)
+			button.action = #selector(toggleSettings)
 		}
 	}
 
@@ -76,4 +54,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { false }
+
+	// helper actions
+
+	@objc private func toggleSettings() {
+		AppState.shared.toggleSettings()
+	}
 }

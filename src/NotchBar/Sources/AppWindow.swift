@@ -15,12 +15,12 @@ final class AppWindow: NSWindow {
 
 	// hold observers for deinit
 
-	private var notificationObservers: [NSObjectProtocol] = []
-	private var userDefaultsObservers: [NSKeyValueObservation] = []
+	private var notifications: [NSObjectProtocol] = []
 
 	// disallow direct instantiation
 
 	private init() {
+		print("AppWindow init")
 
 		// make sure built-in screen is available
 
@@ -63,63 +63,22 @@ final class AppWindow: NSWindow {
 
 		// track window frame changes
 
-		addNotificationObserver(for: NSWindow.didMoveNotification) { _ in self.resetWindowFrame() }
-		addNotificationObserver(for: NSWindow.didResizeNotification) { _ in self.resetWindowFrame() }
-		addNotificationObserver(for: NSApplication.didChangeScreenParametersNotification)
-
-		// track menu bar visibility
-
-		addNotificationObserver(for: UserDefaults.didChangeNotification)
-		addDefaultsObserver(for: \.AppleMenuBarVisibleInFullscreen)
-		addDefaultsObserver(for: \._HIHideMenuBar)
-		// TODO: update level to show above menu bar?
+		addNotificationObserver(to: &notifications, for: NSWindow.didMoveNotification) { _ in self.resetWindowFrame() }
+		addNotificationObserver(to: &notifications, for: NSWindow.didResizeNotification) { _ in self.resetWindowFrame() }
+		addNotificationObserver(to: &notifications, for: NSApplication.didChangeScreenParametersNotification)
 	}
 
 	deinit {
 
 		// disable observers
 
-		for observer in notificationObservers {
+		for observer in notifications {
 			NotificationCenter.default.removeObserver(observer)
-		}
-		for observer in userDefaultsObservers {
-			observer.invalidate()
 		}
 
 		// clear observers
 
-		notificationObservers.removeAll()
-		userDefaultsObservers.removeAll()
-	}
-
-	// observer helpers
-
-	private func addNotificationObserver(
-		for name: NSNotification.Name,
-		action: @escaping (Notification) -> Void = { _ in }
-	) {
-		notificationObservers.append(NotificationCenter.default.addObserver(
-			forName: name,
-			object: nil,
-			queue: nil
-		) { notification in
-			print(">", notification.name.rawValue)
-			action(notification)
-		})
-	}
-
-	private func addDefaultsObserver(
-		for keyPath: KeyPath<UserDefaults, Bool>,
-		action: @escaping (UserDefaults, NSKeyValueObservedChange<Bool>) -> Void = { _, _ in }
-	) {
-		userDefaultsObservers.append(UserDefaults.standard.observe(
-			keyPath,
-			options: [.initial, .new],
-			changeHandler: { defaults, change in
-				print(">", keyPath.description, change.newValue ?? "nil")
-				action(defaults, change)
-			}
-		))
+		notifications.removeAll()
 	}
 
 	// reset window frame
@@ -175,10 +134,5 @@ final class AppWindow: NSWindow {
 
 			self.setFrameOrigin(origin)
 		}
-
-		// hide window when covered
-
-//		self.alphaValue = screen.canShowNotchBar ? 1 : 0
-		// TODO: indicate to user that notchbar is covered?
 	}
 }

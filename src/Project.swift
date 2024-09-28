@@ -10,10 +10,15 @@ let project = Project(
 			product: .app,
 			bundleId: "com.navtoj.NotchBar",
 			deploymentTargets: .macOS("14.6.1"),
-			infoPlist: .default,
+			infoPlist: .extendingDefault(with: [
+				"LSUIElement": true
+			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],
-			dependencies: []
+			dependencies: [
+				.external(name: "SFSafeSymbols"),
+				.external(name: "LaunchAtLogin"),
+			]
 		),
 		.target(
 			name: "NotchBarTests",
