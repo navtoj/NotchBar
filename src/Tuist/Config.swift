@@ -5,5 +5,8 @@ let config = Config(
 	// then uncomment the section below and set the project full-handle.
 	// * Read more: https://docs.tuist.io/guides/quick-start/gather-insights
 
-	fullHandle: "{github1}/{notchbar}"
+	fullHandle: "github1/notchbar",
+	generationOptions: .options(
+		optionalAuthentication: true
+	)
 )

@@ -2,6 +2,7 @@ import ProjectDescription
 
 let project = Project(
 	name: "NotchBar",
+//	settings: .settings(defaultSettings: .recommended(excluding: ["SWIFT_VERSION"])),
 	targets: [
 		.target(
 			name: "NotchBar",
