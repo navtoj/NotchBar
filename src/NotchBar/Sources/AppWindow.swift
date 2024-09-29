@@ -39,7 +39,10 @@ final class AppWindow: NSWindow {
 			backing: .buffered,
 			defer: false
 		)
-		print("window", frame)
+
+		// add swiftui view
+
+		contentView = NSHostingView(rootView: AppView())
 
 		// configure window
 
@@ -56,10 +59,6 @@ final class AppWindow: NSWindow {
 //		ignoresMouseEvents = true
 		isMovable = false
 //		isMovableByWindowBackground = true
-
-		// add swiftui view
-
-		contentView = NSHostingView(rootView: AppView())
 
 		// track window frame changes
 
@@ -91,7 +90,7 @@ final class AppWindow: NSWindow {
 
 			// quit application
 
-			return NSApplication.shared.terminate(self)
+			return NSApp.terminate(self)
 		}
 
 		// ensure notch area is available
@@ -100,7 +99,7 @@ final class AppWindow: NSWindow {
 
 			// quit application
 
-			return NSApplication.shared.terminate(self)
+			return NSApp.terminate(self)
 		}
 
 		// get window values

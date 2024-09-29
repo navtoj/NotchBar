@@ -10,6 +10,10 @@ import SFSafeSymbols
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
+	// create singleton instance
+
+	static let shared = AppDelegate()
+
 	// create window
 
 	private lazy var window = AppWindow.shared

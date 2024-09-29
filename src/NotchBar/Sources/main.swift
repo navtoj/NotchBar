@@ -7,8 +7,18 @@
 
 import AppKit
 
+// initialize application
+
 let app = NSApplication.shared
-let appDelegate = AppDelegate()
+
+// initialize delegate
+
+let appDelegate = AppDelegate.shared
+
+// assign delegate
 
 app.delegate = appDelegate
+
+// start app
+
 app.run()
