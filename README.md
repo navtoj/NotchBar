@@ -1,7 +1,8 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/dark.png">
-    <img alt="The NotchBar app icon." src="_assets/icon/light.png" width=256>
+    <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/dark.png" />
+    <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/light.png" />
+    <img alt="The NotchBar app icon." src="_assets/icon/light.png" width=256 />
   </picture>
   <h1>NotchBar</h1>
 </div>
@@ -111,3 +112,13 @@ This project is licensed under the [AGPLv3 License](LICENSE).
 - [Pow](https://github.com/EmergeTools/Pow) for SwiftUI effects.
 
 [^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
+
+## Star History
+
+<a href="https://star-history.com/#navtoj/notchbar&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline" />
+ </picture>
+</a>
