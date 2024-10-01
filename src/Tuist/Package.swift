@@ -18,7 +18,8 @@ let package = Package(
 		// Add your own dependencies here:
 		// .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
 		// You can read more about dependencies here: https://docs.tuist.io/documentation/tuist/dependencies
-		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", .upToNextMajor(from: "5.3.0")),
-		.package(url: "https://github.com/sindresorhus/LaunchAtLogin-Modern.git", .upToNextMajor(from: "1.1.0")),
+		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", .upToNextMajor(from: "5.3.0")),
+		.package(url: "https://github.com/sindresorhus/LaunchAtLogin-Modern", .upToNextMajor(from: "1.1.0")),
+		.package(url: "https://github.com/EmergeTools/Pow", .upToNextMajor(from: "1.0.4")),
 	]
 )

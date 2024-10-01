@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SwiftUICore
 
 // TODO: indicate to user that notchbar is covered?
 // TODO: update level to show above menu bar?
@@ -20,16 +21,15 @@ final class AppState {
 	// state properties
 
 	enum WindowView {
-		case none
 		case settings
-		//	case welcome
+		case welcome
 
-		func `is`(_ view: WindowView) -> Bool {
-			self == view
-		}
+//		func `is`(_ view: WindowView) -> Bool {
+//			self == view
+//		}
 	}
 
-	private(set) var window: WindowView = .none
+	private(set) var window: WindowView?
 	private(set) var canShowNotchBar: Bool
 
 	// hold observers for deinit

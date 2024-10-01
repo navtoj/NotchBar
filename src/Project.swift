@@ -2,7 +2,10 @@ import ProjectDescription
 
 let project = Project(
 	name: "NotchBar",
-//	settings: .settings(defaultSettings: .recommended(excluding: ["SWIFT_VERSION"])),
+	settings: .settings(base: [
+		"ENABLE_USER_SCRIPT_SANDBOXING": .init(booleanLiteral: true),
+		"ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": .init(booleanLiteral: true),
+	]),
 	targets: [
 		.target(
 			name: "NotchBar",
@@ -18,6 +21,7 @@ let project = Project(
 			dependencies: [
 				.external(name: "SFSafeSymbols"),
 				.external(name: "LaunchAtLogin"),
+				.external(name: "Pow"),
 			]
 		),
 		.target(

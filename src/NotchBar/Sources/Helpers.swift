@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SwiftUICore
 
 // Observer Helpers
 
