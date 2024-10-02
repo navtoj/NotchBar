@@ -7,6 +7,7 @@
 
 import AppKit
 import SFSafeSymbols
+import LaunchAtLogin
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -21,6 +22,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// create status item
 
 	private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+
+	// create status menu
+
+	private lazy var statusItemMenu = NSMenu()
+
+	// create status menu items
+
+	private lazy var launchAtLogin = NSMenuItem(
+		title: "Launch at Login",
+		action: #selector(toggleLaunchAtLogin),
+		keyEquivalent: "l"
+	)
 
 	// app functions
 
@@ -41,8 +54,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 			// set item action
 
-			button.action = #selector(toggleSettings)
+			button.action = #selector(handleClick)
+			button.target = self
+			button.sendAction(on: [.leftMouseUp, .rightMouseUp])
 		}
+
+		// configure status menu
+
+#if DEBUG
+		statusItemMenu.addItem(
+			withTitle: "Debug Mode",
+			action: nil,
+			keyEquivalent: ""
+		)
+		statusItemMenu.items.first?.isEnabled = false
+
+		statusItemMenu.addItem(.separator())
+#endif
+
+		statusItemMenu.addItem(launchAtLogin)
+		launchAtLogin.state = LaunchAtLogin.isEnabled ? .on : .off
+
+		statusItemMenu.addItem(.separator())
+
+		statusItemMenu.addItem(
+			withTitle: "Quit NotchBar",
+			action: #selector(NSApp.terminate(_:)),
+			keyEquivalent: "q"
+		)
 	}
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
@@ -61,7 +100,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 	// helper actions
 
-	@objc private func toggleSettings() {
-		AppState.shared.toggleSettings()
+	@objc func handleClick() {
+
+		// get current event
+
+		guard let event = NSApp.currentEvent else {
+			return print("Status Menu Click Event Not Found.")
+		}
+
+		// handle left click
+
+		guard event.type != NSEvent.EventType.leftMouseUp else {
+			return AppState.shared.toggleSettings()
+		}
+
+		// handle right click
+
+		statusItem.menu = statusItemMenu
+
+		statusItem.button?.performClick(nil)
+
+		statusItem.menu = nil
+	}
+
+	@objc private func toggleLaunchAtLogin() {
+		LaunchAtLogin.isEnabled.toggle()
+		launchAtLogin.state = LaunchAtLogin.isEnabled ? .on : .off
 	}
 }
