@@ -22,7 +22,7 @@ struct AppView: View {
 
 				// TODO: keep overlay within screen bounds using alignment?
 
-				WidgetView(alignment: .leading, showSecondary: $showSecondary)
+				WidgetView(alignment: .center, showSecondary: $showSecondary)
 					.onHover { hovering in
 						print((hovering ? "+" : "-") + " WidgetView")
 						if !hovering { showSecondary = false }
@@ -45,7 +45,7 @@ struct AppView: View {
 
 			// Window View
 
-			Group {
+			VStack(spacing: 0) {
 				switch state.window {
 					case .settings: Settings()
 					case .welcome: Welcome()

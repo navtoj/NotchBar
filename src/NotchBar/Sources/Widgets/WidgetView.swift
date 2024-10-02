@@ -21,7 +21,7 @@ struct WidgetView: View {
 	var body: some View {
 		Primary(showSecondary: $showSecondary)
 			.readSize { size in
-				print("Primary", size)
+				print("Primary.size", size)
 				primarySize = size
 			}
 			.frame(maxHeight: WidgetView.primaryHeight)
@@ -33,42 +33,22 @@ struct WidgetView: View {
 					if showSecondary {
 						VStack(alignment: alignment, spacing: 0) {
 
-							// Connector
-
-							Rectangle()
-								.fill(.black)
-								.frame(
-									width: min(
-										primarySize.width,
-										secondarySize.width
-									).rounded(.towardZero),
-									// FIXME: thin gaps at edge of connector
-									height: 3
-								)
-								.clipShape(InvertedCapsule())
-
-								// align connector horizontally to Primary
-
-								.alignmentGuide(alignment) { dim in
-									dim[alignment] + alignment.offsetConnector()
-								}
-
 							// Main Overlay
 
 							Secondary(show: $showSecondary)
 								.readSize { size in
-									print("Secondary", size)
+									print("Secondary.size", size)
 									secondarySize = size
 								}
 								.roundedCorners(5)
 								.padding(4)
 								.background(.black)
+								.clipShape(RoundCornersInvertedTop())
 								.roundedCorners()
+								.padding(.top, 3)
+								.tappable()
 						}
-						.transition(
-							.movingParts.wipe(edge: .top, blurRadius: 50)
-							.animation(.default) // .delay(0.5)
-						)
+						.transition(.blurReplace.animation(.snappy(duration: 0.4)))
 					}
 				}
 

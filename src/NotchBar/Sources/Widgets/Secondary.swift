@@ -11,7 +11,7 @@ struct Secondary: View {
 	@Binding var show: Bool
 
 	var body: some View {
-		HStack {
+		VStack {
 			Text("Secondary View")
 			Text("Secondary View")
 			Text("Secondary View")

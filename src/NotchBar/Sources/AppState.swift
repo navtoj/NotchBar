@@ -29,7 +29,7 @@ final class AppState {
 //		}
 	}
 
-	private(set) var window: WindowView?
+	private(set) var window: WindowView? // = .welcome
 	private(set) var canShowNotchBar: Bool
 
 	// hold observers for deinit

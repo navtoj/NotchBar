@@ -16,12 +16,11 @@ struct Primary: View {
 	var body: some View {
 		HStack {
 			Text("Primary Primary Primary")
-				.font(.system(size: 300))
-				.minimumScaleFactor(0.01)
 
 			Image(systemSymbol: symbolChange ? .handTapFill : .handTap)
 				.resizable()
 				.scaledToFit()
+				.fixedSize()
 				.contentTransition(.symbolEffect)
 				.onTapGesture {
 					print("Tap Symbol")
@@ -29,8 +28,8 @@ struct Primary: View {
 				}
 		}
 		.padding(.vertical, 5)
-		.padding(.horizontal, symbolChange ? 9.8 : 10)
-		.background(showSecondary ? .blue : .clear)
+		.padding(.horizontal, 10)
+		.background(showSecondary ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
 		.pillShaped()
 		.padding(.vertical, 3)
 		.tappable()

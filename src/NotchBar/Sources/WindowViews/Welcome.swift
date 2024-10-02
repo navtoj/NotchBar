@@ -12,7 +12,7 @@ struct Welcome: View {
 
 	var body: some View {
 		Rectangle()
-			.fill(.black)
+			.fill(.foreground)
 			.frame(width: size, height: size)
 			.clipShape(RoundCornersInvertedTop(radius: size / 2))
 			.border(.green)

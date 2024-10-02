@@ -14,9 +14,6 @@ struct RoundCornersInvertedTop: Shape {
 	//  `````
 
 	func path(in rect: CGRect) -> Path {
-#if DEBUG
-		print("InvertedTopCorners", rect)
-#endif
 		var p = Path()
 
 		// Top Left

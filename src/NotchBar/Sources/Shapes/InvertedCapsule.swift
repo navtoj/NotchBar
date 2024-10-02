@@ -13,9 +13,6 @@ struct InvertedCapsule: Shape {
 	// `````
 
 	func path(in rect: CGRect) -> Path {
-#if DEBUG
-		print("InvertedCapsule", rect)
-#endif
 		var p = Path()
 
 		// Top Left
