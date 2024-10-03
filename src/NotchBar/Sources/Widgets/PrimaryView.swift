@@ -1,5 +1,5 @@
 //
-//  Primary.swift
+//  PrimaryView.swift
 //  NotchBar
 //
 //  Created by Navtoj Chahal on 2024-09-30.
@@ -7,15 +7,19 @@
 
 import SwiftUI
 
-struct Primary: View {
+struct PrimaryView: View {
 	let state = AppState.shared
 
-	@Binding var showSecondary: Bool
-	@State private var symbolChange = false
+	@Binding var expand: Bool
 
+	@State private var symbolChange = false
 	var body: some View {
 		HStack {
-			Text("Primary Primary Primary")
+			HStack {
+				Text("Primary")
+				Text("Primary")
+				Text("Primary")
+			}
 
 			Image(systemSymbol: symbolChange ? .handTapFill : .handTap)
 				.resizable()
@@ -29,18 +33,18 @@ struct Primary: View {
 		}
 		.padding(.vertical, 5)
 		.padding(.horizontal, 10)
-		.background(showSecondary ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
+		.background(expand ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
 		.pillShaped()
 		.padding(.vertical, 3)
 		.tappable()
 		.onTapGesture {
 			print("Tap Primary")
-			showSecondary.toggle()
+			expand.toggle()
 		}
 	}
 }
 
 #Preview {
-	@Previewable @State var showSecondary = true
-	Primary(showSecondary: $showSecondary)
+	@Previewable @State var expand = true
+	PrimaryView(expand: $expand)
 }

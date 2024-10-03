@@ -1,5 +1,5 @@
 //
-//  Secondary.swift
+//  SecondaryView.swift
 //  NotchBar
 //
 //  Created by Navtoj Chahal on 2024-09-30.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct Secondary: View {
-	@Binding var show: Bool
+struct SecondaryView: View {
+	@Binding var expand: Bool
 
 	var body: some View {
-		VStack {
+		HStack {
 			Text("Secondary View")
 			Text("Secondary View")
 			Text("Secondary View")
@@ -22,12 +22,12 @@ struct Secondary: View {
 		.onTapGesture {
 			print("Tap Secondary")
 			AppState.shared.toggleSettings()
-			show = false
+			expand = false
 		}
 	}
 }
 
 #Preview {
-	@Previewable @State var show = true
-	Secondary(show: $show)
+	@Previewable @State var expand = true
+	SecondaryView(expand: $expand)
 }
