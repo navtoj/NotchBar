@@ -9,21 +9,11 @@ import SwiftUICore
 
 extension View {
 
-	func tappable() -> some View {
-		contentShape(.rect)
-	}
-
 	func roundedCorners(_ by: CGFloat = 10, continuous: Bool = true) -> some View {
-		clipShape(
-			.rect(
-				cornerRadius: by,
-				style: continuous ? .continuous : .circular
-			)
-		)
-	}
-
-	func pillShaped() -> some View {
-		clipShape(.capsule(style: .continuous))
+		clipShape(.rect(
+			cornerRadius: by,
+			style: continuous ? .continuous : .circular
+		))
 	}
 
 	func readSize(onChange: @escaping (CGSize) -> Void) -> some View {

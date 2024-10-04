@@ -20,27 +20,17 @@ struct AppView: View {
 
 				HStack {
 					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
 				}
-				.frame(maxWidth: notch.minX, alignment: .leading)
-#if DEBUG
-				.border(.red)
-#endif
+				.frame(maxWidth: notch.minX, alignment: .trailing)
 
 				// Widgets - Right
 
 				HStack {
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+					WidgetView<MediaRemote, Never>(primary: MediaRemote.init, secondary: nil)
 				}
-				.frame(maxWidth: notch.minX, alignment: .trailing)
-#if DEBUG
-				.border(.red)
-#endif
+				.frame(maxWidth: notch.minX, alignment: .leading)
 			}
-			.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn?.notch?.height ?? 31.5, alignment: .leading)
+			.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn?.notch?.height ?? 31.5)
 			.padding(.horizontal)
 			.background(.black)
 			.zIndex(1) // otherwise, secondary closes on hover

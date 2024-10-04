@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct PrimaryView: View {
-	let state = AppState.shared
+	private let state = AppState.shared
 
 	@Binding var expand: Bool
 
 	@State private var symbolChange = false
 	var body: some View {
 		HStack {
-			HStack {
-				Text("Primary")
-				Text("Primary")
-				Text("Primary")
-			}
-
+			Text("Primary")
+			Text("Primary")
+			Text("Primary")
+			
 			Image(systemSymbol: symbolChange ? .handTapFill : .handTap)
 				.resizable()
 				.scaledToFit()
@@ -34,9 +32,10 @@ struct PrimaryView: View {
 		.padding(.vertical, 5)
 		.padding(.horizontal, 10)
 		.background(expand ? AnyShapeStyle(.background) : AnyShapeStyle(.clear))
-		.pillShaped()
-		.padding(.vertical, 3)
-		.tappable()
+		// pill shape
+		.clipShape(.capsule(style: .continuous))
+		// tappable
+		.contentShape(.capsule(style: .continuous))
 		.onTapGesture {
 			print("Tap Primary")
 			expand.toggle()

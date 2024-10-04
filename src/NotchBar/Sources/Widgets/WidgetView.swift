@@ -10,7 +10,6 @@ import Pow
 
 struct WidgetView<Primary: View, Secondary: View>: View {
 	let primary: (Binding<Bool>) -> Primary
-	//	let secondary: (Binding<Bool>) -> Secondary
 	let secondary: ((Binding<Bool>) -> Secondary)?
 
 	@State private var expand = false
@@ -18,7 +17,6 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 
 	var body: some View {
 		primary($expand)
-			.fixedSize()
 			.overlay(alignment: Alignment(horizontal: xAlignment, vertical: .bottom)) {
 				VStack(spacing: 0) {
 					if expand {
@@ -26,13 +24,13 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 							.roundedCorners(5)
 							.padding(4)
 							.background(.black)
-							.roundedCorners()
-							.padding(.top, 3)
-							.tappable()
+							.roundedCorners(9)
+							.padding(.top, 5)
+							.contentShape(.rect)
 							.transition(.blurReplace.animation(.snappy(duration: 0.4)))
 							.background {
 
-								// FIXME: keep overlay within horizontal screen bounds using alignment/offset
+								// FIXME: keep overlay within horizontal screen bounds
 
 								GeometryReader { geometry in
 									Color.clear
