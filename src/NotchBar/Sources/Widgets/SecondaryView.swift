@@ -15,6 +15,8 @@ struct SecondaryView: View {
 			Text("Secondary View")
 			Text("Secondary View")
 			Text("Secondary View")
+			Text("Secondary View")
+			Text("Secondary View")
 		}
 		.fixedSize()
 		.padding(5)

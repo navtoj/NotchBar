@@ -21,15 +21,19 @@ final class AppState {
 	// state properties
 
 	enum WindowView {
-		case settings
 		case welcome
+		case settings
 
-//		func `is`(_ view: WindowView) -> Bool {
-//			self == view
-//		}
+		@ViewBuilder
+		var view: some View {
+			switch self {
+				case .welcome: Welcome()
+				case .settings: Settings()
+			}
+		}
 	}
 
-	private(set) var window: WindowView? // = .welcome
+	private(set) var window: WindowView?
 	private(set) var canShowNotchBar: Bool
 
 	// hold observers for deinit

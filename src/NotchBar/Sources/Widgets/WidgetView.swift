@@ -9,22 +9,18 @@ import SwiftUI
 import Pow
 
 struct WidgetView<Primary: View, Secondary: View>: View {
-	let alignment: HorizontalAlignment = .leading
-	// TODO: keep overlay within screen bounds using alignment?
-
 	let primary: (Binding<Bool>) -> Primary
+	//	let secondary: (Binding<Bool>) -> Secondary
 	let secondary: ((Binding<Bool>) -> Secondary)?
 
 	@State private var expand = false
+	@State private var xAlignment: HorizontalAlignment = .center
 
 	var body: some View {
 		primary($expand)
-			.frame(maxHeight: NSScreen.builtIn?.notch?.height ?? 31.5)
-			.overlay(alignment: Alignment(
-				horizontal: alignment,
-				vertical: .bottom
-			)) {
-				Group {
+			.fixedSize()
+			.overlay(alignment: Alignment(horizontal: xAlignment, vertical: .bottom)) {
+				VStack(spacing: 0) {
 					if expand {
 						secondary?($expand)
 							.roundedCorners(5)
@@ -34,6 +30,29 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 							.padding(.top, 3)
 							.tappable()
 							.transition(.blurReplace.animation(.snappy(duration: 0.4)))
+							.background {
+
+								// FIXME: keep overlay within horizontal screen bounds using alignment/offset
+
+								GeometryReader { geometry in
+									Color.clear
+										.onAppear {
+											guard let bounds = NSScreen.builtIn?.frame else { fatalError("Built-in screen not found.") }
+
+											// ignore if already aligned
+											guard xAlignment == .center else { return }
+
+											let frame = geometry.frame(in: .global)
+											if frame.minX < 0 {
+												print("offset", 0 - frame.minX)
+												xAlignment = .leading
+											} else if frame.maxX > bounds.width {
+												print("offset", bounds.width - frame.maxX)
+												xAlignment = .trailing
+											}
+										}
+								}
+							}
 					}
 				}
 				.alignmentGuide(.bottom) { dim in dim[.top] }
