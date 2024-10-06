@@ -1,37 +1,87 @@
 import SwiftUICore
+import AppKit
 
-extension View {
+private struct FramePreferenceKey: PreferenceKey {
+	static var defaultValue: CGRect = .zero
+	static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
+}
+// https://fivestars.blog/articles/swiftui-share-layout-information/
+struct FrameReader: ViewModifier {
+	let coordinateSpace: CoordinateSpaceProtocol
+	let action: (CGRect) -> Void
 
-	func roundedCorners(_ by: CGFloat = 10, continuous: Bool = true) -> some View {
-		clipShape(.rect(
-			cornerRadius: by,
-			style: continuous ? .continuous : .circular
-		))
-	}
-
-	func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
-		background(
-			GeometryReader { geometryProxy in
-				Color.clear
-					.preference(key: SizePreferenceKey.self, value: geometryProxy.size)
+	func body(content: Content) -> some View {
+		content
+			.background {
+				GeometryReader { proxy in
+					Color.clear
+						.preference(
+							key: FramePreferenceKey.self,
+							value: proxy.frame(in: coordinateSpace)
+						)
+				}
 			}
-		)
-		.onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+			.onPreferenceChange(FramePreferenceKey.self, perform: action)
+	}
+}
+extension View {
+	func onFrameChange(in coordinateSpace: CoordinateSpaceProtocol = .local, perform action: @escaping (CGRect) -> Void) -> some View {
+		modifier(FrameReader(coordinateSpace: coordinateSpace, action: action))
 	}
 }
 
-private struct SizePreferenceKey: PreferenceKey {
-	static var defaultValue: CGSize = .zero
-	static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
+struct SizeReader: ViewModifier {
+	@Binding var size: CGSize
+
+	func body(content: Content) -> some View {
+		content
+			.background {
+				GeometryReader { proxy in
+					Color.clear
+						.onChange(of: proxy.size, initial: true) { old, new  in
+//							print("size", old, "→", new)
+							size = new
+						}
+				}
+			}
+	}
+}
+extension View {
+	func onSizeChange(sync size: Binding<CGSize>) -> some View {
+		modifier(SizeReader(size: size))
+	}
 }
 
-/*
- Example: https://fivestars.blog/articles/swiftui-share-layout-information/
+struct RoundedCorners: ViewModifier {
+	let radius: CGFloat
+	let type: RoundedCornerStyle
 
- var body: some View {
-	 childView
-		 .readSize { newSize in
-			print("The new child size is: \(newSize)")
-		 }
- }
- */
+	func body(content: Content) -> some View {
+		content
+			.clipShape(.rect(cornerRadius: radius, style: type))
+	}
+}
+extension View {
+	func roundedCorners(_ radius: CGFloat = 10, type: RoundedCornerStyle = .continuous) -> some View {
+		modifier(RoundedCorners(radius: radius, type: type))
+	}
+}
+
+struct RoundedBorder: ViewModifier {
+	let radius: CGFloat
+	let width: CGFloat
+	let color: Color
+
+	func body(content: Content) -> some View {
+		content
+			.roundedCorners(radius)
+			.padding(width)
+			.background(color)
+			.roundedCorners(radius + width)
+	}
+}
+extension View {
+	func roundedBorder(radius: CGFloat = 10, width: CGFloat = 5, color: Color = .black) -> some View {
+		modifier(RoundedBorder(radius: radius, width: width, color: color))
+	}
+}

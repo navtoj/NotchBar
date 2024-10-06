@@ -10,8 +10,7 @@ struct PrimaryView: View {
 		HStack {
 			Text("Primary")
 			Text("Primary")
-			Text("Primary")
-			
+
 			Image(systemSymbol: symbolChange ? .handTapFill : .handTap)
 				.resizable()
 				.scaledToFit()

@@ -85,26 +85,20 @@ enum MRMediaRemoteCommand: Int {
 	case EnableLanguageOption
 	case DisableLanguageOption
 
-	var userInfo: MediaRemoteUserInfo? {
+	var dictionary: [String: Any]? {
 		switch self {
 			case .RateTrack, .LikeTrack, .DislikeTrack, .BookmarkTrack:
-				MediaRemoteUserInfo(trackId: "", stationId: "", stationHash: "")
+				[
+					"kMRMediaRemoteOptionTrackID": "",
+					"kMRMediaRemoteOptionStationID": "",
+					"kMRMediaRemoteOptionStationHash": ""
+				]
+			case .Rewind15Seconds:
+				[
+					"status": "test"
+				]
 			default:
 				nil
 		}
-	}
-}
-
-struct MediaRemoteUserInfo {
-	let trackId: Any
-	let stationId: Any
-	let stationHash: Any
-
-	var dictionary: [String: Any] {
-		[
-			"kMRMediaRemoteOptionTrackID": trackId,
-			"kMRMediaRemoteOptionStationID": stationId,
-			"kMRMediaRemoteOptionStationHash": stationHash
-		]
 	}
 }

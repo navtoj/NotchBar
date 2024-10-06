@@ -5,52 +5,81 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 	let primary: (Binding<Bool>) -> Primary
 	let secondary: ((Binding<Bool>) -> Secondary)?
 
+	// Default Values
+
+	init(
+		primary: @escaping (Binding<Bool>) -> Primary,
+		secondary: ((Binding<Bool>) -> Secondary)? = nil,
+		overlay alignment: HorizontalAlignment = .center
+	) {
+		self.primary = primary
+		self.secondary = secondary
+		self.alignment = alignment
+	}
+
+	@State private var alignment: HorizontalAlignment
 	@State private var expand = false
-	@State private var xAlignment: HorizontalAlignment = .center
 
+	@State private var hovering = false
 	var body: some View {
-		primary($expand)
-			.overlay(alignment: Alignment(horizontal: xAlignment, vertical: .bottom)) {
-				VStack(spacing: 0) {
-					if expand {
-						secondary?($expand)
-							.roundedCorners(5)
-							.padding(4)
-							.background(.black)
-							.roundedCorners(9)
-							.padding(.top, 5)
-							.contentShape(.rect)
-							.transition(.blurReplace.animation(.snappy(duration: 0.4)))
-							.background {
+		VStack {
 
-								// FIXME: keep overlay within horizontal screen bounds
+			// Primary View
 
-								GeometryReader { geometry in
-									Color.clear
-										.onAppear {
-											guard let bounds = NSScreen.builtIn?.frame else { fatalError("Built-in screen not found.") }
+			primary($expand)
+		}
+		.frame(maxHeight: .infinity)
+		.overlay(alignment: Alignment(horizontal: alignment, vertical: .bottom)) {
+			VStack {
+				if expand {
 
-											// ignore if already aligned
-											guard xAlignment == .center else { return }
+					// Secondary View
 
-											let frame = geometry.frame(in: .global)
-											if frame.minX < 0 {
-												print("offset", 0 - frame.minX)
-												xAlignment = .leading
-											} else if frame.maxX > bounds.width {
-												print("offset", bounds.width - frame.maxX)
-												xAlignment = .trailing
-											}
-										}
-								}
+					secondary?($expand)
+						.padding(.top, 3)
+						.transition(.blurReplace.animation(.snappy(duration: 0.4)))
+						.onFrameChange(in: .global) { frame in
+							// FIXME: keep overlay within horizontal screen bounds
+
+							// ignore if already aligned
+							guard alignment == .center else { return }
+
+							// get screen bounds
+							guard let bounds = NSScreen.builtIn?.frame else { fatalError("Built-in screen not found.") }
+
+							// check if out of bounds
+							if frame.minX < 0 {
+								let offset = 0 - frame.minX
+								print("offset.left", offset)
+								alignment = .leading
+							} else if frame.maxX > bounds.width {
+								let offset = bounds.width - frame.maxX
+								print("offset.right", offset)
+								alignment = .trailing
 							}
-					}
+						}
 				}
-				.alignmentGuide(.bottom) { dim in dim[.top] }
 			}
-			.onHover { hovering in
-				if !hovering { expand = false }
-			}
+			.alignmentGuide(.bottom) { dim in dim[.top] }
+		}
+		.onHover { hovering in
+			Task { await handleHover(isHovering: hovering) }
+		}
+	}
+
+	private func handleHover(isHovering: Bool) async {
+
+		// update hover state
+		hovering = isHovering
+
+		// ignore if not expanded
+		guard expand else { return }
+
+		// delay to prevent closing on expand
+		try? await Task.sleep(nanoseconds: 250_000_000) // 250 ms
+
+		// close if not hovering
+		if !hovering { expand = false }
 	}
 }
 

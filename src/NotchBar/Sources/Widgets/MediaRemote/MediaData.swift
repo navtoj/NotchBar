@@ -1,7 +1,5 @@
 import AppKit
 
-
-
 @Observable
 final class MediaData {
 #if DEBUG
@@ -329,9 +327,10 @@ final class MediaData {
 			return fetchNowPlayingInfo()
 		}
 	}
-	
-	final func SendCommand(_ command: MRMediaRemoteCommand) -> Bool {
-		return MRMediaRemoteSendCommand(command.rawValue, command.userInfo?.dictionary ?? nil)
+
+	@discardableResult
+	final func command(_ command: MRMediaRemoteCommand) -> Bool {
+		return MRMediaRemoteSendCommand(command.rawValue, command.dictionary)
 	}
 }
 

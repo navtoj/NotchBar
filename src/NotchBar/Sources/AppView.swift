@@ -13,22 +13,31 @@ struct AppView: View {
 
 			// Notch Bar
 
-			HStack(spacing: notch.width) {
-				// TODO: use ViewThatFits to keep widgets within bounds
+			HStack(spacing: notch.width) { // TODO: keep widgets within bounds w/ ViewThatFits
 
 				// Widgets - Left
 
 				HStack {
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+					WidgetView(
+						primary: MediaPrimary.init,
+						secondary: MediaSecondary.init,
+						overlay: .leading
+					)
 				}
-				.frame(maxWidth: notch.minX, alignment: .trailing)
+				.frame(maxWidth: notch.minX, alignment: .leading)
 
 				// Widgets - Right
 
 				HStack {
-					WidgetView<MediaRemote, Never>(primary: MediaRemote.init, secondary: nil)
+					HStack {
+						WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+					}
+					.frame(maxWidth: .infinity, alignment: .leading)
+
+					WidgetView<PrimaryView, Never>(primary: PrimaryView.init)
+					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
 				}
-				.frame(maxWidth: notch.minX, alignment: .leading)
+				.frame(maxWidth: notch.minX, alignment: .trailing)
 			}
 			.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn?.notch?.height ?? 31.5)
 			.padding(.horizontal)
