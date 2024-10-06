@@ -1,10 +1,3 @@
-//
-//  SecondaryView.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-09-30.
-//
-
 import SwiftUI
 
 struct SecondaryView: View {

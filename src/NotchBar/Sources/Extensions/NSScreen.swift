@@ -1,10 +1,3 @@
-//
-//  NSScreen.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-09-27.
-//
-
 import AppKit
 
 extension NSScreen {

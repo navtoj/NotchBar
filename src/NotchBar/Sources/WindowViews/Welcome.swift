@@ -1,10 +1,3 @@
-//
-//  Welcome.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-10-01.
-//
-
 import SwiftUI
 
 struct Welcome: View {

@@ -1,10 +1,3 @@
-//
-//  MediaCommand.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-10-04.
-//
-
 import AppKit
 
 // Load MediaRemote Framework

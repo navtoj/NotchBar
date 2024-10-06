@@ -1,10 +1,3 @@
-//
-//  Settings.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-09-29.
-//
-
 import SwiftUI
 
 struct Settings: View {

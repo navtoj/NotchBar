@@ -1,10 +1,3 @@
-//
-//  RoundCornersInvertedTop.swift
-//  NotchBar
-//
-//  Created by Navtoj Chahal on 2024-10-01.
-//
-
 import SwiftUICore
 
 struct RoundCornersInvertedTop: Shape {
