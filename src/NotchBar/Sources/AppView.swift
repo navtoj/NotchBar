@@ -13,16 +13,13 @@ struct AppView: View {
 
 			// Notch Bar
 
-			HStack(spacing: notch.width) { // TODO: keep widgets within bounds w/ ViewThatFits
+			HStack(spacing: notch.width) { // TODO: keep widgets within bounds w/ ViewThatFits?
 
 				// Widgets - Left
 
 				HStack {
-					WidgetView(
-						primary: MediaPrimary.init,
-						secondary: MediaSecondary.init,
-						overlay: .leading
-					)
+					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+					WidgetView<PrimaryView, Never>(primary: PrimaryView.init)
 				}
 				.frame(maxWidth: notch.minX, alignment: .leading)
 
@@ -30,12 +27,14 @@ struct AppView: View {
 
 				HStack {
 					HStack {
-						WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+						WidgetView(
+							primary: MediaPrimary.init,
+							secondary: MediaSecondary.init,
+							overlay: .leading
+						)
 					}
 					.frame(maxWidth: .infinity, alignment: .leading)
-
-					WidgetView<PrimaryView, Never>(primary: PrimaryView.init)
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
+					WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
 				}
 				.frame(maxWidth: notch.minX, alignment: .trailing)
 			}

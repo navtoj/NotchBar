@@ -55,14 +55,14 @@ struct MediaPrimary: View {
 				Text(track.artist)
 				Divider()
 
-				// Title & Album (on Hover)
+				// Title
 
 				Text(track.title)
 					.lineLimit(1)
 					.truncationMode(.tail)
 					.foregroundStyle(media.isPlaying ? .primary : .secondary)
 			}
-			.padding(.leading, 4)
+//			.padding(.horizontal, 4)
 			.padding(.vertical, 2)
 			.transition(.movingParts.filmExposure.animation(.smooth))
 			.contentShape(.rect)

@@ -125,6 +125,7 @@ extension View {
 				let width = proxy.size.width
 				Color.clear
 					.onChange(of: width, initial: true) { oldWidth, newWidth in
+						// FIXME: onChange(of: CGFloat) action tried to update multiple times per frame.
 						DispatchQueue.main.async {
 							onChange(newWidth)
 						}
