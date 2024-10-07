@@ -19,8 +19,8 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 > Requirements: macOS 14.5 or later
 
-1. Download the [latest release](https://github.com/navtoj/NotchBar/releases/latest) ([.app](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.app.zip) or [.dmg](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.dmg)) from the [Releases](https://github.com/navtoj/NotchBar/releases) page.
-2. Drag the NotchBar app to your Applications folder.
+1. Download the [.app](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.app.zip) from the [latest release](https://github.com/navtoj/NotchBar/releases/latest) on the [Releases](https://github.com/navtoj/NotchBar/releases) page.
+2. Unzip and drag the __NotchBar.app__ to your **Applications** folder.
 3. Launch NotchBar from your Applications folder or Spotlight.
 
 <!-- ![Install.dmg](_assets/install/dmg.png) -->
@@ -74,6 +74,8 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
     <td>Artist</td>
     <td>Track</td>
   </tr>
+  <tr><td colspan="3"><img src="_assets/widgets/mediaPlaybackCard.png" /></td></tr>
+  <tr><td colspan="3">Dropdown Details Card w/ Controls</tr>
 </table>
 <table>
   <tr></tr>
@@ -88,17 +90,59 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 |✨|more coming soon...|
 |-|:-|
 
-## Contributing
+## Development
 
 Contributions to NotchBar are most welcome! Please feel free to submit a Pull Request.
 
-## Building from Source
+#### Widget Structure
 
-To build NotchBar from source:
+```
+Widgets
+├── Example
+│   ├── PrimaryView.swift
+│   └── SecondaryView.swift
+└── WidgetView.swift
+```
 
-1. Clone the repository: git clone https://github.com/navtoj/NotchBar.git
-2. Open `NotchBar.xcodeproj` in Xcode.
-3. Build and run the project.
+```swift
+WidgetView(
+	
+	// Required – Always Visible in Notchbar
+	primary: PrimaryView.init,
+
+	// Optional – Dropdown Card on Tap/Hover
+	secondary: SecondaryView.init
+)
+```
+
+## Build from Source
+
+### Install [Tuist](https://github.com/tuist/tuist)
+
+```shell
+brew tap tuist/tuist
+brew install --formula tuist
+```
+
+#### Clone Repository
+
+```shell
+git clone https://github.com/navtoj/NotchBar.git
+```
+
+#### Compile Source
+
+```shell
+cd NotchBar/src/
+tuist install
+tuist build
+```
+
+#### Launch Xcode (Optional)
+
+```shell
+tuist generate
+```
 
 ## License
 
