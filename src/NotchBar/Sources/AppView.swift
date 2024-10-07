@@ -18,8 +18,8 @@ struct AppView: View {
 				// Widgets - Left
 
 				HStack {
-					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
-					WidgetView<PrimaryView, Never>(primary: PrimaryView.init)
+					WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
+//					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
 				}
 				.frame(maxWidth: notch.minX, alignment: .leading)
 

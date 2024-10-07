@@ -1,4 +1,5 @@
 // swift-tools-version: 5.9
+@preconcurrency
 import PackageDescription
 
 #if TUIST
@@ -15,11 +16,10 @@ let packageSettings = PackageSettings(
 let package = Package(
 	name: "NotchBar",
 	dependencies: [
-		// Add your own dependencies here:
-		// .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
-		// You can read more about dependencies here: https://docs.tuist.io/documentation/tuist/dependencies
+		// https://docs.tuist.io/documentation/tuist/dependencies
 		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", .upToNextMajor(from: "5.3.0")),
 		.package(url: "https://github.com/sindresorhus/LaunchAtLogin-Modern", .upToNextMajor(from: "1.1.0")),
 		.package(url: "https://github.com/EmergeTools/Pow", .upToNextMajor(from: "1.0.4")),
+		.package(url: "https://github.com/Kyome22/SystemInfoKit", .upToNextMajor(from: "3.2.0")),
 	]
 )

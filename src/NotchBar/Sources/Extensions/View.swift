@@ -85,3 +85,19 @@ extension View {
 		modifier(RoundedBorder(radius: radius, width: width, color: color))
 	}
 }
+
+struct AnimatedNumbers: ViewModifier {
+	let value: Double
+
+	func body(content: Content) -> some View {
+		content
+			.monospacedDigit()
+			.contentTransition(.numericText(value: value))
+			.animation(.default, value: value)
+	}
+}
+extension View {
+	func animatedNumbers(value: Double) -> some View {
+		modifier(AnimatedNumbers(value: value))
+	}
+}

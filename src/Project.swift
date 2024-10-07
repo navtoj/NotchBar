@@ -22,6 +22,7 @@ let project = Project(
 				.external(name: "SFSafeSymbols"),
 				.external(name: "LaunchAtLogin"),
 				.external(name: "Pow"),
+				.external(name: "SystemInfoKit"),
 			]
 		),
 		.target(

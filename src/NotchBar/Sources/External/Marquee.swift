@@ -5,7 +5,8 @@
 //  Created by Naina Maharjan on 28/02/2024.
 //
 
-// TODO: Replace Package - https://github.com/stonko1994/Marquee
+// TODO: Replace Package
+// https://github.com/stonko1994/Marquee -> didn't work, find a better one
 
 import SwiftUI
 
@@ -42,7 +43,7 @@ struct Marquee<Content: View>: View {
 			}
 			.offset(x: model.offset)
 			.fixedSize()
-			.onChange(of: context.date, initial: true) { oldDate, newDate in
+			.onChange(of: context.date, initial: false) { oldDate, newDate in
 				DispatchQueue.main.async {
 					model.tick(at: newDate)
 				}
@@ -124,7 +125,7 @@ extension View {
 			GeometryReader { proxy in
 				let width = proxy.size.width
 				Color.clear
-					.onChange(of: width, initial: true) { oldWidth, newWidth in
+					.onChange(of: width, initial: false) { oldWidth, newWidth in
 						// FIXME: onChange(of: CGFloat) action tried to update multiple times per frame.
 						DispatchQueue.main.async {
 							onChange(newWidth)

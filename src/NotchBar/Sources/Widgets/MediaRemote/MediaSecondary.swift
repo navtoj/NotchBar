@@ -28,24 +28,26 @@ struct MediaSecondary: View {
 
 				// Album
 
-				Group {
-					if albumName.width > controls.width {
-						Marquee(targetVelocity: 10) {
+				if !track.album.isEmpty {
+					Group {
+						if albumName.width > controls.width {
+							Marquee(targetVelocity: 10) {
+								Text(track.album)
+									.font(.caption)
+									.fixedSize()
+									.onSizeChange(sync: $albumName)
+							}
+						} else {
 							Text(track.album)
 								.font(.caption)
 								.fixedSize()
 								.onSizeChange(sync: $albumName)
+								.frame(maxWidth: .infinity)
 						}
-					} else {
-						Text(track.album)
-							.font(.caption)
-							.fixedSize()
-							.onSizeChange(sync: $albumName)
 					}
+					.padding(5)
+					.background(.background)
 				}
-				.padding(5)
-				.frame(maxWidth: .infinity)
-				.background(.background)
 
 				// Artwork
 
