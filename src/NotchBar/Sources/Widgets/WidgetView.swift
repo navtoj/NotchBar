@@ -50,11 +50,15 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 							// check if out of bounds
 							if frame.minX < 0 {
 								let offset = 0 - frame.minX
+#if DEBUG
 								print("offset.left", offset)
+#endif
 								alignment = .leading
 							} else if frame.maxX > bounds.width {
 								let offset = bounds.width - frame.maxX
+#if DEBUG
 								print("offset.right", offset)
+#endif
 								alignment = .trailing
 							}
 						}

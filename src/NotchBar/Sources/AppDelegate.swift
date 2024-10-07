@@ -31,7 +31,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// app functions
 
 	func applicationWillFinishLaunching(_ notification: Notification) {
+#if DEBUG
 		print("applicationWillFinishLaunching")
+#endif
 
 		// prevent focus
 
@@ -78,7 +80,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
+#if DEBUG
 		print("applicationDidFinishLaunching")
+#endif
 
 		// show window
 
@@ -86,7 +90,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationWillTerminate(_ notification: Notification) {
+#if DEBUG
 		print("applicationWillTerminate")
+#endif
 	}
 
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { false }

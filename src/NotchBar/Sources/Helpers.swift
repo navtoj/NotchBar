@@ -13,7 +13,9 @@ func addNotificationObserver(
 		object: nil,
 		queue: nil
 	) { notification in
+#if DEBUG
 		print(">", notification.name.rawValue)
+#endif
 		action(notification)
 	})
 }
@@ -27,7 +29,9 @@ func addUserDefaultsObserver(
 		keyPath,
 		options: [.initial, .new],
 		changeHandler: { defaults, change in
+#if DEBUG
 			print(">", keyPath.description, change.newValue ?? "nil")
+#endif
 			action(defaults, change)
 		}
 	))

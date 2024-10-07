@@ -13,7 +13,9 @@ final class AppWindow: NSWindow {
 	// disallow direct instantiation
 
 	private init() {
+#if DEBUG
 		print("AppWindow init")
+#endif
 
 		// make sure built-in screen is available
 
@@ -110,7 +112,9 @@ final class AppWindow: NSWindow {
 		// check window size
 
 		if width != size.width || height != size.height {
+#if DEBUG
 			print("Window size changed.")
+#endif
 
 			// reset window size
 
@@ -120,7 +124,9 @@ final class AppWindow: NSWindow {
 		// check window position
 
 		if x != origin.x || y != origin.y {
+#if DEBUG
 			print("Window position changed.")
+#endif
 
 			// reset window position
 

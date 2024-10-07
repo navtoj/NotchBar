@@ -63,7 +63,7 @@ struct MediaPrimary: View {
 					.foregroundStyle(media.isPlaying ? .primary : .secondary)
 			}
 //			.padding(.horizontal, 4)
-			.padding(.vertical, 2)
+			.padding(.bottom, 2)
 			.transition(.movingParts.filmExposure.animation(.smooth))
 			.contentShape(.rect)
 			.onHover { isHovering in

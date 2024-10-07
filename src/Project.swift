@@ -14,7 +14,8 @@ let project = Project(
 			bundleId: "com.navtoj.NotchBar",
 			deploymentTargets: .macOS("14.6.1"),
 			infoPlist: .extendingDefault(with: [
-				"LSUIElement": true
+				"LSUIElement": true,
+				"LSApplicationCategoryType": "public.app-category.productivity",
 			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],

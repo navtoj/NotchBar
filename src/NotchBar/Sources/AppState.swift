@@ -37,7 +37,9 @@ final class AppState {
 	// disallow direct instantiation
 
 	private init() {
+#if DEBUG
 		print("AppState init")
+#endif
 
 		// make sure built-in screen is available
 

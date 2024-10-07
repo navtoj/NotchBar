@@ -25,7 +25,9 @@ import AppKit
 	}
 	
 	@objc private func handleDidActivateApplicationNotification(_ notification: Notification) {
+#if DEBUG
 //		print("didActivateApplicationNotification")
+#endif
 		
 		guard let userInfo = notification.userInfo else {
 			return print("Failed to get active app notification.")
