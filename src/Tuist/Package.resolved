@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "launchatlogin-modern",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/LaunchAtLogin-Modern.git",
+      "state" : {
+        "revision" : "a04ec1c363be3627734f6dad757d82f5d4fa8fcc",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "pow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EmergeTools/Pow",
+      "state" : {
+        "revision" : "f0d0f3e72d42beaf2b01f1cb798e1b55902814eb",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "sfsafesymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols.git",
+      "state" : {
+        "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a",
+        "version" : "5.3.0"
+      }
+    },
+    {
+      "identity" : "systeminfokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kyome22/SystemInfoKit",
+      "state" : {
+        "revision" : "a70db062a94959404fb35b72eb9a08568dcf1dc0",
+        "version" : "3.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}
