@@ -26,16 +26,5 @@ let project = Project(
 				.external(name: "SystemInfoKit"),
 			]
 		),
-		.target(
-			name: "NotchBarTests",
-			destinations: .macOS,
-			product: .unitTests,
-			bundleId: "com.navtoj.NotchBarTests",
-			deploymentTargets: .macOS("14.6.1"),
-			infoPlist: .default,
-			sources: ["NotchBar/Tests/**"],
-			resources: [],
-			dependencies: [.target(name: "NotchBar")]
-		),
 	]
 )

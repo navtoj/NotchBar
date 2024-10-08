@@ -91,11 +91,7 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 |✨|more coming soon...|
 |-|:-|
 
-## Development
-
-Contributions are most welcome! Please feel free to submit a Pull Request.
-
-#### Widget Structure
+### Widget Structure
 
 ```
 Widgets
@@ -116,7 +112,9 @@ WidgetView(
 )
 ```
 
-## Build from Source
+## Development
+
+Contributions are most welcome! Please feel free to submit a Pull Request.
 
 ### Install [Tuist](https://github.com/tuist/tuist)
 
@@ -125,21 +123,20 @@ brew tap tuist/tuist
 brew install --formula tuist
 ```
 
-#### Clone Repository
+### Clone Repository
 
 ```shell
 git clone https://github.com/navtoj/NotchBar.git
+cd NotchBar/src/
 ```
 
-#### Compile Source
+### Install Dependencies
 
 ```shell
-cd NotchBar/src/
-tuist install
-tuist build
+tuist install && tuist build
 ```
 
-#### Launch Xcode (Optional)
+### Launch Xcode (Optional)
 
 ```shell
 tuist generate
