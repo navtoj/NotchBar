@@ -1,6 +1,9 @@
 name: Release
 run-name: ${{ github.actor }} is running release actions.
 on:
+    push:
+        branches:
+            - Release-Action
     workflow_dispatch:
     release:
         types: [published]
