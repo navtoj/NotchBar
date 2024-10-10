@@ -17,11 +17,6 @@ jobs:
                       README.md
                   sparse-checkout-cone-mode: false
 
-            - name: List files in the repository
-              run: |
-                  echo "github.workspace = ${{ github.workspace }}"
-                  ls ${{ github.workspace }}
-            
             - name: Get Latest Release Download URL
               id: latest-release-download-url
               run: |                  
@@ -49,13 +44,14 @@ jobs:
                   # Save URL to Step Output
                   echo "value=$browser_download_url" >> "$GITHUB_OUTPUT"
 
-            - name: Debug
-              run: |
-                echo "The download url is ${{ steps.latest-release-download-url.outputs.value }}"
-
             - name: Update README.md
+              run: sed -i "s|https://[^ ]*NotchBar\.app\.zip|${{ steps.latest-release-download-url.outputs.value }}p|g" README.md
+              
+            - name: Commit Changes
               run: |
-                sed -i "s|https://[^ ]*NotchBar\.app\.zip|h${{ steps.latest-release-download-url.outputs.value }}p|g" README.md
-                cat README.md
+                  git config user.name "GitHub Action"
+                  git config user.email "NotchBar@noreply.github.com"
+                  git commit -a -m "Update download link in README.md to latest release."
+                  git push
 
             - run: echo "job.status = ${{ job.status }}"
