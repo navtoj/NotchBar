@@ -1,11 +1,8 @@
 name: Release
 on:
-    push:
-        branches:
-            - Release-Action
-    workflow_dispatch:
     release:
         types: [published]
+    workflow_dispatch:
 jobs:
     Release-Actions:
         runs-on: ubuntu-latest
@@ -19,7 +16,7 @@ jobs:
 
             - name: Get Latest Release Download URL
               id: latest-release-download-url
-              run: |                  
+              run: |
                   # Fetch Repository Releases
                   releases=$(curl --silent https://api.github.com/repos/navtoj/notchbar/releases)
 
@@ -28,11 +25,11 @@ jobs:
 
                     # get latest release
                     max_by(.created_at)
-                  
+
                     # filter asset files
                     | .assets
                     | map(select(.name == "NotchBar.app.zip"))
-                  
+
                     # get latest asset
                     | max_by(.created_at)
 
@@ -45,13 +42,14 @@ jobs:
                   echo "value=$browser_download_url" >> "$GITHUB_OUTPUT"
 
             - name: Update README.md
-              run: sed -i "s|https://[^ ]*NotchBar\.app\.zip|${{ steps.latest-release-download-url.outputs.value }}p|g" README.md
-              
-            - name: Commit Changes
-              run: |
-                  git config user.name "GitHub Action"
-                  git config user.email "NotchBar@noreply.github.com"
-                  git commit -a -m "Update download link in README.md to latest release."
-                  git push
+              run: sed -i "s|https://[^ ]*NotchBar\.app\.zip|${{ steps.latest-release-download-url.outputs.value }}|g" README.md
 
-            - run: echo "job.status = ${{ job.status }}"
+            - name: Update Repository
+              run: |
+                  # ensure changes exist
+                  if [ $(git status | grep --count modified) -eq 1 ]; then
+                    git config user.name "GitHub Action"
+                    git config user.email "NotchBar@noreply.github.com"
+                    git commit -a -m "Update download link in README.md to latest release." 
+                    git push
+                  fi
