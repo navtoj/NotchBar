@@ -1,5 +1,4 @@
 name: Release
-run-name: ${{ github.actor }} is running release actions.
 on:
     push:
         branches:
@@ -11,11 +10,6 @@ jobs:
     Release-Actions:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "github.event_name = ${{ github.event_name }}"
-            - run: echo "runner.os = ${{ runner.os }}"
-            - run: echo "github.ref = ${{ github.ref }}"
-            - run: echo "github.repository = ${{ github.repository }}"
-
             - name: Check out repository code
               uses: actions/checkout@v4
               with:
@@ -30,9 +24,7 @@ jobs:
             
             - name: Get Latest Release Download URL
               id: latest-release-download-url
-              run: |
-                  # echo "LATEST_RELEASE_DOWNLOAD_URL=$(jq -r 'max_by(.created_at) | .assets | map(select(.name == "NotchBar.app.zip")) | max_by(.created_at) | .browser_download_url' <<< $(curl --silent https://api.github.com/repos/navtoj/notchbar/releases))" >> "$GITHUB_OUTPUT"
-                  
+              run: |                  
                   # Fetch Repository Releases
                   releases=$(curl --silent https://api.github.com/repos/navtoj/notchbar/releases)
 
@@ -54,10 +46,16 @@ jobs:
 
                   ' <<< "$releases")
 
-                  # Save URL to GitHub Actions Output
-                  echo "LATEST_RELEASE_DOWNLOAD_URL=$browser_download_url" >> "$GITHUB_OUTPUT"
+                  # Save URL to Step Output
+                  echo "value=$browser_download_url" >> "$GITHUB_OUTPUT"
 
             - name: Debug
-              run: echo "The download url is ${{ steps.latest-release-download-url.outputs.LATEST_RELEASE_DOWNLOAD_URL }}"
+              run: |
+                echo "The download url is ${{ steps.latest-release-download-url.outputs.value }}"
+
+            - name: Update README.md
+              run: |
+                sed -i "s|https://[^ ]*NotchBar\.app\.zip|h${{ steps.latest-release-download-url.outputs.value }}p|g" README.md
+                cat README.md
 
             - run: echo "job.status = ${{ job.status }}"
