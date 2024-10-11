@@ -19,8 +19,7 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 > Requirements: macOS 14.5 or later
 
-<!-- 1. Download the [.app](https://github.com/navtoj/NotchBar/releases/latest/download/NotchBar.app.zip) from the [latest release](https://github.com/navtoj/NotchBar/releases/latest) on the [Releases](https://github.com/navtoj/NotchBar/releases) page. -->
-1. Download the `NotchBar.app.zip` from the [latest release](https://github.com/navtoj/NotchBar/releases/latest) assets.
+1. Download the [`NotchBar.app.zip`](https://github.com/navtoj/NotchBar/releases/download/0.0.2/NotchBar.app.zip) from the [Releases](https://github.com/navtoj/NotchBar/releases/latest) page.
 2. Unzip and drag the `NotchBar.app` to your **Applications** folder.
 3. Launch **NotchBar** from your Applications folder or Spotlight.
 

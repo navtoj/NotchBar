@@ -1,0 +1,63 @@
+name: Release
+on:
+    release:
+        types: [published]
+    workflow_dispatch:
+jobs:
+    Release-Actions:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Create GitHub App Token
+              uses: actions/create-github-app-token@v1.11.0
+              id: app-token
+              with:
+                  app-id: ${{ vars.ACTIONS_BYPASS_BOT_APP_ID }}
+                  private-key: ${{ secrets.ACTIONS_BYPASS_BOT_PRIVATE_KEY }}
+
+            - name: Clone Repository
+              uses: actions/checkout@v4
+              with:
+                  ref: main
+                  token: ${{ steps.app-token.outputs.token }}
+                  # persist-credentials: false
+                  sparse-checkout: README.md
+                  sparse-checkout-cone-mode: false
+
+            - name: Get Latest Release Download URL
+              id: latest-release-download-url
+              run: |
+                  # Fetch Repository Releases
+                  releases=$(curl --silent https://api.github.com/repos/navtoj/notchbar/releases)
+
+                  # Extract Download URL
+                  browser_download_url=$(jq -r '
+
+                    # get latest release
+                    max_by(.created_at)
+
+                    # filter asset files
+                    | .assets
+                    | map(select(.name == "NotchBar.app.zip"))
+
+                    # get latest asset
+                    | max_by(.created_at)
+
+                    # get download url
+                    | .browser_download_url
+
+                  ' <<< "$releases")
+
+                  # Save URL to Step Output
+                  echo "value=$browser_download_url" >> "$GITHUB_OUTPUT"
+
+            - name: Update README.md
+              run: sed -i "s|https://[^ ]*NotchBar\.app\.zip|${{ steps.latest-release-download-url.outputs.value }}|g" README.md
+
+            - name: Update Repository
+              run: |
+                  if [ $(git status | grep --count modified) -eq 1 ]; then
+                    git config user.name "github-actions[bot]"
+                    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                    git commit -a -m "Update download url to latest release."
+                    git push
+                  fi
