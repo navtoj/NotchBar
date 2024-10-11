@@ -154,7 +154,9 @@ This project is licensed under the [AGPLv3 License](LICENSE).
 
 [^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
 
-## Star History
+## Repo Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/1347103aebc5b2acfeec016a3534b3dc061e423d.svg "Repobeats Analytics Image")
 
 <a href="https://star-history.com/#navtoj/notchbar&Timeline">
  <picture>
