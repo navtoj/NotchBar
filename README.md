@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/dark.png" />
     <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/light.png" />
-    <img alt="The NotchBar app icon." src="_assets/icon/light.png" width=256 />
+    <img alt="The NotchBar app icon." src="_assets/icon/light.png" height=256 />
   </picture>
   <h1>NotchBar</h1>
 </div>
@@ -23,16 +23,14 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 2. Unzip and drag the `NotchBar.app` to your **Applications** folder.
 3. Launch **NotchBar** from your Applications folder or Spotlight.
 
-<!-- ![Install.dmg](_assets/install/dmg.png) -->
-
 > [!TIP]
-> ### Can't open `NotchBar.app`?
-> 
-> <img width="372" alt="Install Popup" src="_assets/install/popup.png">
-> 
-> **Right click** the `NotchBar` app and **left click** `Open`.[^1]
-> 
-> <img width="400" alt="Install Solution" src="_assets/install/solution.png">
+> ### Can't open `NotchBar.app`?[^1]
+> |Step 1️|Step 2️|Step 3️|
+> |:-|:-|:-|
+> |Click `Show in Finder`|_Right_ Click `NotchBar.app` → Click `Open`|Again, Click `Open`|
+> |<img width="260" src="_assets/install/solution.1.png" alt="Solution Step 1">|<img width="440" src="_assets/install/solution.2.png" alt="Solution Step 2">|<img width="205" src="_assets/install/solution.3.png" alt="Solution Step 3">|
+
+[^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
 
 ## Usage
 
@@ -151,8 +149,6 @@ This project is licensed under the [AGPLv3 License](LICENSE).
 - [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols) for safe usage of SF Symbols.
 - [LaunchAtLogin-Modern](https://github.com/sindresorhus/LaunchAtLogin-Modern) for launch at login functionality.
 - [Pow](https://github.com/EmergeTools/Pow) for SwiftUI effects.
-
-[^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
 
 ## Repo Stats
 
