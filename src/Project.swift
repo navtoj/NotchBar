@@ -16,6 +16,8 @@ let project = Project(
 			infoPlist: .extendingDefault(with: [
 				"LSUIElement": true,
 				"LSApplicationCategoryType": "public.app-category.productivity",
+				"CFBundleShortVersionString": "0.0.2", // Public
+				"CFBundleVersion": "0", // Internal
 			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],
