@@ -37,7 +37,7 @@ jobs:
 
                     # filter asset files
                     | .assets
-                    | map(select(.name == "NotchBar.app.zip"))
+                    | map(select(.name == "NotchBar.zip"))
 
                     # get latest asset
                     | max_by(.created_at)
@@ -51,7 +51,7 @@ jobs:
                   echo "value=$browser_download_url" >> "$GITHUB_OUTPUT"
 
             - name: Update README.md
-              run: sed -i "s|https://[^ ]*NotchBar\.app\.zip|${{ steps.latest-release-download-url.outputs.value }}|g" README.md
+              run: sed -i "s|https://[^ ]*NotchBar\.zip|${{ steps.latest-release-download-url.outputs.value }}|g" README.md
 
             - name: Update Repository
               run: |

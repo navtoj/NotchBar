@@ -19,18 +19,26 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 > Requirements: macOS 14.5 or later
 
-1. Download the [`NotchBar.app.zip`](https://github.com/navtoj/NotchBar/releases/download/0.0.2/NotchBar.app.zip) from the [Releases](https://github.com/navtoj/NotchBar/releases/latest) page.
+1. Download the [`NotchBar.zip`](https://github.com/navtoj/NotchBar/releases/download/0.0.2/NotchBar.zip) from the [Releases](https://github.com/navtoj/NotchBar/releases/latest) page.
 2. Unzip and drag the `NotchBar.app` to your **Applications** folder.
 3. Launch **NotchBar** from your Applications folder or Spotlight.
 
 > [!TIP]
-> ### Can't open `NotchBar.app`?[^1]
-> |Step 1️|Step 2️|Step 3️|
+> ### Can't open `NotchBar.app`?
+> |Step 1|Step 2|Step 3|
 > |:-|:-|:-|
 > |Click `Show in Finder`|_Right_ Click `NotchBar.app` → Click `Open`|Again, Click `Open`|
-> |<img width="260" src="_assets/install/solution.1.png" alt="Solution Step 1">|<img width="440" src="_assets/install/solution.2.png" alt="Solution Step 2">|<img width="205" src="_assets/install/solution.3.png" alt="Solution Step 3">|
+> |<img width="260" src="_assets/install/solution.1.0.png" alt="Solution 1.0">[^1]|<img width="440" src="_assets/install/solution.1.1.png" alt="Solution 1.1">|<img width="205" src="_assets/install/solution.1.2.png" alt="Solution 1.2">|
+> #### If `Show in Finder` button is not visible...
+> <img src="_assets/install/solution.2.0.png" alt="Solution 2.0">[^2]
+>
+> |Step 0|
+> |:-|
+> |Open `Terminal` → Run `chmod +x /Applications/NotchBar.app/Contents/MacOS/NotchBar`|
+> |<img width="2091.737704918" src="_assets/install/solution.2.1.png" alt="Solution 2.1">|
 
 [^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
+[^2]: This popup appears because the macOS `Archive Utility` breaks file permissions for the executable within the `.app` bundle.
 
 ## Usage
 
