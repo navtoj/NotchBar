@@ -63,28 +63,32 @@ struct RoundedCorners: ViewModifier {
 			.clipShape(.rect(cornerRadius: radius, style: type))
 	}
 }
-extension View {
-	func roundedCorners(_ radius: CGFloat = 10, type: RoundedCornerStyle = .continuous) -> some View {
-		modifier(RoundedCorners(radius: radius, type: type))
-	}
-}
-
 struct RoundedBorder: ViewModifier {
 	let radius: CGFloat
+	let type: RoundedCornerStyle
 	let width: CGFloat
 	let color: Color
 
 	func body(content: Content) -> some View {
 		content
-			.roundedCorners(radius)
+			.roundedCorners(radius, type: type)
 			.padding(width)
 			.background(color)
-			.roundedCorners(radius + width)
+			.roundedCorners(radius + width, type: type)
 	}
 }
 extension View {
-	func roundedBorder(radius: CGFloat = 10, width: CGFloat = 5, color: Color = .black) -> some View {
-		modifier(RoundedBorder(radius: radius, width: width, color: color))
+	func roundedCorners(_ radius: CGFloat = 10, type: RoundedCornerStyle = .continuous) -> some View {
+		modifier(RoundedCorners(radius: radius, type: type))
+	}
+	func roundedCorners(
+		_ radius: CGFloat = 10,
+		type: RoundedCornerStyle = .continuous,
+		width: CGFloat = 1,
+		color: Color = .black
+	) -> some View {
+		modifier(RoundedBorder(radius: radius, type: type, width: width, color: color)
+		)
 	}
 }
 

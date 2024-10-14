@@ -21,8 +21,6 @@ struct Welcome: View {
 				.border(.blue)
 			}
 			.padding(size)
-			.background(.background)
-			.roundedCorners()
 	}
 }
 

@@ -60,7 +60,7 @@ struct MediaSecondary: View {
 			}
 		}
 		.frame(width: controls.width)
-		.roundedBorder(radius: 5, width: 4)
+		.roundedCorners(5, width: 4)
     }
 }
 

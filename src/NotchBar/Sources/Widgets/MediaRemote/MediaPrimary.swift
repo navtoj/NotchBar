@@ -40,24 +40,41 @@ struct MediaPrimary: View {
 						// Fallback Symbol
 
 						HStack(spacing: 0) {
-							Image(systemSymbol: .musicNote)
-								.frame(width: size - 1)
+
+							if isHovered {
+
+								// Play/Pause Button
+
+								let isLightBackground = false
+
+								Image(systemSymbol: media.isPlaying ? .pauseFill : .playFill)
+									.foregroundStyle(isLightBackground ? .black : .white)
+									.contentTransition(.symbolEffect)
+									.frame(width: size - 1)
+							} else {
+
+								Image(systemSymbol: .musicNote)
+									.frame(width: size - 1)
+							}
 							Divider()
 						}
 					}
 				}
+				.contentShape(.rect)
 				.onTapGesture(count: 1) {
 					media.command(.TogglePlayPause)
 				}
 
 				// Artist
 
-				Text(track.artist)
-				Divider()
+				if !track.artist.isEmpty {
+					Text(track.artist)
+					Divider()
+				}
 
 				// Title
 
-				Text(track.title)
+				Text(track.title.isEmpty ? "Unknown" : track.title)
 					.lineLimit(1)
 					.truncationMode(.tail)
 					.foregroundStyle(media.isPlaying ? .primary : .secondary)

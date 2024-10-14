@@ -107,13 +107,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 			return print("Status Menu Click Event Not Found.")
 		}
 
-		// handle left click
+		// handle right click
 
-		guard event.type != NSEvent.EventType.leftMouseUp else {
+		guard event.type != NSEvent.EventType.rightMouseUp else {
 			return AppState.shared.toggleSettings()
 		}
 
-		// handle right click
+		// handle left click
 
 		statusItem.menu = statusItemMenu
 

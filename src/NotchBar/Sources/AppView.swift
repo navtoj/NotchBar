@@ -13,15 +13,21 @@ struct AppView: View {
 
 			// Notch Bar
 
-			HStack(spacing: notch.width) { // TODO: keep widgets within bounds w/ ViewThatFits?
+			HStack(spacing: notch.width) {
+				// TODO: keep widgets within bounds w/ ViewThatFits?
 
 				// Widgets - Left
 
 				HStack {
 					WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
-//					WidgetView(primary: PrimaryView.init, secondary: SecondaryView.init)
 				}
+#if DEBUG
+				.border(.red)
+#endif
 				.frame(maxWidth: notch.minX, alignment: .leading)
+#if DEBUG
+				.border(.blue)
+#endif
 
 				// Widgets - Right
 
@@ -36,26 +42,51 @@ struct AppView: View {
 					.frame(maxWidth: .infinity, alignment: .leading)
 					WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
 				}
+#if DEBUG
+				.border(.red)
+#endif
 				.frame(maxWidth: notch.minX, alignment: .trailing)
+#if DEBUG
+				.border(.blue)
+#endif
 			}
 			.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn?.notch?.height ?? 31.5)
 			.padding(.horizontal)
 			.background(.black)
-			.zIndex(1) // otherwise, secondary closes on hover
-			.environment(\.colorScheme, .dark)
 
 			// Top Screen Corners
 
-			Color.black
+			Rectangle()
+#if DEBUG
+				.fill(.red)
+#else
+				.fill(.black)
+#endif
 				.frame(height: 10)
 				.clipShape(InvertedBottomCorners(radius: 10))
 
 			// Window View
 
 			state.window?.view
+				.background(.background)
+				.roundedCorners(color: .gray.opacity(0.4))
+				.shadow(color: .black, radius: 20)
+				.transition(
+					.blurReplace
+						.animation(.default)
+				)
+//				.border(.red)
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
+#if DEBUG
+				.border(.blue)
+#endif
+				.padding()
+				// if inverted top corners
+				.padding(.horizontal, 10)
+				.padding(.bottom, 10)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+		.environment(\.colorScheme, .dark)
 	}
 }
 
