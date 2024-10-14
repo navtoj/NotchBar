@@ -21,7 +21,7 @@ struct SecondaryView: View {
 			AppState.shared.toggleSettings()
 			expand = false
 		}
-		.roundedBorder(radius: 5, width: 4)
+		.roundedCorners(5, width: 4)
 	}
 }
 

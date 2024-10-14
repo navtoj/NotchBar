@@ -17,7 +17,7 @@ let project = Project(
 				"LSUIElement": true,
 				"LSApplicationCategoryType": "public.app-category.productivity",
 				"CFBundleShortVersionString": "0.0.2", // Public
-				"CFBundleVersion": "0", // Internal
+				"CFBundleVersion": "0.0.2.1", // Internal
 			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],

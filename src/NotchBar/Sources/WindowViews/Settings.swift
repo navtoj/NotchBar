@@ -4,17 +4,46 @@ struct Settings: View {
 	var body: some View {
 		VStack(spacing: 0) {
 
-			Text("Settings")
-				.font(.headline)
-				.padding()
+			// Title Bar
 
-			Button("Quit App", role: .destructive) {
-				NSApp.terminate(self)
+			HStack {
+
+				// Window Title
+
+				Text("Settings")
+					.font(.title)
+
+				Spacer()
+
+				// Close Button
+
+				Button(action: {
+					AppState.shared.toggleSettings()
+				}) {
+					Image(systemSymbol: .xmark)
+						.padding(.vertical, 5)
+				}
 			}
+			.padding()
+			.frame(maxWidth: .infinity, alignment: .leading)
+
+			// Divider
+
+			Divider()
+
+			// Content
+
+			VStack {
+				// TODO: configure widgets: visibility, order, etc.
+
+				Button("Quit App", role: .destructive) {
+					NSApp.terminate(self)
+				}
+			}
+			.padding()
+			.frame(maxHeight: .infinity)
 		}
-		.padding()
-		.background(.background)
-		.roundedCorners()
+		.frame(maxWidth: 300, maxHeight: 300)
 	}
 }
 
