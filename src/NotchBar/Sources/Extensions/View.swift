@@ -39,9 +39,7 @@ struct SizeReader: ViewModifier {
 				GeometryReader { proxy in
 					Color.clear
 						.onChange(of: proxy.size, initial: true) { old, new  in
-#if DEBUG
 //							print("size", old, "→", new)
-#endif
 							size = new
 						}
 				}

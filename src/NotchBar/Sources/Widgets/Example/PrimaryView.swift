@@ -17,9 +17,6 @@ struct PrimaryView: View {
 				.fixedSize()
 				.contentTransition(.symbolEffect)
 				.onTapGesture {
-#if DEBUG
-					print("Tap Symbol")
-#endif
 					symbolChange.toggle()
 				}
 		}
@@ -31,9 +28,6 @@ struct PrimaryView: View {
 		// tappable
 		.contentShape(.capsule(style: .continuous))
 		.onTapGesture {
-#if DEBUG
-			print("Tap Primary")
-#endif
 			expand.toggle()
 		}
 	}

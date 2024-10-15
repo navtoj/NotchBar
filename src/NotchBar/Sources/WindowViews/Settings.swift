@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct Settings: View {
+	@State var state = AppState.shared
+
 	var body: some View {
 		VStack(spacing: 0) {
 
@@ -18,7 +20,7 @@ struct Settings: View {
 				// Close Button
 
 				Button(action: {
-					AppState.shared.toggleSettings()
+					state.removeCard()
 				}) {
 					Image(systemSymbol: .xmark)
 						.padding(.vertical, 5)

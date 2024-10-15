@@ -13,23 +13,11 @@ final class AppWindow: NSWindow {
 	// disallow direct instantiation
 
 	private init() {
-#if DEBUG
-		print("AppWindow init")
-#endif
-
-		// make sure built-in screen is available
-
-		guard let screen = NSScreen.builtIn else {
-
-			// quit application
-
-			fatalError("Built-in screen not found.")
-		}
 
 		// create window
 
 		super.init(
-			contentRect: screen.frame,
+			contentRect: NSScreen.builtIn.frame,
 			styleMask: .borderless,
 			backing: .buffered,
 			defer: false
@@ -59,7 +47,6 @@ final class AppWindow: NSWindow {
 
 		addNotificationObserver(to: &notifications, for: NSWindow.didMoveNotification) { _ in self.resetWindowFrame() }
 		addNotificationObserver(to: &notifications, for: NSWindow.didResizeNotification) { _ in self.resetWindowFrame() }
-		addNotificationObserver(to: &notifications, for: NSApplication.didChangeScreenParametersNotification)
 	}
 
 	deinit {
@@ -79,24 +66,6 @@ final class AppWindow: NSWindow {
 
 	private func resetWindowFrame() {
 
-		// ensure built-in screen is available
-
-		guard let screen = NSScreen.builtIn else {
-
-			// quit application
-
-			return NSApp.terminate(self)
-		}
-
-		// ensure notch area is available
-
-		guard screen.notch != nil else {
-
-			// quit application
-
-			return NSApp.terminate(self)
-		}
-
 		// get window values
 
 		let width = self.frame.width
@@ -106,15 +75,12 @@ final class AppWindow: NSWindow {
 
 		// get screen values
 
-		let size = screen.frame.size
-		let origin = screen.frame.origin
+		let size = NSScreen.builtIn.frame.size
+		let origin = NSScreen.builtIn.frame.origin
 
 		// check window size
 
 		if width != size.width || height != size.height {
-#if DEBUG
-			print("Window size changed.")
-#endif
 
 			// reset window size
 
@@ -124,9 +90,6 @@ final class AppWindow: NSWindow {
 		// check window position
 
 		if x != origin.x || y != origin.y {
-#if DEBUG
-			print("Window position changed.")
-#endif
 
 			// reset window position
 
