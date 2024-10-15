@@ -108,12 +108,14 @@ Widgets
 
 ```swift
 WidgetView(
-	
-	// Required – Always Visible in Notchbar
-	primary: PrimaryView.init,
 
-	// Optional – Dropdown Card on Tap/Hover
-	secondary: SecondaryView.init
+    // Required – Always Visible in Notchbar
+
+    primary: PrimaryView.init,
+
+    // Optional – Dropdown Card on Tap/Hover
+
+    secondary: SecondaryView.init
 )
 ```
 
@@ -160,7 +162,7 @@ This project is licensed under the [AGPLv3 License](LICENSE).
 
 ## Repo Stats
 
-![Alt](https://repobeats.axiom.co/api/embed/1347103aebc5b2acfeec016a3534b3dc061e423d.svg "Repobeats Analytics Image")
+![Repobeats Analytics Image](https://repobeats.axiom.co/api/embed/1347103aebc5b2acfeec016a3534b3dc061e423d.svg)
 
 <a href="https://star-history.com/#navtoj/notchbar&Timeline">
  <picture>

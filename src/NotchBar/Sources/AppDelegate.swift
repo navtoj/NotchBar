@@ -31,9 +31,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// app functions
 
 	func applicationWillFinishLaunching(_ notification: Notification) {
-#if DEBUG
-		print("applicationWillFinishLaunching")
-#endif
 
 		// prevent focus
 
@@ -80,20 +77,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
-#if DEBUG
-		print("applicationDidFinishLaunching")
-#endif
 
 		// show window
 
 		window.orderFrontRegardless()
 	}
 
-	func applicationWillTerminate(_ notification: Notification) {
-#if DEBUG
-		print("applicationWillTerminate")
-#endif
-	}
+	func applicationWillTerminate(_ notification: Notification) {}
 
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { false }
 
@@ -110,7 +100,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		// handle right click
 
 		guard event.type != NSEvent.EventType.rightMouseUp else {
-			return AppState.shared.toggleSettings()
+			return AppState.shared.toggleCard(.settings)
 		}
 
 		// handle left click

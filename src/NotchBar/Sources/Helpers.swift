@@ -6,33 +6,39 @@ import SwiftUICore
 func addNotificationObserver(
 	to observers: inout [NSObjectProtocol],
 	for name: NSNotification.Name,
-	action: @escaping (Notification) -> Void = { _ in }
+	action: ((Notification) -> Void)? = nil
 ) {
 	observers.append(NotificationCenter.default.addObserver(
 		forName: name,
 		object: nil,
 		queue: nil
 	) { notification in
+		if let run = action {
+			run(notification)
+		} else {
 #if DEBUG
-		print(">", notification.name.rawValue)
+			print(">", notification.name.rawValue)
 #endif
-		action(notification)
+		}
 	})
 }
 
 func addUserDefaultsObserver(
 	to observers: inout [NSKeyValueObservation],
 	for keyPath: KeyPath<UserDefaults, Bool>,
-	action: @escaping (UserDefaults, NSKeyValueObservedChange<Bool>) -> Void = { _, _ in }
+	action: ((UserDefaults, NSKeyValueObservedChange<Bool>) -> Void)? = nil
 ) {
 	observers.append(UserDefaults.standard.observe(
 		keyPath,
 		options: [.initial, .new],
 		changeHandler: { defaults, change in
+			if let run = action {
+				run(defaults, change)
+			} else {
 #if DEBUG
-			print(">", keyPath.description, change.newValue ?? "nil")
+				print(">", keyPath.description, change.newValue ?? "nil")
 #endif
-			action(defaults, change)
+			}
 		}
 	))
 }

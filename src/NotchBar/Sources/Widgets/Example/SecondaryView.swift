@@ -15,10 +15,7 @@ struct SecondaryView: View {
 		.padding(5)
 		.background(.background)
 		.onTapGesture {
-#if DEBUG
-			print("Tap Secondary")
-#endif
-			AppState.shared.toggleSettings()
+			AppState.shared.toggleCard(.settings)
 			expand = false
 		}
 		.roundedCorners(5, width: 4)

@@ -45,7 +45,7 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 							guard alignment == .center else { return }
 
 							// get screen bounds
-							guard let bounds = NSScreen.builtIn?.frame else { fatalError("Built-in screen not found.") }
+							let bounds = NSScreen.builtIn.frame
 
 							// check if out of bounds
 							if frame.minX < 0 {
