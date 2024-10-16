@@ -3,6 +3,9 @@ import SwiftUI
 // TODO: hide when under menu bar
 
 struct AppView: View {
+
+	@State var size: CGSize = .zero
+
 	var body: some View {
 
 		// App Container
@@ -70,22 +73,78 @@ struct AppView: View {
 
 			// Window Card
 
-			AppState.shared.card?.view
-				.background(.background)
-				.roundedCorners(color: .gray.opacity(0.4))
-				.modifier(DynamicCardShadow())
-				.transition(
-					.blurReplace
-						.animation(.default)
-				)
-				.frame(maxWidth: .infinity, maxHeight: .infinity)
+			Group {
+
+				// Notch Requirement Override
+
+				if NSScreen.builtIn.notch == nil {
+					HStack {
+						HStack(spacing: 0) {
+							Text("NotchBar")
+								.bold()
+							Text(" requires a screen with a notch.")
+						}
+						Button("Quit App", role: .destructive) {
+							NSApp.terminate(self)
+						}
+					}
+					.padding()
+				} else if !SystemState.shared.isMenuBarHidden {
+
+					// Menu Bar Hidden Override
+
+					VStack {
+						HStack {
+							HStack(spacing: 0) {
+								Text("NotchBar")
+									.bold()
+								Text(" is hidden under the macOS menu bar.")
+									.frame(maxWidth: .infinity, alignment: .leading)
+							}
+							Button("Change Setting", role: .destructive) {
+								if let url = URL(string: "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension") {
+									NSWorkspace.shared.open(url)
+								}
+							}
+						}
+						.frame(maxWidth: size.width)
+						HStack {
+							Text("Automatically hide and show the menu bar")
+								.frame(maxWidth: .infinity, alignment: .leading)
+							HStack(spacing: 4) {
+								Text(SystemState.shared.menuBarAutoHide.rawValue)
+								Image(systemSymbol: .chevronUpChevronDown)
+									.padding(2)
+									.background(.quaternary.opacity(0.6))
+									.roundedCorners(4)
+							}
+						}
+						.padding(.horizontal, 10)
+						.frame(width: 458, height: 36)
+						.background(.quinary)
+						.roundedCorners()
+						.onSizeChange(sync: $size)
+					}
+					.padding()
+				} else {
+					AppState.shared.card?.view
+				}
+			}
+			.background(.background)
+			.roundedCorners(color: .gray.opacity(0.4))
+			.modifier(DynamicCardShadow())
+			.transition(
+				.blurReplace
+					.animation(.default)
+			)
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 #if DEBUG
-				.border(.blue)
+			.border(.blue)
 #endif
-				.padding()
-				// TODO: only if inverted top corners
-				.padding(.horizontal, 10)
-				.padding(.bottom, 10)
+			.padding()
+			// TODO: only if inverted top corners
+			.padding(.horizontal, 10)
+			.padding(.bottom, 10)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 	}

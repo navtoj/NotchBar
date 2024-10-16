@@ -1,4 +1,5 @@
 import AppKit
+import Defaults
 import SwiftUICore
 
 @Observable
@@ -23,11 +24,11 @@ final class AppState {
 		}
 	}
 
-	private(set) var card: WindowCard? // = .settings
-	func addCard(_ card: WindowCard) {
+	private(set) var card: WindowCard? = Defaults[.skipWelcome] ? nil : .welcome
+	func showCard(_ card: WindowCard) {
 		self.card = card
 	}
-	func removeCard() {
+	func hideCard() {
 		card = nil
 	}
 	func toggleCard(_ card: WindowCard) {

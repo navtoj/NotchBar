@@ -1,51 +1,48 @@
 import SwiftUI
+import LaunchAtLogin
 
 struct Settings: View {
-	@State var state = AppState.shared
+	@State var size: CGSize = .zero
 
 	var body: some View {
-		VStack(spacing: 0) {
+		VStack(alignment: .leading, spacing: 0) {
 
 			// Title Bar
 
-			HStack {
+			HStack(spacing: 10) {
+
+				// Close Button
+
+				Button(action: {
+					AppState.shared.hideCard()
+				}) {
+					Image(systemSymbol: .xmark)
+						.padding(.vertical, 5)
+				}
 
 				// Window Title
 
 				Text("Settings")
 					.font(.title)
-
-				Spacer()
-
-				// Close Button
-
-				Button(action: {
-					state.removeCard()
-				}) {
-					Image(systemSymbol: .xmark)
-						.padding(.vertical, 5)
-				}
 			}
-			.padding()
-			.frame(maxWidth: .infinity, alignment: .leading)
+			.padding(10)
+			.onSizeChange(sync: $size, if: .max)
 
 			// Divider
 
 			Divider()
+				.frame(width: size.width)
 
 			// Content
 
 			VStack {
 				// TODO: configure widgets: visibility, order, etc.
 
-				Button("Quit App", role: .destructive) {
-					NSApp.terminate(self)
-				}
+				LaunchAtLogin.Toggle()
 			}
 			.padding()
-			.frame(maxHeight: .infinity)
+			.onSizeChange(sync: $size, if: .max)
 		}
-		.frame(maxWidth: 300, maxHeight: 300)
 	}
 }
 

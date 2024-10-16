@@ -30,8 +30,13 @@ extension View {
 	}
 }
 
+enum SizeConstraint {
+	case min
+	case max
+}
 struct SizeReader: ViewModifier {
 	@Binding var size: CGSize
+	fileprivate let condition: SizeConstraint?
 
 	func body(content: Content) -> some View {
 		content
@@ -40,15 +45,28 @@ struct SizeReader: ViewModifier {
 					Color.clear
 						.onChange(of: proxy.size, initial: true) { old, new  in
 //							print("size", old, "→", new)
-							size = new
+							switch condition {
+								case .min:
+									size = CGSize(
+										width: min(size.width, new.width),
+										height: min(size.height, new.height)
+									)
+								case .max:
+									size = CGSize(
+										width: max(size.width, new.width),
+										height: max(size.height, new.height)
+									)
+								case nil:
+									size = new
+							}
 						}
 				}
 			}
 	}
 }
 extension View {
-	func onSizeChange(sync size: Binding<CGSize>) -> some View {
-		modifier(SizeReader(size: size))
+	func onSizeChange(sync size: Binding<CGSize>, if condition: SizeConstraint? = .none) -> some View {
+		modifier(SizeReader(size: size, condition: condition))
 	}
 }
 

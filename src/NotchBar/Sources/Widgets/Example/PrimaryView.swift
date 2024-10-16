@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct PrimaryView: View {
-	private let state = AppState.shared
-
 	@Binding var expand: Bool
 
 	@State private var symbolChange = false
