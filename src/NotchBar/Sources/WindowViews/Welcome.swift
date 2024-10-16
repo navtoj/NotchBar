@@ -1,33 +1,36 @@
 import SwiftUI
+import Defaults
 
 struct Welcome: View {
-	@State var state = SystemState.shared
+	@State var systemState = SystemState.shared
 
-	let size: CGFloat = 200
+	@State var size: CGSize = .zero
 
 	var body: some View {
 		VStack {
-			// TODO: show info to user to help setup
-			Text("menuBarAutoHide: " + state.menuBarAutoHide.rawValue)
-			Text("isMenuBarHidden: " + state.isMenuBarHidden.description)
 
-			Rectangle()
-				.fill(.foreground)
-				.frame(width: size, height: size)
-				.clipShape(RoundCornersInvertedTop(radius: size / 2))
-				.border(.green)
-				.overlay {
-					ZStack {
-						Rectangle()
-							.fill(.red)
-							.frame(width: size * 1.5, height: 1)
-						Rectangle()
-							.fill(.red)
-							.frame(width: 1, height: size * 1.5)
-					}
-					.border(.blue)
-				}
-				.padding(size)
+			// Title Bar
+
+			HStack(spacing: 0) {
+				Text("Welcome to ")
+					.foregroundStyle(.secondary)
+
+				Text("NotchBar")
+			}
+			.font(.title)
+			.bold()
+			.onSizeChange(sync: $size, if: .max)
+
+			Divider()
+				.frame(maxWidth: size.width)
+				.padding(.bottom, 5)
+			
+			Text("Tap the 􀫸 status item for settings.")
+				.onSizeChange(sync: $size, if: .max)
+		}
+		.padding()
+		.onDisappear {
+			Defaults[.skipWelcome] = true
 		}
 	}
 }

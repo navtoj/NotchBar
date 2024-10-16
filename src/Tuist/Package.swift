@@ -21,5 +21,6 @@ let package = Package(
 		.package(url: "https://github.com/sindresorhus/LaunchAtLogin-Modern", .upToNextMajor(from: "1.1.0")),
 		.package(url: "https://github.com/EmergeTools/Pow", .upToNextMajor(from: "1.0.4")),
 		.package(url: "https://github.com/Kyome22/SystemInfoKit", .upToNextMajor(from: "3.2.0")),
+		.package(url: "https://github.com/sindresorhus/Defaults", .upToNextMajor(from: "8.2.0")),
 	]
 )

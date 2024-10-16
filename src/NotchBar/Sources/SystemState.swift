@@ -12,8 +12,8 @@ final class SystemState {
 
 	// state properties
 
-	private(set) var menuBarAutoHide = UserDefaults.standard.menuBarAutoHide
 	private(set) var isMenuBarHidden = NSScreen.builtIn.isMenuBarHidden
+	private(set) var menuBarAutoHide = UserDefaults.standard.menuBarAutoHide
 
 	// hold observers for deinit
 

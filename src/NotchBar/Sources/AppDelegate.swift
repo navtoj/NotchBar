@@ -1,6 +1,11 @@
 import AppKit
 import SFSafeSymbols
 import LaunchAtLogin
+import Defaults
+
+extension Defaults.Keys {
+	static let skipWelcome = Key<Bool>("skipWelcome", default: false)
+}
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -19,14 +24,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// create status menu
 
 	private lazy var statusItemMenu = NSMenu()
-
-	// create status menu items
-
-	private lazy var launchAtLogin = NSMenuItem(
-		title: "Launch at Login",
-		action: #selector(toggleLaunchAtLogin),
-		keyEquivalent: "l"
-	)
 
 	// app functions
 
@@ -53,21 +50,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 		// configure status menu
 
-#if DEBUG
 		statusItemMenu.addItem(
-			withTitle: "Debug Mode",
-			action: nil,
-			keyEquivalent: ""
+			withTitle: "Check for Updates...",
+			action: #selector(openGithub),
+			keyEquivalent: "u"
 		)
-		statusItemMenu.items.first?.isEnabled = false
 
 		statusItemMenu.addItem(.separator())
-#endif
 
-		statusItemMenu.addItem(launchAtLogin)
-		launchAtLogin.state = LaunchAtLogin.isEnabled ? .on : .off
-
-		statusItemMenu.addItem(.separator())
+		if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+		   let bundle = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+			statusItemMenu.addItem(
+				withTitle: version + "." + bundle,
+//				action: #selector(NSApp.orderFrontStandardAboutPanel(_:)),
+				action: nil,
+				keyEquivalent: ""
+			)
+		}
 
 		statusItemMenu.addItem(
 			withTitle: "Quit NotchBar",
@@ -94,26 +93,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		// get current event
 
 		guard let event = NSApp.currentEvent else {
-			return print("Status Menu Click Event Not Found.")
+			return print("Status Menu Event Not Found.")
 		}
 
-		// handle right click
+		// handle event
 
-		guard event.type != NSEvent.EventType.rightMouseUp else {
-			return AppState.shared.toggleCard(.settings)
+		switch event.type {
+			case .leftMouseUp:
+				AppState.shared.toggleCard(.settings)
+
+			case .rightMouseUp:
+				statusItem.menu = statusItemMenu
+				statusItem.button?.performClick(nil)
+				statusItem.menu = nil
+
+			default:
+				print("> Invalid Event Type")
 		}
-
-		// handle left click
-
-		statusItem.menu = statusItemMenu
-
-		statusItem.button?.performClick(nil)
-
-		statusItem.menu = nil
 	}
 
-	@objc private func toggleLaunchAtLogin() {
-		LaunchAtLogin.isEnabled.toggle()
-		launchAtLogin.state = LaunchAtLogin.isEnabled ? .on : .off
+	@objc func openGithub() {
+		if let url = URL(string: "https://github.com/navtoj/NotchBar/releases") {
+			NSWorkspace.shared.open(url)
+		} else { print("Error: Invalid GitHub URL") }
 	}
 }
