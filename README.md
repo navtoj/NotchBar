@@ -25,11 +25,14 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 > [!TIP]
 > ### Can't open `NotchBar.app`?
+<details>
+<summary>Use this quick workaround.</summary><br>
+
 > |Step 1|Step 2|Step 3|
 > |:-|:-|:-|
 > |Click `Show in Finder`|_Right_ Click `NotchBar.app` → Click `Open`|Again, Click `Open`|
 > |<img width="260" src="_assets/install/solution.1.0.png" alt="Solution 1.0">[^1]|<img width="440" src="_assets/install/solution.1.1.png" alt="Solution 1.1">|<img width="205" src="_assets/install/solution.1.2.png" alt="Solution 1.2">|
-> #### If `Show in Finder` button is not visible...
+> #### If the `Show in Finder` button is not visible...
 > <img src="_assets/install/solution.2.0.png" alt="Solution 2.0">[^2]
 >
 > |Step 0|
@@ -39,6 +42,7 @@ NotchBar is a macOS app designed to utilize the empty space around the notch.
 
 [^1]: This popup appears because Apple requires a **CAD $119** yearly subscription to remove it.
 [^2]: This popup appears because the macOS `Archive Utility` breaks file permissions for the executable within the `.app` bundle.
+</details>
 
 ## Usage
 
@@ -50,12 +54,14 @@ A _sparkle_ icon will also be shown in the menu bar for important actions.
 
 > [!TIP]
 > ### Can't see the `NotchBar`?
-> Make sure it's not being covered by the macOS menu bar.
-> 
-> **Option 1 —** Set **`Displays have separate Spaces`** option to **`Off`**
-> <img alt="Spaces Setting" src="_assets/usage/settingsSpaces.png">
-> <br>**Option 2 —** Set **`Automatically hide and show the menu bar`** option to **`Always`**
+<details>
+<summary>It might be covered by the macOS menu bar.</summary><br>
+
+> **Option 1 —** Set **`Automatically hide and show the menu bar`** option to **`Always`**
 > <img alt="Menu Bar Setting" src="_assets/usage/settingsMenuBar.png">
+> <br>**Option 2 —** Set **`Displays have separate Spaces`** option to **`Off`**
+> <img alt="Spaces Setting" src="_assets/usage/settingsSpaces.png">
+</details>
 
 ## Widgets
 
