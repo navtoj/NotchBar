@@ -35,23 +35,33 @@ struct AppView: View {
 					// Widgets - Right
 
 					HStack {
+						WidgetView(
+							primary: MediaPrimary.init,
+							secondary: MediaSecondary.init,
+							overlay: .leading
+						)
 						HStack {
-							WidgetView(
-								primary: MediaPrimary.init,
-								secondary: MediaSecondary.init,
-								overlay: .leading
-							)
+
+							// Todo Widget Override
+
+							if !AppState.shared.todo.isEmpty {
+								Text(AppState.shared.todo)
+									.lineLimit(1)
+							} else {
+								WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
+							}
 						}
-						.frame(maxWidth: .infinity, alignment: .leading)
-						WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
+#if DEBUG
+						.border(.green)
+#endif
+						.frame(maxWidth: .infinity, alignment: .trailing)
+#if DEBUG
+						.border(.yellow)
+#endif
 					}
-#if DEBUG
-					.border(.red)
-#endif
-					.frame(maxWidth: notch.minX, alignment: .trailing)
-#if DEBUG
-					.border(.blue)
-#endif
+//					.border(.red)
+					.frame(maxWidth: notch.minX, alignment: .leading)
+//					.border(.blue)
 				}
 				.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn.notch?.height ?? 31.5)
 				.padding(.horizontal)
