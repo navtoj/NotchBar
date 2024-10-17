@@ -11,13 +11,20 @@ let project = Project(
 			name: "NotchBar",
 			destinations: .macOS,
 			product: .app,
-			bundleId: "com.navtoj.NotchBar",
+			bundleId: "com.navtoj.notchbar",
 			deploymentTargets: .macOS("14.6.1"),
 			infoPlist: .extendingDefault(with: [
 				"LSUIElement": true,
 				"LSApplicationCategoryType": "public.app-category.productivity",
 				"CFBundleShortVersionString": "0.0.3", // Public
-				"CFBundleVersion": "0", // Internal
+				"CFBundleVersion": "1", // Internal
+				"CFBundleURLTypes": .array([
+					.dictionary([
+						"CFBundleURLName": .string("com.navtoj.notchbar"),
+						"CFBundleURLSchemes": .array(["notchbar"]),
+						"CFBundleTypeRole": .string("Viewer"),
+					]),
+				]),
 			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],
