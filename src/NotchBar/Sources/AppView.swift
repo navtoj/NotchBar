@@ -48,7 +48,11 @@ struct AppView: View {
 								Text(AppState.shared.todo)
 									.lineLimit(1)
 							} else {
-								WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
+								WidgetView(
+									primary: ActiveAppPrimary.init,
+									secondary: ActiveAppSecondary.init,
+									overlay: .trailing
+								)
 							}
 						}
 #if DEBUG

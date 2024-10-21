@@ -7,7 +7,7 @@ struct ActiveAppPrimary: View {
 
 //	@State private var appName: CGSize = .zero
 	var body: some View {
-		if let app = data.activeApp {
+		if let app = data.app {
 			HStack {
 				Text(app.localizedName ?? "Unknown")
 					.id(app)
@@ -30,6 +30,9 @@ struct ActiveAppPrimary: View {
 			.clipShape(.capsule(style: .continuous))
 			.animation(.movingParts.overshoot, value: app)
 			.padding(.bottom, 2)
+			.onTapGesture {
+				expand.toggle()
+			}
 		}
 	}
 }

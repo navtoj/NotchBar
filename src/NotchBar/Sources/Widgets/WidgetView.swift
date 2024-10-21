@@ -10,15 +10,17 @@ struct WidgetView<Primary: View, Secondary: View>: View {
 	init(
 		primary: @escaping (Binding<Bool>) -> Primary,
 		secondary: ((Binding<Bool>) -> Secondary)? = nil,
-		overlay alignment: HorizontalAlignment = .center
+		overlay alignment: HorizontalAlignment = .center,
+		expand: Bool = false
 	) {
 		self.primary = primary
 		self.secondary = secondary
 		self.alignment = alignment
+		self.expand = expand
 	}
 
 	@State private var alignment: HorizontalAlignment
-	@State private var expand = false
+	@State private var expand: Bool
 
 	@State private var hovering = false
 	var body: some View {

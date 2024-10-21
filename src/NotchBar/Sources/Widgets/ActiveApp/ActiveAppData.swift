@@ -3,10 +3,18 @@ import AppKit
 @Observable final class ActiveAppData {
 	static let shared = ActiveAppData()
 	
-	private(set) var activeApp = NSWorkspace.shared.frontmostApplication
-	
+	private(set) var app: NSRunningApplication?
+	private(set) var menu: [MenuItem]?
+
 	private init() {
-		
+
+		// Initial Values
+
+		if let app = NSWorkspace.shared.frontmostApplication {
+			self.app = app
+			menu = getMenu(of: app)
+		}
+
 		// Track Active App
 		
 		NSWorkspace.shared.notificationCenter.addObserver(
@@ -34,6 +42,7 @@ import AppKit
 			return print("Failed to get NSRunningApplication.")
 		}
 		
-		self.activeApp = app
+		self.app = app
+		self.menu = getMenu(of: app)
 	}
 }

@@ -44,7 +44,9 @@ struct SizeReader: ViewModifier {
 				GeometryReader { proxy in
 					Color.clear
 						.onChange(of: proxy.size, initial: true) { old, new  in
-//							print("size", old, "→", new)
+#if DEBUG
+							print("size", old, "→", new)
+#endif
 							switch condition {
 								case .min:
 									size = CGSize(
