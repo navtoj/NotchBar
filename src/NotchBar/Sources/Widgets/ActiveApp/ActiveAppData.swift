@@ -10,10 +10,8 @@ import AppKit
 
 		// Initial Values
 
-		if let app = NSWorkspace.shared.frontmostApplication {
-			self.app = app
-			menu = getMenu(of: app)
-		}
+		invalidate(.app)
+		invalidate(.menu)
 
 		// Track Active App
 		
@@ -44,5 +42,22 @@ import AppKit
 		
 		self.app = app
 		self.menu = getMenu(of: app)
+	}
+
+	enum Invalidation {
+		case app
+		case menu
+	}
+	func invalidate(_ type: Invalidation) {
+//		print("Invalidating...", type)
+
+		if type == .app {
+			app = NSWorkspace.shared.frontmostApplication
+		}
+
+		if type == .menu,
+		   let app = app {
+			menu = getMenu(of: app)
+		}
 	}
 }

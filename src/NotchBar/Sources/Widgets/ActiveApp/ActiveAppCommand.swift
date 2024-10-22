@@ -5,6 +5,7 @@ import AppKit
 
 // TODO: fetch on hover/tap or cache?
 func getMenu(of app: NSRunningApplication) -> [MenuItem]? {
+//	guard checkPermissions() else { return nil }
 
 	let axApp = AXUIElementCreateApplication(app.processIdentifier)
 	guard let bar = get(
@@ -26,7 +27,7 @@ func getMenu(of app: NSRunningApplication) -> [MenuItem]? {
 			// ignore app name
 			name != app.localizedName
 		].allSatisfy({ $0 }) else { return nil }
-		print(name) // Xcode
+//		print(name) // Xcode
 
 		return MenuItem(element: item, name: name)
 	}
@@ -46,7 +47,7 @@ private func getSubmenu(of item: AXUIElement) -> [SubmenuItem] {
 			// ignore separators, search, etc.
 			!name.isEmpty
 		].allSatisfy({ $0 }) else { return nil }
-		print(">", name) // About Xcode
+//		print(">", name) // About Xcode
 
 		return SubmenuItem(
 			element: item,

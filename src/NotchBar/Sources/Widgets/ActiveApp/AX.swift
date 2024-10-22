@@ -3,6 +3,15 @@
 
 import AppKit
 
+func checkPermissions(prompt value: Bool = false) -> Bool {
+	// https://stackoverflow.com/a/56206516
+	
+	let prompt = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
+	let options: NSDictionary = [prompt: value]
+	let appHasPermission = AXIsProcessTrustedWithOptions(options)
+	return appHasPermission
+}
+
 func get(_ attribute: String, from axElement: AXUIElement, errors: [(error: AXError, message: String)] = []) -> CFTypeRef? {
 	var axValue: CFTypeRef?
 	let axResult = AXUIElementCopyAttributeValue(axElement, attribute as CFString, &axValue)

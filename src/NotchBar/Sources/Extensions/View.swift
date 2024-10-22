@@ -37,16 +37,27 @@ enum SizeConstraint {
 struct SizeReader: ViewModifier {
 	@Binding var size: CGSize
 	fileprivate let condition: SizeConstraint?
+	fileprivate let id: (before: Binding<String>, after: String)?
 
 	func body(content: Content) -> some View {
 		content
 			.background {
 				GeometryReader { proxy in
 					Color.clear
-						.onChange(of: proxy.size, initial: true) { old, new  in
-#if DEBUG
-							print("size", old, "→", new)
-#endif
+						.onChange(of: proxy.size, initial: true) { _, new  in
+
+							// Check ID
+
+							if let before = id?.before,
+							   let after = id?.after,
+							   before.wrappedValue != after {
+//								print("id", before.wrappedValue, "→", after)
+								before.wrappedValue = after
+								return size = new
+							}
+
+							// Update Size
+//							print("size", size, "→", new)
 							switch condition {
 								case .min:
 									size = CGSize(
@@ -67,8 +78,12 @@ struct SizeReader: ViewModifier {
 	}
 }
 extension View {
-	func onSizeChange(sync size: Binding<CGSize>, if condition: SizeConstraint? = .none) -> some View {
-		modifier(SizeReader(size: size, condition: condition))
+	func onSizeChange(
+		sync size: Binding<CGSize>,
+		if condition: SizeConstraint? = .none,
+		check id: (before: Binding<String>, after: String)? = nil
+	) -> some View {
+		modifier(SizeReader(size: size, condition: condition, id: id))
 	}
 }
 
