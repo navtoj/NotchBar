@@ -8,50 +8,59 @@ struct ActiveAppSecondary: View {
 	@State private var size: CGSize = .zero
 	@State private var sizeID: String = ""
 	var body: some View {
-		VStack(spacing: 0) {
-			if data.menu == nil {
+		Group {
+			if let items = data.menu {
+				HStack(spacing: 0) {
+					ForEach(items) { item in
+						MenuItem(item: item)
+							.padding(8)
+						if item != items.last { Divider() }
+					}
+					// TODO: boxes under this view
+				}
+				.onSizeChange(sync: $size, check: (
+					before: $sizeID,
+					after: data.app?.bundleIdentifier ?? "id"
+				))
+			} else {
 				HStack {
 					Text("Accessibility Access Required")
-					Button("Enable") {
-						_ = checkPermissions(prompt: true)
-					}
+					Button("Enable") { checkPermissions(prompt: true) }
 				}
 				.fixedSize()
-				.padding(.vertical, 8)
-				.onSizeChange(
-					sync: $size,
-					check: (
-						before: $sizeID,
-						after: data.app?.bundleIdentifier ?? "id" + ".permissions"
-					)
-				)
-				.onAppear {
-					data.invalidate(.menu)
-				}
-			} else if let items = data.menu {
-				ForEach(items) { item in
-					Text(item.name)
-						.fixedSize()
-						.padding(.vertical, 12)
-						.onSizeChange(
-							sync: $size,
-							if: .max,
-							check: (
-								before: $sizeID,
-								after: data.app?.bundleIdentifier ?? "id"
-							)
-						)
-					if item != items.last {
-						Divider()
-							.padding(.horizontal, -4)
-					}
-				}
+				.padding(8)
+				.onSizeChange(sync: $size, check: (
+					before: $sizeID,
+					after: data.app?.bundleIdentifier ?? "id" + ".permissions"
+				))
+				.onAppear { data.invalidate(.menu) }
 			}
 		}
-		.frame(maxWidth: size.width)
-		.padding(.horizontal, 8)
+		.frame(width: size.width)
 		.background(.background)
 		.roundedCorners(5, width: 4)
+	}
+
+	@ViewBuilder
+	func MenuItem(item: MenuItem) -> some View {
+		let leaf = Button("\(item.level). " + item.name) {
+			print("Button", item.name, item.level)
+		}
+
+		let branch = Menu("\(item.level). " + item.name) {
+			ForEach(item.submenu) { subitem in
+				MenuItem(item: subitem)
+			}
+		}
+			.menuIndicator(.hidden)
+			.menuStyle(.button)
+			.buttonStyle(.borderless)
+
+		if item.submenu.isEmpty {
+			AnyView(leaf)
+		} else {
+			AnyView(branch)
+		}
 	}
 }
 

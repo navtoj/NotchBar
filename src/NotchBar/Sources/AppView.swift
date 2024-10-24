@@ -22,50 +22,35 @@ struct AppView: View {
 					// Widgets - Left
 
 					HStack {
-						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
+						WidgetView(
+							primary: ActiveAppPrimary.init,
+							secondary: ActiveAppSecondary.init,
+							overlay: .leading,
+							expand: true
+						)
+
+						// Todo Widget Override
+
+						if !AppState.shared.todo.isEmpty {
+							Text(AppState.shared.todo)
+								.lineLimit(1)
+						}
+
+						WidgetView(
+							primary: MediaPrimary.init,
+							secondary: MediaSecondary.init,
+							overlay: .trailing
+						)
+						.frame(maxWidth: .infinity, alignment: .trailing)
 					}
-#if DEBUG
-					.border(.red)
-#endif
 					.frame(maxWidth: notch.minX, alignment: .leading)
-#if DEBUG
-					.border(.blue)
-#endif
 
 					// Widgets - Right
 
 					HStack {
-						WidgetView(
-							primary: MediaPrimary.init,
-							secondary: MediaSecondary.init,
-							overlay: .leading
-						)
-						HStack {
-
-							// Todo Widget Override
-
-							if !AppState.shared.todo.isEmpty {
-								Text(AppState.shared.todo)
-									.lineLimit(1)
-							} else {
-								WidgetView(
-									primary: ActiveAppPrimary.init,
-									secondary: ActiveAppSecondary.init,
-									overlay: .trailing
-								)
-							}
-						}
-#if DEBUG
-						.border(.green)
-#endif
-						.frame(maxWidth: .infinity, alignment: .trailing)
-#if DEBUG
-						.border(.yellow)
-#endif
+						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
 					}
-//					.border(.red)
-					.frame(maxWidth: notch.minX, alignment: .leading)
-//					.border(.blue)
+					.frame(maxWidth: notch.minX, alignment: .trailing)
 				}
 				.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn.notch?.height ?? 31.5)
 				.padding(.horizontal)

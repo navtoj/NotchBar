@@ -5,19 +5,16 @@ struct ActiveAppPrimary: View {
 
 	@Binding var expand: Bool
 
-//	@State private var appName: CGSize = .zero
 	var body: some View {
 		if let app = data.app {
 			HStack {
 				Text(app.localizedName ?? "Unknown")
 					.id(app)
 					.transition(.opacity.animation(.easeOut))
-//					.onSizeChange(sync: $appName)
 				if let icon = app.icon {
 					Image(nsImage: icon)
 						.resizable()
 						.scaledToFit()
-//						.frame(height: appName.height)
 						.id(app)
 						.transition(.opacity.animation(.easeOut))
 				} else {

@@ -29,16 +29,16 @@ func getMenu(of app: NSRunningApplication) -> [MenuItem]? {
 		].allSatisfy({ $0 }) else { return nil }
 //		print(name) // Xcode
 
-		return MenuItem(element: item, name: name)
+		return MenuItem(element: item, level: 0, name: name)
 	}
 }
 
-private func getSubmenu(of item: AXUIElement) -> [SubmenuItem] {
+private func getSubmenu(of item: AXUIElement, level: Int) -> [MenuItem] {
 	guard let children = get(kAXChildrenAttribute, from: item) as? [AXUIElement],
 		  let dropdown = children.first,
 		  let submenu = get(kAXChildrenAttribute, from: dropdown) as? [AXUIElement] else { return [] }
 	if children.count > 1 {
-		print("!!! Multiple dropdowns found.", item)
+		print("!!! Multiple dropdowns found.", children)
 	}
 
 	return submenu.compactMap { item in
@@ -47,15 +47,14 @@ private func getSubmenu(of item: AXUIElement) -> [SubmenuItem] {
 			// ignore separators, search, etc.
 			!name.isEmpty
 		].allSatisfy({ $0 }) else { return nil }
-//		print(">", name) // About Xcode
+//		print(String(repeating: " ", count: level), name) // About Xcode
 
-		return SubmenuItem(
+		return MenuItem(
 			element: item,
-			name: name,
-			submenu: getSubmenu(of: item)
+			level: level,
+			name: name
 		)
 	}
-
 }
 
 struct MenuItem: Identifiable, Equatable {
@@ -65,26 +64,14 @@ struct MenuItem: Identifiable, Equatable {
 	internal let id = UUID()
 
 	private let element: AXUIElement
-
+	let level: Int
 	let name: String
-	let submenu: [SubmenuItem]
+	let submenu: [MenuItem]
 
-	init(element: AXUIElement, name: String) {
+	init(element: AXUIElement, level: Int, name: String) {
 		self.element = element
+		self.level = level
 		self.name = name
-		self.submenu = getSubmenu(of: element)
-	}
-}
-
-struct SubmenuItem {
-	private let element: AXUIElement
-
-	let name: String
-	let submenu: [SubmenuItem]
-
-	init(element: AXUIElement, name: String, submenu: [SubmenuItem]) {
-		self.element = element
-		self.name = name
-		self.submenu = getSubmenu(of: element)
+		self.submenu = getSubmenu(of: element, level: level + 1)
 	}
 }

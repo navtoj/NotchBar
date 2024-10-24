@@ -3,6 +3,7 @@
 
 import AppKit
 
+@discardableResult
 func checkPermissions(prompt value: Bool = false) -> Bool {
 	// https://stackoverflow.com/a/56206516
 	
