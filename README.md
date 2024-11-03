@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/dark.png" />
-    <source media="(prefers-color-scheme: dark)" srcset="_assets/icon/light.png" />
+    <source media="(prefers-color-scheme: light)" srcset="_assets/icon/light.png" />
     <img alt="The NotchBar app icon." src="_assets/icon/light.png" height=256 />
   </picture>
   <h1>NotchBar</h1>
