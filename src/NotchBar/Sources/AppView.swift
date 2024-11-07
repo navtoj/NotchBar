@@ -14,6 +14,22 @@ struct AppView: View {
 
 			// Notch Bar
 
+			if SystemState.shared.isMenuBarHidden {
+				BarView(widgets: [
+					BarLayoutView()
+				])
+
+				// Top Screen Corners
+
+				Rectangle()
+#if DEBUG
+					.fill(.red)
+#else
+					.fill(.black)
+#endif
+					.frame(height: 10)
+					.clipShape(InvertedBottomCorners(radius: 10))
+			}
 			if SystemState.shared.isMenuBarHidden,
 			   let notch = NSScreen.builtIn.notch {
 				HStack(spacing: notch.width) {
@@ -24,13 +40,9 @@ struct AppView: View {
 					HStack {
 						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
 					}
-#if DEBUG
 					.border(.red)
-#endif
 					.frame(maxWidth: notch.minX, alignment: .leading)
-#if DEBUG
 					.border(.blue)
-#endif
 
 					// Widgets - Right
 
@@ -51,34 +63,20 @@ struct AppView: View {
 								WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
 							}
 						}
-#if DEBUG
 						.border(.green)
-#endif
 						.frame(maxWidth: .infinity, alignment: .trailing)
-#if DEBUG
 						.border(.yellow)
-#endif
 					}
-//					.border(.red)
+					.border(.red)
 					.frame(maxWidth: notch.minX, alignment: .leading)
-//					.border(.blue)
+					.border(.blue)
 				}
 				.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn.notch?.height ?? 31.5)
 				.padding(.horizontal)
 				.background(.black)
 				.environment(\.colorScheme, .dark)
 				.zIndex(1) // above window card
-
-				// Top Screen Corners
-
-				Rectangle()
-#if DEBUG
-					.fill(.red)
-#else
-					.fill(.black)
-#endif
-					.frame(height: 10)
-					.clipShape(InvertedBottomCorners(radius: 10))
+				.opacity(0.25)
 			}
 
 			// Window Card
