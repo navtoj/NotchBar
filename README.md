@@ -143,7 +143,7 @@ cd NotchBar/src/
 ### Install Dependencies
 
 <details>
-<summary>Don't have `tuist` installed?</summary>
+<summary>Don't have <code>tuist</code> installed?</summary>
 
 #### Install [Tuist](https://github.com/tuist/tuist)
 
