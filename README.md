@@ -133,13 +133,6 @@ WidgetView(
 
 Contributions are most welcome! Please feel free to submit a Pull Request.
 
-### Install [Tuist](https://github.com/tuist/tuist)
-
-```shell
-brew tap tuist/tuist
-brew install --formula tuist
-```
-
 ### Clone Repository
 
 ```shell
@@ -148,6 +141,17 @@ cd NotchBar/src/
 ```
 
 ### Install Dependencies
+
+<details>
+<summary>Don't have `tuist` installed?</summary>
+
+#### Install [Tuist](https://github.com/tuist/tuist)
+
+```shell
+brew tap tuist/tuist
+brew install --formula tuist
+```
+</details>
 
 ```shell
 tuist install && tuist build
