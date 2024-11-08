@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct ActiveAppPrimary: View {
+struct ActiveAppPrimary: PrimaryViewType {
+	static let id = "ActiveAppPrimary"
 	private let data = ActiveAppData.shared
 
 	@Binding var expand: Bool

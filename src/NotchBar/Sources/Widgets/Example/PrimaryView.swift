@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct PrimaryView: View {
+struct PrimaryView: PrimaryViewType {
+	static let id = "PrimaryView"
 	@Binding var expand: Bool
 
 	@State private var symbolChange = false

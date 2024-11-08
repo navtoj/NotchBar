@@ -1,7 +1,8 @@
 import SwiftUI
 import SystemInfoKit
 
-struct SystemInfoPrimary: View {
+struct SystemInfoPrimary: PrimaryViewType {
+	static let id = "SystemInfoPrimary"
 	private let data = SystemInfoData.shared
 
 	@Binding var expand: Bool

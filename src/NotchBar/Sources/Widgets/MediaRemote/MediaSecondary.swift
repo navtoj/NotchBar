@@ -1,7 +1,7 @@
 import SwiftUI
 import SFSafeSymbols
 
-struct MediaSecondary: View {
+struct MediaSecondary: SecondaryViewType {
 	private let media = MediaData.shared
 
 	@Binding var expand: Bool

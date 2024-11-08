@@ -1,7 +1,13 @@
 import SwiftUI
 import Pow
 
-struct WidgetView<Primary: View, Secondary: View>: View {
+protocol PrimaryViewType: View {
+	static var id: String { get }
+}
+protocol SecondaryViewType: View {}
+extension Never: SecondaryViewType {}
+
+struct WidgetView<Primary: PrimaryViewType, Secondary: SecondaryViewType>: View {
 	let primary: (Binding<Bool>) -> Primary
 	let secondary: ((Binding<Bool>) -> Secondary)?
 

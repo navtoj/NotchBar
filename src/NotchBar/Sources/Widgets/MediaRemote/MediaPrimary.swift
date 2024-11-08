@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct MediaPrimary: View {
+struct MediaPrimary: PrimaryViewType {
+	static let id = "MediaPrimary"
 	private let media = MediaData.shared
 
 	@Binding var expand: Bool

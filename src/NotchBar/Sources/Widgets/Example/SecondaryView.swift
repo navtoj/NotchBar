@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SecondaryView: View {
+struct SecondaryView: SecondaryViewType {
 	@Binding var expand: Bool
 
 	var body: some View {
