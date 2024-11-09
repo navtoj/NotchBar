@@ -35,11 +35,6 @@ final class AppState {
 		self.card = self.card == card ? nil : card
 	}
 
-	private(set) var todo: String = ""
-	func setTodo(to value: String) {
-		todo = value
-	}
-
 	// disallow direct instantiation
 
 	private init() {}

@@ -1,11 +1,8 @@
 import AppKit
+import Defaults
+import SwiftUICore
 import SFSafeSymbols
 import LaunchAtLogin
-import Defaults
-
-extension Defaults.Keys {
-	static let skipWelcome = Key<Bool>("skipWelcome", default: false)
-}
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -93,20 +90,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 			// Process URL
 
-			guard let scheme = url.scheme else { return print("Invalid URL scheme.") }
-#if DEBUG
-			print("scheme :", scheme) // notchbar
-#endif
+//			guard let scheme = url.scheme else { return print("Invalid URL scheme.") }
+//			print("scheme :", scheme) // notchbar
 
 			guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
 				  let path = components.path,
 				  let params = components.queryItems else {
 				return print("Invalid URL path or params missing.")
 			}
-#if DEBUG
-			print("path :", path) // todo
-			print("params :", params) // set=a todo item
-#endif
+//			print("path :", path) // todo
+//			print("params :", params) // set=a todo item
 
 			// Validate Path
 
@@ -119,16 +112,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 					  let value = param.value as String? else {
 					return print("Invalid URL Param:", param)
 				}
-#if DEBUG
-				print("key :", key) // set
-				print("value :", value) // a todo item
-#endif
+//				print("key :", key) // set
+//				print("value :", value) // a todo item
 
 				// Handle Params
 
 				switch key {
 					case "set":
-						AppState.shared.setTodo(to: value)
+						Defaults[.todoWidget] = value
 					default:
 						print("Unknown URL Param:", key)
 				}

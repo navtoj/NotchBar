@@ -15,9 +15,7 @@ struct AppView: View {
 			// Notch Bar
 
 			if SystemState.shared.isMenuBarHidden {
-				BarView(widgets: [
-					BarLayoutView()
-				])
+				BarView()
 
 				// Top Screen Corners
 
@@ -29,54 +27,6 @@ struct AppView: View {
 #endif
 					.frame(height: 10)
 					.clipShape(InvertedBottomCorners(radius: 10))
-			}
-			if SystemState.shared.isMenuBarHidden,
-			   let notch = NSScreen.builtIn.notch {
-				HStack(spacing: notch.width) {
-					// TODO: keep widgets within bounds w/ ViewThatFits?
-
-					// Widgets - Left
-
-					HStack {
-						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
-					}
-					.border(.red)
-					.frame(maxWidth: notch.minX, alignment: .leading)
-					.border(.blue)
-
-					// Widgets - Right
-
-					HStack {
-						WidgetView(
-							primary: MediaPrimary.init,
-							secondary: MediaSecondary.init,
-							overlay: .leading
-						)
-						HStack {
-
-							// Todo Widget Override
-
-							if !AppState.shared.todo.isEmpty {
-								Text(AppState.shared.todo)
-									.lineLimit(1)
-							} else {
-								WidgetView<ActiveAppPrimary, Never>(primary: ActiveAppPrimary.init)
-							}
-						}
-						.border(.green)
-						.frame(maxWidth: .infinity, alignment: .trailing)
-						.border(.yellow)
-					}
-					.border(.red)
-					.frame(maxWidth: notch.minX, alignment: .leading)
-					.border(.blue)
-				}
-				.frame(maxWidth: .infinity, maxHeight: NSScreen.builtIn.notch?.height ?? 31.5)
-				.padding(.horizontal)
-				.background(.black)
-				.environment(\.colorScheme, .dark)
-				.zIndex(1) // above window card
-				.opacity(0.25)
 			}
 
 			// Window Card
