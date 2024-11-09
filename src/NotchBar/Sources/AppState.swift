@@ -24,7 +24,7 @@ final class AppState {
 		}
 	}
 
-	private(set) var card: WindowCard? = Defaults[.skipWelcome] ? nil : .welcome
+	private(set) var card: WindowCard? = Defaults[.skipWelcome] ? .settings : .welcome
 	func showCard(_ card: WindowCard) {
 		self.card = card
 	}

@@ -50,13 +50,11 @@ private struct BarAreaFrame: ViewModifier {
 
 	func body(content: Content) -> some View {
 		content
-//			.border(.red)
 			.frame(
 				maxWidth: width,
 				maxHeight: height,
 				alignment: .init(horizontal: alignment, vertical: .center)
 			)
-//			.border(.blue/*.opacity(0.5)*/)
-			.clipped()
+			// .clipped() // hides secondary view
 	}
 }

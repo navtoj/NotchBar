@@ -39,7 +39,9 @@ struct WidgetView<Primary: PrimaryViewType, Secondary: SecondaryViewType>: View 
 			.contextMenu {
 #if DEBUG
 				Button("Debug Layout") {
-					print(layout)
+					for (key, value) in layout {
+						print(value, key)
+					}
 				}
 				Button("Reset Layout") {
 					layout = [:]
