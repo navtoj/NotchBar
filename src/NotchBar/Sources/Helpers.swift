@@ -42,3 +42,44 @@ func addUserDefaultsObserver(
 		}
 	))
 }
+
+// Debug Helpers
+
+protocol PrinterAddResult {
+	func print()
+}
+final class Printer: PrinterAddResult {
+//	static var shared = Printer()
+//	private init() {}
+
+	private var keyLength: Int = 0
+	private var outputs: [(String, Any?)] = []
+
+	@discardableResult
+	func add(_ key: String, _ value: Any? = nil) -> PrinterAddResult {
+#if !DEBUG
+		return self
+#endif
+		keyLength = max(keyLength, key.count)
+		outputs.append((key, value))
+		return self
+	}
+
+	func print() {
+#if !DEBUG
+		return
+#endif
+		let count = outputs.count { $0.1 != nil }
+		for (key, value) in outputs {
+			let text = count < 2 ? key : key.padding(toLength: keyLength, withPad: " ", startingAt: 0)
+//			String(repeating: " ", count: keyLength - key.count)
+			if let value {
+				Swift.print(text, ":", value)
+			} else {
+				Swift.print(text)
+			}
+		}
+		keyLength = 0
+		outputs.removeAll()
+	}
+}

@@ -56,7 +56,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 		statusItemMenu.addItem(
 			withTitle: "Check for Updates...",
-			action: #selector(openGithub),
+			action: #selector(openReleasesPage),
 			keyEquivalent: "u"
 		)
 
@@ -86,54 +86,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		window.orderFrontRegardless()
 	}
 
-	// To-Do URL Scheme
-
 	func application(_ application: NSApplication, open urls: [URL]) {
-		for url in urls {
 
-			// Process URL
+		// handle url schemes
 
-			guard let scheme = url.scheme else { return print("Invalid URL scheme.") }
-#if DEBUG
-			print("scheme :", scheme) // notchbar
-#endif
-
-			guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-				  let path = components.path,
-				  let params = components.queryItems else {
-				return print("Invalid URL path or params missing.")
-			}
-#if DEBUG
-			print("path :", path) // todo
-			print("params :", params) // set=a todo item
-#endif
-
-			// Validate Path
-
-			guard path == "todo" else { return print("Unknown URL Path:", path) }
-
-			// Process Params
-
-			for param in params {
-				guard let key = param.name as String?,
-					  let value = param.value as String? else {
-					return print("Invalid URL Param:", param)
-				}
-#if DEBUG
-				print("key :", key) // set
-				print("value :", value) // a todo item
-#endif
-
-				// Handle Params
-
-				switch key {
-					case "set":
-						AppState.shared.setTodo(to: value)
-					default:
-						print("Unknown URL Param:", key)
-				}
-			}
-		}
+		handleScheme(urls: urls)
 	}
 
 	func applicationWillTerminate(_ notification: Notification) {}
@@ -142,7 +99,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 	// helper actions
 
-	@objc func handleClick() {
+	@objc private func handleClick() {
 
 		// get current event
 
@@ -166,7 +123,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 	}
 
-	@objc func openGithub() {
+	@objc private func openReleasesPage() {
 		if let url = URL(string: "https://github.com/navtoj/NotchBar/releases") {
 			NSWorkspace.shared.open(url)
 		} else { print("Error: Invalid GitHub URL") }
