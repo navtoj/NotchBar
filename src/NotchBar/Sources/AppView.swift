@@ -3,8 +3,13 @@ import SwiftUI
 // TODO: hide when under menu bar
 
 struct AppView: View {
+	@State var widgets: [Wrapper] = [
+		Wrapper(primary: Subview(), secondary: Subview())
+	]
 
 	@State var size: CGSize = .zero
+
+	// TODO: use zstack to layer black bar > widget subviews > window card, etc.
 
 	var body: some View {
 
@@ -22,7 +27,10 @@ struct AppView: View {
 					// Widgets - Left
 
 					HStack {
-						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
+						ForEach(widgets, id: \.id) { widget in
+							widget
+						}
+//						WidgetView<SystemInfoPrimary, Never>(primary: SystemInfoPrimary.init)
 					}
 #if DEBUG
 					.border(.red)
@@ -35,11 +43,14 @@ struct AppView: View {
 					// Widgets - Right
 
 					HStack {
-						WidgetView(
-							primary: MediaPrimary.init,
-							secondary: MediaSecondary.init,
-							overlay: .leading
-						)
+						ForEach(widgets, id: \.id) { widget in
+							widget
+						}
+//						WidgetView(
+//							primary: MediaPrimary.init,
+//							secondary: MediaSecondary.init,
+//							overlay: .leading
+//						)
 						HStack {
 
 							// Todo Widget Override
