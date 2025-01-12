@@ -103,7 +103,7 @@ struct AppView: View {
 
 					// Menu Bar Hidden Override
 
-					VStack {
+					VStack(spacing: 15) {
 						HStack {
 							HStack(spacing: 0) {
 								Text("NotchBar")
@@ -111,31 +111,19 @@ struct AppView: View {
 								Text(" is hidden under the macOS menu bar.")
 									.frame(maxWidth: .infinity, alignment: .leading)
 							}
-							Button("Change Setting", role: .destructive) {
-								if let url = URL(string: "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension") {
-									NSWorkspace.shared.open(url)
-								}
+							Button("Quit App", role: .destructive) {
+								NSApp.terminate(self)
 							}
+							.buttonStyle(.plain)
+							.foregroundStyle(.red.opacity(0.6))
 						}
+						.font(.title3)
 						.frame(maxWidth: size.width)
-						HStack {
-							Text("Automatically hide and show the menu bar")
-								.frame(maxWidth: .infinity, alignment: .leading)
-							HStack(spacing: 4) {
-								Text(SystemState.shared.menuBarAutoHide.rawValue)
-								Image(systemSymbol: .chevronUpChevronDown)
-									.padding(2)
-									.background(.quaternary.opacity(0.6))
-									.roundedCorners(4)
-							}
-						}
-						.padding(.horizontal, 10)
-						.frame(width: 458, height: 36)
-						.background(.quinary)
-						.roundedCorners()
-						.onSizeChange(sync: $size)
+
+						MenuBarAutoHidePicker()
+							.onSizeChange(sync: $size)
 					}
-					.padding()
+					.padding(15)
 				} else {
 					AppState.shared.card?.view
 				}
@@ -157,6 +145,35 @@ struct AppView: View {
 			.padding(.bottom, 10)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+	}
+}
+
+struct MenuBarAutoHidePicker: View {
+	let option = Binding(get: { SystemState.shared.menuBarAutoHide }, set: { value in
+		guard value != SystemState.shared.menuBarAutoHide else { return }
+		
+		let shellCommand = "defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -int"
+		shellScript(run: "\(shellCommand) \(value.visibleInFullscreen ? 1 : 0)")
+
+		let scriptCommand = "tell application \"System Events\" to set autohide menu bar of dock preferences to"
+		appleScript(run: "\(scriptCommand) \(value.autohideOnDesktop)")
+	})
+
+	var body: some View {
+		HStack {
+			Text("Automatically hide and show the menu bar")
+				.frame(maxWidth: .infinity, alignment: .leading)
+			Picker("", selection: option) {
+				ForEach(MenuBarAutoHide.allCases) { item in
+					Text(item.rawValue)
+				}
+			}
+			.fixedSize()
+		}
+		.padding(.horizontal, 10)
+		.frame(width: 458, height: 36)
+		.background(.quinary)
+		.roundedCorners()
 	}
 }
 

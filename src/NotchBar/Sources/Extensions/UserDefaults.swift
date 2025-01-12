@@ -39,13 +39,15 @@ extension UserDefaults {
 		)
 	}
 }
-enum MenuBarAutoHide: String {
+enum MenuBarAutoHide: String, CaseIterable, Identifiable {
+	var id: Self { self }
+
 	case always = "Always"
 	case onDesk = "On Desktop Only"
 	case inFull = "In Full Screen Only"
 	case never = "Never"
 
-	private var visibleInFullscreen: Bool {
+	public var visibleInFullscreen: Bool {
 		switch self {
 			case .always, .inFull: return false
 			case .onDesk, .never: return true

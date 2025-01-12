@@ -43,6 +43,43 @@ func addUserDefaultsObserver(
 	))
 }
 
+// Command Helpers
+
+@discardableResult
+func appleScript(run command: String) -> NSAppleEventDescriptor? {
+#if DEBUG
+	print("appleScript:", command)
+#endif
+	var error: NSDictionary?
+	guard let scriptObject = NSAppleScript(source: command) else { return nil }
+	let output = scriptObject.executeAndReturnError(&error)
+	if let error {
+		print("AppleScript Error:", error)
+	}
+	return output
+}
+
+@discardableResult
+func shellScript(run command: String) -> String {
+#if DEBUG
+	print("shellScript:", command)
+#endif
+	let process = Process()
+	let pipe = Pipe()
+	process.standardOutput = pipe
+	process.standardError = pipe
+	process.launchPath = "/bin/zsh"
+	process.arguments = ["-c", command]
+	do {
+		try process.run()
+	} catch {
+		print("ShellScript Error:", error)
+	}
+	let data = pipe.fileHandleForReading.readDataToEndOfFile()
+	let output = String(data: data, encoding: .utf8) ?? ""
+	return output
+}
+
 // Debug Helpers
 
 protocol PrinterAddResult {
