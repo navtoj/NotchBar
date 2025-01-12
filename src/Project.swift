@@ -25,9 +25,13 @@ let project = Project(
 						"CFBundleTypeRole": .string("Viewer"),
 					]),
 				]),
+				"NSAppleEventsUsageDescription": "Auto-Hide Menu Bar",
 			]),
 			sources: ["NotchBar/Sources/**"],
 			resources: ["NotchBar/Resources/**"],
+			entitlements: .dictionary([
+				"com.apple.security.automation.apple-events": .string("YES"),
+			]),
 			dependencies: [
 				.external(name: "SFSafeSymbols"),
 				.external(name: "LaunchAtLogin"),
