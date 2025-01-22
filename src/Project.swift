@@ -17,7 +17,7 @@ let project = Project(
 				"LSUIElement": true,
 				"LSApplicationCategoryType": "public.app-category.productivity",
 				"CFBundleShortVersionString": "0.0.3", // Public
-				"CFBundleVersion": "1", // Internal
+				"CFBundleVersion": "2", // Internal
 				"CFBundleURLTypes": .array([
 					.dictionary([
 						"CFBundleURLName": .string("com.navtoj.notchbar"),
