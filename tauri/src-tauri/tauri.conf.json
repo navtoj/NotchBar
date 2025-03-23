@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schema.tauri.app/config/2",
-	"productName": "notchbar",
+	"productName": "NotchBar",
 	"version": "0.1.0",
-	"identifier": "com.notchbar.app",
+	"identifier": "com.navtoj.notchbar",
 	"build": {
 		"beforeDevCommand": "bun run dev",
 		"devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
 	"app": {
 		"windows": [
 			{
-				"title": "notchbar",
+				"title": "NotchBar",
 				"width": 800,
 				"height": 600
 			}
