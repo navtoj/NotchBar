@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { invoke } from '@tauri-apps/api/core';
 
-	let name = $state('');
+	let name = $state('world');
 	let greetMsg = $state('');
 
 	async function greet(event: Event) {
@@ -11,7 +11,7 @@
 	}
 </script>
 
-<main class="container">
+<main class="container h-dvh">
 	<h1>Welcome to Tauri + Svelte</h1>
 
 	<div class="row">
