@@ -10,8 +10,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"tauri": "tauri",
-		"lint": "eslint . && prettier --check .",
-		"format": "prettier --write ."
+		"lint": "eslint . && bun prettier -- --check .",
+		"format": "bun prettier -- --write .",
+		"prettier": "prettier --ignore-path ./.prettierignore --ignore-path ./.gitignore --ignore-path ./src-tauri/.gitignore"
 	},
 	"license": "MIT",
 	"dependencies": {
