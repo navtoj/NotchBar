@@ -4,6 +4,8 @@
 		"**/src/lib/shadcn": true
 	},
 	"search.exclude": {
+		"**/bun.lock": true,
+		"**/Cargo.lock": true,
 		"**/src/lib/shadcn": true
 	}
 }

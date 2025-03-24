@@ -16,3 +16,7 @@ tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+
+# https://corrode.dev/blog/tips-for-faster-rust-compile-times/#turn-off-debuginfo
+[profile.dev]
+debug = 0
