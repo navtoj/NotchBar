@@ -4,10 +4,8 @@
 name = "NotchBar"
 edition = "2024"
 
-# The `_lib` suffix is necessary to prevent conflict with the bin name.
-# Issue only on Windows? https://github.com/rust-lang/cargo/issues/8519
 [lib]
-name = "notchbar_lib"
+name = "notchbar"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
