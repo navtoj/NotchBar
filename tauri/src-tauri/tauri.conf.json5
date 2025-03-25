@@ -1,5 +1,6 @@
 {
 	$schema: 'https://schema.tauri.app/config/2',
+	// macOS menu bar & about dialog name
 	productName: 'NotchBar',
 	version: '0.1.0',
 	identifier: 'com.navtoj.notchbar',
