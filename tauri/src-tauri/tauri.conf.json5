@@ -13,7 +13,7 @@
 	app: {
 		windows: [
 			{
-				title: 'NotchBar',
+				decorations: false,
 				width: 800,
 				height: 600,
 			},
