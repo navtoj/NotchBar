@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ModeWatcher } from 'mode-watcher';
 	import '../app.css';
-	import Titlebar from './Titlebar.svelte';
 
 	let { children, data } = $props();
 </script>
@@ -17,7 +16,6 @@
 			</p>
 		</div>
 	{:else}
-		<Titlebar />
 		<div class="flex-1">
 			{@render children()}
 		</div>
