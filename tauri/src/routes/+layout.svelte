@@ -7,7 +7,7 @@
 
 <ModeWatcher themeColors={{ dark: 'black', light: 'white' }} />
 
-<main class="flex h-dvh select-none flex-col overflow-auto overscroll-none">
+<main class="flex h-full select-none flex-col overflow-auto overscroll-none bg-background">
 	{#if !data.tauri}
 		<div class="grid flex-1 place-content-center">
 			<p class=" font-mono text-xl uppercase">

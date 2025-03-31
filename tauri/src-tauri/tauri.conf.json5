@@ -11,20 +11,14 @@
 		frontendDist: '../build',
 	},
 	app: {
-		windows: [
-			{
-				decorations: false,
-				width: 800,
-				height: 600,
-			},
-		],
 		security: {
 			csp: null,
 		},
+		macOSPrivateApi: true,
 	},
 	bundle: {
 		active: true,
-		targets: 'all',
+		targets: 'app',
 		icon: [
 			'icons/32x32.png',
 			'icons/128x128.png',
@@ -32,5 +26,9 @@
 			'icons/icon.icns',
 			'icons/icon.ico',
 		],
+		macOS: {
+			hardenedRuntime: true,
+			minimumSystemVersion: '14.7.1',
+		},
 	},
 }

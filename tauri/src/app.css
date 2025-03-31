@@ -70,7 +70,7 @@
 		@apply border-border;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply h-[31.5px] text-foreground;
 	}
 	html {
 		@apply overscroll-none;
