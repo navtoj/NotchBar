@@ -180,8 +180,8 @@ This project is licensed under the [AGPLv3 License](LICENSE).
 
 <a href="https://star-history.com/#navtoj/notchbar&Timeline">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline&secret=Z2hwX1poNFZITGxGY1hYeWE4N0Y5RnhpRDNVM0lMemh6MjRZZEFNZg==&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline&secret=Z2hwX1poNFZITGxGY1hYeWE4N0Y5RnhpRDNVM0lMemh6MjRZZEFNZg==" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=navtoj/notchbar&type=Timeline&secret=Z2hwX1poNFZITGxGY1hYeWE4N0Y5RnhpRDNVM0lMemh6MjRZZEFNZg==" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://reroute.deno.dev/star-history/navtoj/notchbar/timeline/dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://reroute.deno.dev/star-history/navtoj/notchbar/timeline" />
+   <img alt="Star History Chart" src="https://reroute.deno.dev/star-history/navtoj/notchbar/timeline" />
  </picture>
 </a>
