@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct PlaceholderApp: App {
 	var body: some Scene {
-		WindowGroup {
+		Window("Placeholder", id: "placeholder") {
 			ContentView()
 		}
 	}
