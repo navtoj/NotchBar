@@ -1,4 +1,5 @@
 import AppKit
+import LaunchAtLogin
 import SFSafeSymbols
 
 final class AppStatus {
@@ -25,10 +26,30 @@ final class AppStatus {
 
 		icon.menu = menu
 
+		let autoStart = NSMenuItem(
+			title: "Open at Login",
+			action: #selector(toggleAutoStart),
+			keyEquivalent: "l"
+		)
+		autoStart.state = LaunchAtLogin.isEnabled ? .on : .off
+		autoStart.target = self
+		menu.addItem(autoStart)
+
+		menu.addItem(.separator())
+
 		menu.addItem(
 			withTitle: "Quit NotchBar",
 			action: #selector(NSApp.terminate(_:)),
 			keyEquivalent: "q"
 		)
+	}
+
+	// MARK: Functions
+
+	@objc
+	private func toggleAutoStart(_ sender: NSMenuItem) {
+		let isEnabled = sender.state == .on
+		sender.state = isEnabled ? .off : .on
+		LaunchAtLogin.isEnabled = !isEnabled
 	}
 }
