@@ -8,6 +8,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// MARK: Properties
 
 	private let window = AppWindow.shared
+	private let status = AppStatus.shared
 
 	// MARK: Functions
 
