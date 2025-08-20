@@ -27,6 +27,7 @@ let project = Project(
 			]),
 			dependencies: [
 				.external(name: "SFSafeSymbols"),
+				.external(name: "LaunchAtLogin"),
 			],
 			settings: .settings(base: [
 				"CODE_SIGN_STYLE": "Automatic", // Manual
