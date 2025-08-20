@@ -26,7 +26,9 @@ let project = Project(
 				"com.apple.security.app-sandbox": true,
 				"com.apple.security.files.user-selected.read-only": true,
 			]),
-			dependencies: [],
+			dependencies: [
+				.external(name: "SFSafeSymbols"),
+			],
 			settings: .settings(base: [
 				"CODE_SIGN_STYLE": "Automatic", // Manual
 				"CODE_SIGN_IDENTITY": "Apple Development", // Mac Developer
