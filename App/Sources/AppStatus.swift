@@ -18,7 +18,26 @@ final class AppStatus {
 		// Status Item
 
 		if let button = icon.button {
-			let image = NSImage(systemSymbol: .space)
+			let unicode = "⏘" // ⌴
+			let color = NSColor.labelColor
+
+			let font = NSFont.systemFont(ofSize: 22)
+			let attributes: [NSAttributedString.Key: Any] = [
+				.font: font,
+				.strokeWidth: -10,
+				.foregroundColor: color,
+				.strokeColor: color,
+			]
+
+			let attributedString = NSAttributedString(string: unicode, attributes: attributes)
+			let size = attributedString.size()
+			let image = NSImage(size: size)
+
+			image.lockFocus()
+			attributedString.draw(at: .init(x: -0.5, y: 1.5))
+			image.unlockFocus()
+
+			image.isTemplate = true
 			button.image = image
 		}
 
