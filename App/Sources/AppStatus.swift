@@ -1,4 +1,5 @@
 import AppKit
+import SFSafeSymbols
 
 final class AppStatus {
 	// MARK: Static Properties
@@ -16,7 +17,7 @@ final class AppStatus {
 		// Status Item
 
 		if let button = icon.button {
-			let image = NSImage(systemSymbolName: "space", accessibilityDescription: "NotchBar")
+			let image = NSImage(systemSymbol: .space)
 			button.image = image
 		}
 

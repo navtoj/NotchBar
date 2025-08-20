@@ -11,3 +11,10 @@ switch_case_alignment:
 
 opening_brace:
     ignore_multiline_statement_conditions: true
+
+custom_rules:
+    sf_safe_symbols:
+        name: "Safe SFSymbols"
+        message: "Use `SFSafeSymbols` via `systemSymbol` parameters for type safety."
+        severity: error
+        regex: "(Image\\(systemName:)|(NSImage\\(symbolName:)|(NSImage\\(systemSymbolName:)|(Label[^,]+?,\\s*systemImage:)|(UIApplicationShortcutIcon\\(systemImageName:)"
