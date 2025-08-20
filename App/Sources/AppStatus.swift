@@ -18,7 +18,27 @@ final class AppStatus {
 		// Status Item
 
 		if let button = icon.button {
-			let image = NSImage(systemSymbol: .sparkle)
+			let color = NSColor.labelColor
+
+			let attributedString = NSAttributedString(
+				string: "⏘", // ⌴
+				attributes: [
+					.font: NSFont.systemFont(ofSize: 22),
+					.foregroundColor: color,
+					.strokeWidth: -10,
+					.strokeColor: color,
+				]
+			)
+
+			let image = NSImage(
+				size: attributedString.size(),
+				flipped: false
+			) { _ in
+				attributedString.draw(at: .init(x: 0, y: 1.5))
+				return true
+			}
+
+			image.isTemplate = true
 			button.image = image
 		}
 
