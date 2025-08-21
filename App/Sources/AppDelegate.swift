@@ -12,6 +12,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 	// MARK: Functions
 
+	func applicationWillFinishLaunching(_: Notification) {
+		#if DEBUG
+			if let path = Bundle.main.path(forResource: "Debug", ofType: "png", inDirectory: "Public/Icons"),
+			   let image = NSImage(contentsOfFile: path)
+			{
+				NSApp.applicationIconImage = image
+			}
+		#endif
+	}
+
 	func applicationDidFinishLaunching(_: Notification) {
 		// Menu Bar
 

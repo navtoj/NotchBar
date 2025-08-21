@@ -21,7 +21,13 @@ let project = Project(
 				"NSHumanReadableCopyright": "Copyright © Navtoj Chahal",
 			]),
 			sources: ["App/Sources/**"],
-			resources: ["App/Resources/**"],
+			resources: [
+				.glob(
+					pattern: "App/Resources/**",
+					excluding: [.path("App/Resources/Public/**")]
+				),
+				.folderReference(path: "App/Resources/Public"),
+			],
 			entitlements: .dictionary([
 				"com.apple.security.app-sandbox": true,
 				"com.apple.security.files.user-selected.read-only": true,

@@ -18,7 +18,11 @@ final class AppStatus {
 		// Status Item
 
 		if let button = icon.button {
-			let color = NSColor.labelColor
+			#if DEBUG
+				let color = NSColor.systemRed
+			#else
+				let color = NSColor.labelColor
+			#endif
 
 			let attributedString = NSAttributedString(
 				string: "⏘", // ⌴
@@ -38,7 +42,9 @@ final class AppStatus {
 				return true
 			}
 
-			image.isTemplate = true
+			#if !DEBUG
+				image.isTemplate = true
+			#endif
 			button.image = image
 		}
 
