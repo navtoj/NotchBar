@@ -19,7 +19,11 @@ final class AppStatus {
 
 		if let button = icon.button {
 			let unicode = "⏘" // ⌴
-			let color = NSColor.labelColor
+			#if DEBUG
+				let color = NSColor.systemRed
+			#else
+				let color = NSColor.labelColor
+			#endif
 
 			let font = NSFont.systemFont(ofSize: 22)
 			let attributes: [NSAttributedString.Key: Any] = [
@@ -37,7 +41,9 @@ final class AppStatus {
 			attributedString.draw(at: .init(x: -0.5, y: 1.5))
 			image.unlockFocus()
 
-			image.isTemplate = true
+			#if !DEBUG
+				image.isTemplate = true
+			#endif
 			button.image = image
 		}
 
