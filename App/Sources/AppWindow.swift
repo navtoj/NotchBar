@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - AppWindow
+
 final class AppWindow: NSWindow {
 	// MARK: Static Properties
 
@@ -7,21 +9,24 @@ final class AppWindow: NSWindow {
 
 	// MARK: Properties
 
-	private let hostingView = NSHostingView(rootView: ContentView())
+	private let hostingView = NSHostingView(rootView: WindowView())
 
 	// MARK: Lifecycle
 
 	private init() {
 		super.init(
 			contentRect: .zero,
-			styleMask: [.titled, .closable, .miniaturizable, .resizable],
+			styleMask: [.titled, .closable, .miniaturizable],
 			backing: .buffered,
 			defer: true
 		)
-		title = "NotchBar"
+		title = "Settings"
+		level = .floating
 		contentView = hostingView
 		setContentSize(hostingView.intrinsicContentSize)
 
+		isReleasedWhenClosed = false
+		delegate = self
 		center()
 	}
 
@@ -37,5 +42,27 @@ final class AppWindow: NSWindow {
 		}
 
 		return super.performKeyEquivalent(with: event)
+	}
+
+	// MARK: Functions
+
+	@objc
+	func open() {
+		NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: .init()) { _, error in
+			if let error { return print(error) }
+
+			DispatchQueue.main.async {
+				NSApp.setActivationPolicy(.regular)
+				AppWindow.shared.makeKeyAndOrderFront(nil)
+			}
+		}
+	}
+}
+
+// MARK: NSWindowDelegate
+
+extension AppWindow: NSWindowDelegate {
+	func windowWillClose(_: Notification) {
+		NSApp.setActivationPolicy(.accessory)
 	}
 }

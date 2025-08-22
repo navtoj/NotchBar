@@ -19,6 +19,7 @@ let project = Project(
 				"CFBundleShortVersionString": "0.0.1", // Public
 				"LSApplicationCategoryType": "public.app-category.productivity",
 				"NSHumanReadableCopyright": "Copyright © Navtoj Chahal",
+				"LSUIElement": true,
 			]),
 			sources: ["App/Sources/**"],
 			resources: [
