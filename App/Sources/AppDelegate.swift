@@ -13,43 +13,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// MARK: Functions
 
 	func applicationWillFinishLaunching(_: Notification) {
-		#if DEBUG
-			if let path = Bundle.main.path(forResource: "Debug", ofType: "png", inDirectory: "Public/Icons"),
-			   let image = NSImage(contentsOfFile: path)
-			{
-				NSApp.applicationIconImage = image
-			}
-		#endif
-	}
+		// Single Instance
 
-	func applicationDidFinishLaunching(_: Notification) {
-		// Menu Bar
-
-		if let menu = NSApplication.shared.mainMenu,
-		   let appMenu = menu.items.first,
-		   let submenu = appMenu.submenu
+		if let id = Bundle.main.bundleIdentifier,
+		   NSRunningApplication.runningApplications(withBundleIdentifier: id).count > 1
 		{
-			submenu.addItem(
-				withTitle: "About NotchBar",
-				action: #selector(NSApp.orderFrontStandardAboutPanel(_:)),
-				keyEquivalent: "a"
-			)
-
-			submenu.addItem(.separator())
-
-			submenu.addItem(
-				withTitle: "Quit NotchBar",
-				action: #selector(NSApp.terminate(_:)),
-				keyEquivalent: "q"
-			)
+			print("Another instance is already running.")
+			NSApp.terminate(nil)
 		}
 
-		// Show Window
+		// Prevent Focus
 
-		window.makeKeyAndOrderFront(nil)
+		NSApp.setActivationPolicy(.prohibited)
+	}
+
+	func applicationShouldHandleReopen(_ app: NSApplication, hasVisibleWindows: Bool) -> Bool {
+		// Alternative Settings Entry
+
+		if app.windows
+			.filter({ $0.title == "Settings" && $0.isVisible })
+			.isEmpty
+		{
+			window.open()
+		}
+
+		return hasVisibleWindows
 	}
 
 	func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool {
-		true
+		!true
 	}
 }

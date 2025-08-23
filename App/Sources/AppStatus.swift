@@ -50,16 +50,35 @@ final class AppStatus {
 
 		// Status Menu
 
-		icon.menu = menu
+		icon.menu = setup(ns: menu)
+	}
 
-		let autoStart = NSMenuItem(
-			title: "Open at Login",
-			action: #selector(toggleAutoStart),
-			keyEquivalent: "l"
+	// MARK: Functions
+
+	private func setup(ns menu: NSMenu) -> NSMenu {
+		let about = NSMenuItem(
+			title: "About",
+			action: #selector(openAbout),
+			keyEquivalent: ""
 		)
-		autoStart.state = LaunchAtLogin.isEnabled ? .on : .off
-		autoStart.target = self
-		menu.addItem(autoStart)
+		if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+			#if DEBUG
+				let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?"
+				about.badge = NSMenuItemBadge(string: "\(version).\(build)")
+			#else
+				about.badge = NSMenuItemBadge(string: version)
+			#endif
+		}
+		about.target = self
+		menu.addItem(about)
+
+		let settings = NSMenuItem(
+			title: "Settings...",
+			action: #selector(AppWindow.shared.open),
+			keyEquivalent: ","
+		)
+		settings.target = AppWindow.shared
+		menu.addItem(settings)
 
 		menu.addItem(.separator())
 
@@ -68,14 +87,14 @@ final class AppStatus {
 			action: #selector(NSApp.terminate(_:)),
 			keyEquivalent: "q"
 		)
+
+		return menu
 	}
 
-	// MARK: Functions
-
 	@objc
-	private func toggleAutoStart(_ sender: NSMenuItem) {
-		let isEnabled = sender.state == .on
-		sender.state = isEnabled ? .off : .on
-		LaunchAtLogin.isEnabled = !isEnabled
+	private func openAbout() {
+		if let url = URL(string: "https://github.com/navtoj/NotchBar") {
+			NSWorkspace.shared.open(url)
+		} else { print("Error: Invalid URL") }
 	}
 }
