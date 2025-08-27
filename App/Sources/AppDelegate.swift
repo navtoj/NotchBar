@@ -1,4 +1,9 @@
 import AppKit
+import Defaults
+
+extension Defaults.Keys {
+	static let roundCorners = Key<Bool>("roundCorners", default: true)
+}
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	// MARK: Static Properties
