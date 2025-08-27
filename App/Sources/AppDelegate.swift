@@ -8,7 +8,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	// MARK: Properties
 
 	private let status = AppStatus.shared
-	private let window = AppWindow.shared
+	private let settings = SettingsWindow.shared
+	private let bar = BarWindow.shared
 
 	// MARK: Functions
 
@@ -34,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 			.filter({ $0.title == "Settings" && $0.isVisible })
 			.isEmpty
 		{
-			window.open()
+			settings.open()
 		}
 
 		return hasVisibleWindows

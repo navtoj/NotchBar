@@ -1,6 +1,6 @@
-@inline(__always)
-func DEBUG(_ block: () -> Void) {
-	#if DEBUG
-		block()
-	#endif
-}
+#if DEBUG
+	/// A Boolean value indicating whether the app is running in debug mode.
+	public let DEBUG = true
+#else
+	public let DEBUG = false
+#endif

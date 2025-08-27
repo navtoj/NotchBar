@@ -1,7 +1,7 @@
 import LaunchAtLogin
 import SwiftUI
 
-struct ContentView: View {
+struct SettingsView: View {
 	var body: some View {
 		VStack {
 			LaunchAtLogin.Toggle("Open at Login")
@@ -11,5 +11,5 @@ struct ContentView: View {
 }
 
 #Preview {
-	ContentView()
+	SettingsView()
 }

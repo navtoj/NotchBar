@@ -1,15 +1,15 @@
 import SwiftUI
 
-// MARK: - AppWindow
+// MARK: - SettingsWindow
 
-final class AppWindow: NSWindow {
+final class SettingsWindow: NSWindow {
 	// MARK: Static Properties
 
-	static let shared = AppWindow()
+	static let shared = SettingsWindow()
 
 	// MARK: Properties
 
-	private let hostingView = NSHostingView(rootView: ContentView())
+	private let hostingView = NSHostingView(rootView: SettingsView())
 
 	// MARK: Lifecycle
 
@@ -53,7 +53,7 @@ final class AppWindow: NSWindow {
 
 			DispatchQueue.main.async {
 				NSApp.setActivationPolicy(.regular)
-				AppWindow.shared.makeKeyAndOrderFront(nil)
+				self.makeKeyAndOrderFront(nil)
 			}
 		}
 	}
@@ -61,7 +61,7 @@ final class AppWindow: NSWindow {
 
 // MARK: NSWindowDelegate
 
-extension AppWindow: NSWindowDelegate {
+extension SettingsWindow: NSWindowDelegate {
 	#if DEBUG
 		func windowDidBecomeMain(_: Notification) {
 			if let path = Bundle.main.path(forResource: "Debug", ofType: "png", inDirectory: "Public/Icons"),
