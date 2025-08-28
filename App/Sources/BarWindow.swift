@@ -66,23 +66,19 @@ final class BarWindow: NSWindow {
 
 	private func handleShowHide() {
 		guard let screen = NSScreen.builtIn else {
-			AppStatus.shared.setIcon(color: .disabledControlTextColor)
-			AppStatus.shared.showInfo(title: "No internal screen.")
+			AppState.shared.status = .noInternalScreen
 			return orderOut(nil)
 		}
 		guard screen.notch != nil else {
-			AppStatus.shared.setIcon(color: .disabledControlTextColor)
-			AppStatus.shared.showInfo(title: "No notch found.")
+			AppState.shared.status = .noNotchFound
 			return orderOut(nil)
 		}
 		guard !screen.isMenuBarVisible else {
-			AppStatus.shared.setIcon(color: .disabledControlTextColor)
-			AppStatus.shared.showInfo(title: "Hidden under Menu Bar.")
+			AppState.shared.status = .hiddenUnderMenuBar
 			return orderOut(nil)
 		}
 
-		AppStatus.shared.resetIcon()
-		AppStatus.shared.hideInfo()
+		AppState.shared.status = .none
 		orderFrontRegardless()
 	}
 }

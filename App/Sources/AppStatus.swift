@@ -22,7 +22,9 @@ final class AppStatus {
 	private init() {
 		// Status Item
 
-		resetIcon()
+		if let button = icon.button {
+			button.image = iconImage()
+		}
 
 		// Status Menu
 
@@ -31,33 +33,26 @@ final class AppStatus {
 
 	// MARK: Functions
 
-	/// Reset the icon to the default color.
-	func resetIcon() {
-		if let button = icon.button {
-			button.image = iconImage()
+	/// Show or hide the info section.
+	func update(_ status: Status?) {
+		if let status {
+			info.title = "Status"
+			info.subtitle = status.rawValue
+
+			info.isHidden = false
+			infoSeparator.isHidden = false
+
+			if let button = icon.button {
+				button.appearsDisabled = true
+			}
+		} else {
+			info.isHidden = true
+			infoSeparator.isHidden = true
+
+			if let button = icon.button {
+				button.appearsDisabled = false
+			}
 		}
-	}
-
-	/// Set the default icon with a custom color.
-	func setIcon(color: NSColor) {
-		if let button = icon.button {
-			button.image = iconImage(color: color)
-		}
-	}
-
-	/// Show the info section with a title and optional subtitle.
-	func showInfo(title: String, subtitle: String? = nil) {
-		info.title = title
-		info.subtitle = subtitle
-
-		info.isHidden = false
-		infoSeparator.isHidden = false
-	}
-
-	/// Hide the info section.
-	func hideInfo() {
-		info.isHidden = true
-		infoSeparator.isHidden = true
 	}
 }
 
@@ -65,7 +60,7 @@ final class AppStatus {
 
 private extension AppStatus {
 	func iconImage(color override: NSColor? = nil) -> NSImage? {
-		let color = override ?? .labelColor
+		let color = override ?? .controlTextColor
 
 		let glyph = NSAttributedString(
 			string: "⏘", // ⌴
