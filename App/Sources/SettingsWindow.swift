@@ -20,8 +20,9 @@ final class SettingsWindow: NSWindow {
 			backing: .buffered,
 			defer: true
 		)
-		title = "Settings"
+		title = "NotchBar"
 		level = .floating
+		collectionBehavior = .canJoinAllSpaces
 		contentView = hostingView
 		setContentSize(hostingView.intrinsicContentSize)
 

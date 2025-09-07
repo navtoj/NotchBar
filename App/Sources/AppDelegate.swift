@@ -37,7 +37,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		// Alternative Settings Entry
 
 		if app.windows
-			.filter({ $0.title == "Settings" && $0.isVisible })
+			.filter({ $0.className == SettingsWindow.shared.className && $0.isVisible })
 			.isEmpty
 		{
 			settings.open()

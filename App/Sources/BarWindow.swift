@@ -20,7 +20,6 @@ final class BarWindow: NSWindow {
 			backing: .buffered,
 			defer: false
 		)
-		title = "NotchBar"
 		contentView = hostingView
 		isReleasedWhenClosed = false
 		animationBehavior = .none

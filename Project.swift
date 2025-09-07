@@ -13,7 +13,7 @@ let project = Project(
 			destinations: .macOS,
 			product: .app,
 			bundleId: "com.navtoj.NotchBar",
-			deploymentTargets: .macOS("14.7.6"),
+			deploymentTargets: .macOS("15.6.1"),
 			infoPlist: .extendingDefault(with: [
 				"CFBundleVersion": "1", // Internal
 				"CFBundleShortVersionString": "0.0.1", // Public
