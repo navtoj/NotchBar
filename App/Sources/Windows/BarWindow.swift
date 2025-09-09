@@ -13,7 +13,13 @@ final class BarWindow: NSWindow {
 
 	// MARK: Lifecycle
 
-	init() {
+	deinit {
+		if let observer {
+			NotificationCenter.default.removeObserver(observer)
+		}
+	}
+
+	private init() {
 		super.init(
 			contentRect: NSScreen.builtIn?.frame ?? .zero,
 			styleMask: .borderless,
@@ -46,12 +52,6 @@ final class BarWindow: NSWindow {
 			queue: .main
 		) { _ in
 			self.handleShowHide()
-		}
-	}
-
-	deinit {
-		if let observer {
-			NotificationCenter.default.removeObserver(observer)
 		}
 	}
 

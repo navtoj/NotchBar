@@ -1,0 +1,101 @@
+<!-- Executable=/Users/navtoj/Library/Developer/Xcode/DerivedData/NotchBar-fwaetjeukkothifkrbxyktikhlsc/Build/Products/Debug/NotchBar.app/Contents/MacOS/NotchBar -->
+<!-- warning: Specifying ':' in the path is deprecated and will not work in a future release -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>com.apple.security.accessibility</key>
+		<true />
+		<key>com.apple.security.automation.apple-events</key>
+		<true />
+		<key>com.apple.security.get-task-allow</key>
+		<true />
+		<key>com.apple.security.scripting-targets</key>
+		<dict>
+			<key>com.apple.systemevents</key>
+			<array>
+				<string>*</string>
+			</array>
+		</dict>
+	</dict>
+</plist>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
+	<xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)" />
+	<suite name="Dock Preferences Suite" code="dpas" description="Terms and Events for controlling the dock preferences">
+		<class-extension extends="application" description="The System Events application">
+			<property name="dock preferences" code="dpas" type="dock preferences object" description="the preferences for the current user&apos;s dock">
+				<cocoa key="dockPref" />
+			</property>
+		</class-extension>
+		<class name="dock preferences object" code="dpao" description="user&apos;s dock preferences">
+			<cocoa class="DockPref" />
+			<property name="animate" code="dani" type="boolean" description="is the animation of opening applications on or off?" />
+			<property name="autohide" code="dahd" type="boolean" description="is autohiding the dock on or off?" />
+			<property name="dock size" code="dsze" type="real" description="size/height of the items (between 0.0 (minimum) and 1.0 (maximum))">
+				<cocoa key="docksize" />
+			</property>
+			<property name="autohide menu bar" code="dahm" type="boolean" description="is autohiding the menu bar on or off?">
+				<cocoa key="autohideMenuBar" />
+			</property>
+			<property name="double click behavior" code="dbeh" type="dpbh" description="behaviour when double clicking window a title bar">
+				<cocoa key="doubleClickBehavior" />
+			</property>
+			<property name="magnification" code="dmag" type="boolean" description="is magnification on or off?" />
+			<property name="magnification size" code="dmsz" type="real" description="maximum magnification size when magnification is on (between 0.0 (minimum) and 1.0 (maximum))">
+				<cocoa key="magsize" />
+			</property>
+			<property name="minimize effect" code="deff" type="dpef" description="minimization effect">
+				<cocoa key="effect" />
+			</property>
+			<property name="minimize into application" code="dmia" type="boolean" description="minimize window into its application?">
+				<cocoa key="minimizeIntoApp" />
+			</property>
+			<property name="screen edge" code="dpse" type="dpls" description="location on screen">
+				<cocoa key="edge" />
+			</property>
+			<property name="show indicators" code="dshi" type="boolean" description="show indicators for open applications?">
+				<cocoa key="showIndicators" />
+			</property>
+			<property name="show recents" code="dshr" type="boolean" description="show recent applications?">
+				<cocoa key="showRecents" />
+			</property>
+		</class>
+		<enumeration name="dpls" code="dpls">
+			<enumerator name="bottom" code="bott" description="bottom" />
+			<enumerator name="left" code="left" description="left" />
+			<enumerator name="right" code="righ" description="right" />
+		</enumeration>
+		<enumeration name="dpef" code="dpef">
+			<enumerator name="genie" code="geni" description="genie" />
+			<enumerator name="scale" code="scal" description="scale" />
+		</enumeration>
+		<enumeration name="dpbh" code="dpbh">
+			<enumerator name="minimize" code="ddmi" description="minimize" />
+			<enumerator name="off" code="ddof" description="off" />
+			<enumerator name="zoom" code="ddzo" description="zoom" />
+		</enumeration>
+	</suite>
+	<suite name="Login Items Suite" code="logi" description="Terms and Events for controlling the Login Items application">
+		<class-extension extends="application" description="The System Events application">
+			<element type="login item" />
+		</class-extension>
+		<class name="login item" code="logi" description="an item to be launched or opened at login" plural="login items">
+			<cocoa class="LoginItem" />
+			<property name="hidden" code="hidn" type="boolean" description="Is the Login Item hidden when launched?">
+				<cocoa key="AEHideOnLaunch" />
+			</property>
+			<property name="kind" code="kind" type="text" access="r" description="the file type of the Login Item">
+				<cocoa key="location" />
+			</property>
+			<property name="name" code="pnam" type="text" access="r" description="the name of the Login Item">
+				<cocoa key="itemName" />
+			</property>
+			<property name="path" code="ppth" type="text" access="r" description="the file system path to the Login Item">
+				<cocoa key="fullPath" />
+			</property>
+		</class>
+	</suite>
+</dictionary>

@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 
 // MARK: - AppState
 
@@ -15,10 +15,6 @@ final class AppState {
 			AppStatus.shared.update(status)
 		}
 	}
-
-	// MARK: Lifecycle
-
-	private init() {}
 }
 
 // MARK: - Status
