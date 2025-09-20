@@ -30,22 +30,16 @@ final class SystemState {
 
 	private init() {
 		addUserDefaultsObserver(to: &userDefaults, for: \.AppleMenuBarVisibleInFullscreen) { _, change in
-			let value = change.newValue ?? UserDefaults.standard.AppleMenuBarVisibleInFullscreen
-			print("AppleMenuBarVisibleInFullscreen changed to \(value)")
-
 			self.menuBarAutoHide = MenuBarAutoHide.status(
-				AppleMenuBarVisibleInFullscreen: value,
+				AppleMenuBarVisibleInFullscreen: change.newValue ?? UserDefaults.standard.AppleMenuBarVisibleInFullscreen,
 				_HIHideMenuBar: UserDefaults.standard._HIHideMenuBar
 			)
 		}
 
 		addUserDefaultsObserver(to: &userDefaults, for: \._HIHideMenuBar) { _, change in
-			let value = change.newValue ?? UserDefaults.standard._HIHideMenuBar
-			print("_HIHideMenuBar changed to \(value)")
-
 			self.menuBarAutoHide = MenuBarAutoHide.status(
 				AppleMenuBarVisibleInFullscreen: UserDefaults.standard.AppleMenuBarVisibleInFullscreen,
-				_HIHideMenuBar: value
+				_HIHideMenuBar: change.newValue ?? UserDefaults.standard._HIHideMenuBar
 			)
 		}
 	}

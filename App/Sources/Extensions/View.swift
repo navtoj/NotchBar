@@ -11,7 +11,7 @@ extension View {
 		_ radius: CGFloat = 10,
 		type: RoundedCornerStyle = .continuous,
 		width: CGFloat = 1,
-		color: Color = .black
+		color: NSColor = .black
 	) -> some View {
 		modifier(RoundedBorder(radius: radius, type: type, width: width, color: color))
 	}
@@ -37,7 +37,7 @@ private struct RoundedBorder: ViewModifier {
 	let radius: CGFloat
 	let type: RoundedCornerStyle
 	let width: CGFloat
-	let color: Color
+	let color: NSColor
 
 	// MARK: Content Methods
 
@@ -46,7 +46,7 @@ private struct RoundedBorder: ViewModifier {
 			.cornerRadius(radius, type: type)
 			.overlay {
 				RoundedRectangle(cornerRadius: radius, style: type)
-					.stroke(color, lineWidth: width)
+					.stroke(Color(nsColor: color), lineWidth: width)
 			}
 	}
 }

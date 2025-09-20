@@ -33,6 +33,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		NSApp.setActivationPolicy(.prohibited)
 	}
 
+	func applicationDidFinishLaunching(_ notification: Notification) {
+		SettingsWindow.shared.open()
+	}
+
 	func applicationShouldHandleReopen(_ app: NSApplication, hasVisibleWindows: Bool) -> Bool {
 		// Alternative Settings Entry
 
